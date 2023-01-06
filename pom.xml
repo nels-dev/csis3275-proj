@@ -9,12 +9,12 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>csis3275</groupId>
-	<artifactId>circle-demo</artifactId>
+	<artifactId>application</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>circle-demo</name>
+	<name>csis3275-project</name>
 	<description>Circle CI build demo</description>
 	<properties>
-		<java.version>19</java.version>
+		<java.version>15</java.version>
 	</properties>
 	<dependencies>
 		<dependency>
