@@ -1,0 +1,57 @@
+version: 2.1
+
+orbs:
+  aws-ecr: circleci/aws-ecr@8.1
+  aws-ecs: circleci/aws-ecs@3.2
+
+# Define a job to be invoked later in a workflow.
+# See: https://circleci.com/docs/2.0/configuration-reference/#jobs
+jobs:
+  build-package:
+    docker:
+      - image: cimg/openjdk:19.0.1
+    steps:
+      - checkout
+      - run:
+          name: Build package with Maven
+          command: ./mvnw package -DskipTests
+      - persist_to_workspace:
+          root: .
+          paths:
+            - Dockerfile
+            - target/*
+  run-unit-tests:
+    docker:
+      - image: cimg/openjdk:19.0.1
+    steps:
+      - checkout
+      - run:
+          name: Run Unit Tests
+          command: ./mvnw test
+      - store_test_results:
+          path: target/surefire-reports
+
+# Invoke jobs via workflows
+# See: https://circleci.com/docs/2.0/configuration-reference/#workflows
+workflows:
+  build-and-deploy:
+    jobs:
+      - build-package
+      - run-unit-tests:
+          requires:
+            - build-package
+      - aws-ecr/build-and-push-image:
+          public-registry: true
+          attach-workspace: true
+          context: AWS Setup
+          repo: csis3275-proj-repo
+          tag: "${CIRCLE_SHA1}"
+          requires:
+            - run-unit-tests
+      - aws-ecs/deploy-service-update:
+          context: AWS Setup
+          cluster: csis3275-proj-cluster
+          container-image-name-updates: 'container=csis3275-proj-service,tag=${CIRCLE_SHA1}'
+          family: csis3275-proj-service
+          requires:
+            - aws-ecr/build-and-push-image
