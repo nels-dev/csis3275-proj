@@ -1,4 +1,4 @@
-package csis3275.project;
+package csis3275.project.seasell;
 
 import org.junit.jupiter.api.Test;
 

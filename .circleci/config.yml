@@ -41,6 +41,10 @@ workflows:
           requires:
             - build-package
       - aws-ecr/build-and-push-image:
+          filters:
+            branches:
+              only:
+                - main
           public-registry: true
           attach-workspace: true
           context: AWS Setup
@@ -49,6 +53,10 @@ workflows:
           requires:
             - run-unit-tests
       - aws-ecs/deploy-service-update:
+          filters:
+            branches:
+              only:
+                - main
           context: AWS Setup
           cluster: csis3275-proj-cluster
           container-image-name-updates: 'container=csis3275-proj-service,tag=${CIRCLE_SHA1}'
