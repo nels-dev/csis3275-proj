@@ -8,11 +8,11 @@
 		<version>3.0.0</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>csis3275</groupId>
-	<artifactId>application</artifactId>
+	<groupId>csis3275.project</groupId>
+	<artifactId>seasell</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>csis3275-project</name>
-	<description>Circle CI build demo</description>
+	<name>seasell</name>
+	<description>Springboot application of SeaSell e-commerce platform</description>
 	<properties>
 		<java.version>15</java.version>
 	</properties>
