@@ -1,0 +1,13 @@
+logging:
+  level:
+    root: INFO
+spring:
+  jpa:
+    hibernate.ddl-auto: create
+    show-sql: true
+    database-platform: org.hibernate.dialect.MySQLDialect
+  datasource:
+    url: jdbc:mysql://localhost:3306/seasell
+    username: mysql
+    password: mysqlpw
+    driver-class-name: com.mysql.cj.jdbc.Driver

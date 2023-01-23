@@ -1,0 +1,13 @@
+logging:
+  level:
+    root: INFO
+spring:
+  jpa:
+    hibernate.ddl-auto: create
+    show-sql: true
+    database-platform: org.hibernate.dialect.MySQLDialect
+  datasource:
+    url: jdbc:mysql://${RDS_HOST}:3306/seasell
+    username: seasell_admin
+    password: ${RDS_PASSWORD}
+    driver-class-name: com.mysql.cj.jdbc.Driver
