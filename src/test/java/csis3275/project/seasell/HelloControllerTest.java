@@ -6,10 +6,10 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class HelloControllerTest {
 
-  @Test
-  public void sayHelloTest(){
-    HelloController homeController = new HelloController();
-    assertEquals("Hi!!!!", homeController.sayHello());
-  }
+    @Test
+    public void sayHelloTest() {
+        HelloController homeController = new HelloController();
+        assertEquals("Hi!!!!", homeController.sayHello());
+    }
 
 }
