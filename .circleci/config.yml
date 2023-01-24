@@ -3,11 +3,12 @@ version: 2.1
 orbs:
   aws-ecr: circleci/aws-ecr@8.1
   aws-ecs: circleci/aws-ecs@3.2
+  aws-cli: circleci/aws-cli@3.1.4
 
 # Define a job to be invoked later in a workflow.
 # See: https://circleci.com/docs/2.0/configuration-reference/#jobs
 jobs:
-  build-package:
+  build-backend:
     docker:
       - image: cimg/openjdk:19.0.1
     steps:
@@ -20,6 +21,23 @@ jobs:
           paths:
             - Dockerfile
             - target/*
+  build-frontend:
+    docker:
+      - image: cimg/node:18.13
+    working_directory: ~/project/frontend
+    steps:
+      - checkout:
+          path: ~/project
+      - run:
+          name: Install NPM dependencies
+          command: npm install
+      - run:
+          name: Build production package
+          command: npm run build
+      - persist_to_workspace:
+          root: .
+          paths:
+            - dist/*
   run-unit-tests:
     docker:
       - image: cimg/openjdk:19.0.1
@@ -30,16 +48,27 @@ jobs:
           command: ./mvnw test
       - store_test_results:
           path: target/surefire-reports
+  deploy-frontend:
+    docker:
+      - image: 'cimg/python:3.10'
+    steps:
+      - attach_workspace:
+          at: .
+      - aws-cli/setup:
+          profile-name: default
+      - run:
+          name: Upload to S3
+          command: aws s3 sync ./dist/ s3://seasell-website/ --delete
 
 # Invoke jobs via workflows
 # See: https://circleci.com/docs/2.0/configuration-reference/#workflows
 workflows:
   build-and-deploy:
     jobs:
-      - build-package
+      - build-backend
       - run-unit-tests:
           requires:
-            - build-package
+            - build-backend
       - aws-ecr/build-and-push-image:
           filters:
             branches:
@@ -63,3 +92,12 @@ workflows:
           family: csis3275-proj-service
           requires:
             - aws-ecr/build-and-push-image
+      - build-frontend
+      - deploy-frontend:
+          filters:
+            branches:
+              only:
+                - main
+          context: AWS Setup
+          requires:
+            - build-frontend
