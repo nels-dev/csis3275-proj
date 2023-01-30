@@ -42,22 +42,22 @@ public class WebSecurityConfiguration {
     public SecurityFilterChain securityFilterChain(HttpSecurity http, JWTAuthenticationFilter jwtAuthenticationFilter,
             AuthenticationProvider authenticationProvider) throws Exception {
         http
-            // Allow cross-origin requests
-            .cors().and()
-            // Disable CSRF (it has no use since are not storing cookies)
-            .csrf().disable()
-            // Stateless session
-            .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
-            .addFilter(jwtAuthenticationFilter).authorizeHttpRequests()
-            // Public endpoints always permitted
-            .requestMatchers("/", "/api/login", "/api/register", "/hello").permitAll()
-            // Configure Client-Facing endpoints
-            .requestMatchers("/api/client/**").hasRole("CLIENT")
-            // Configure Admin-Facing endpoints
-            .requestMatchers("/api/admin/**").hasRole("ADMIN")
-            // Fallback, protect all other requests
-            .anyRequest().authenticated().and().authenticationProvider(authenticationProvider).formLogin().disable()
-            .httpBasic().disable().oauth2ResourceServer().jwt();
+                // Allow cross-origin requests
+                .cors().and()
+                // Disable CSRF (it has no use since are not storing cookies)
+                .csrf().disable()
+                // Stateless session
+                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
+                .addFilter(jwtAuthenticationFilter).authorizeHttpRequests()
+                // Public endpoints always permitted
+                .requestMatchers("/", "/api/login", "/api/register", "/hello").permitAll()
+                // Configure Client-Facing endpoints
+                .requestMatchers("/api/client/**").hasRole("CLIENT")
+                // Configure Admin-Facing endpoints
+                .requestMatchers("/api/admin/**").hasRole("ADMIN")
+                // Fallback, protect all other requests
+                .anyRequest().authenticated().and().authenticationProvider(authenticationProvider).formLogin().disable()
+                .httpBasic().disable().oauth2ResourceServer().jwt();
         return http.build();
     }
 
@@ -66,7 +66,7 @@ public class WebSecurityConfiguration {
         CorsConfiguration configuration = new CorsConfiguration();
         configuration.setAllowedOrigins(List.of("*"));
         configuration.setAllowedHeaders(List.of("*"));
-        configuration.setAllowedMethods(List.of("GET","POST","PUT","DELETE","PATCH"));
+        configuration.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "PATCH"));
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/api/**", configuration);
         return source;
