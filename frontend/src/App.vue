@@ -1,24 +1,29 @@
 <template>
   <v-app>
-    <v-main>
-      <MainPage/>
-
-    </v-main>
+    <router-view />
   </v-app>
+
 </template>
 
 <script>
-import MainPage from './components/MainPage.vue'
 
 export default {
   name: 'App',
 
-  components: {
-    MainPage,
-  },
-
   data: () => ({
     //
   }),
+  computed: {
+    loggedIn(){
+      return this.$store.state.auth.status.loggedIn
+    }
+  },
+  mounted(){
+    console.log("App started", this.$store.state.auth.status);
+    if (!this.loggedIn){
+      console.log("Login not detected, directing to signin");
+      this.$router.push("/signin")
+    }
+  }
 }
 </script>
