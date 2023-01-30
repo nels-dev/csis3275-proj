@@ -15,7 +15,7 @@
     ></v-img>
 
       <v-spacer></v-spacer>
-
+      <ClientName/>
       <v-btn icon>
 
         <!-- start of avatar -->
@@ -163,27 +163,29 @@
 </template>
 
 <script>
+import ClientName from '@/components/ClientName.vue';
+
 
   export default {
-  //  start of slideshow
-  data () {
-      return {
-        items: [
-          {
-            src: 'https://m.media-amazon.com/images/I/71PeTiNaOCL._AC_SX679_.jpg',
-          },
-          {
-            src: 'https://m.media-amazon.com/images/I/71PeTiNaOCL._AC_SX679_.jpg',
-          },
-          {
-            src: 'https://m.media-amazon.com/images/I/71PeTiNaOCL._AC_SX679_.jpg',
-          },
-          {
-            src: 'https://m.media-amazon.com/images/I/71PeTiNaOCL._AC_SX679_.jpg',
-          },
-        ],
-      }
+    //  start of slideshow
+    data() {
+        return {
+            items: [
+                {
+                    src: "https://m.media-amazon.com/images/I/71PeTiNaOCL._AC_SX679_.jpg",
+                },
+                {
+                    src: "https://m.media-amazon.com/images/I/71PeTiNaOCL._AC_SX679_.jpg",
+                },
+                {
+                    src: "https://m.media-amazon.com/images/I/71PeTiNaOCL._AC_SX679_.jpg",
+                },
+                {
+                    src: "https://m.media-amazon.com/images/I/71PeTiNaOCL._AC_SX679_.jpg",
+                },
+            ],
+        };
     },
-  //  end of slideshow
-  }
+    components: { ClientName }
+}
 </script>
