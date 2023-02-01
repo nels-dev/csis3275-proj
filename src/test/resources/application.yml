@@ -1,0 +1,19 @@
+logging:
+  level:
+    root: WARN
+    org.springframework.boot.autoconfigure: WARN
+    csis3275.project.seasell: DEBUG
+jwt:
+  secret: 1TivnN7cyruKcEwJorqrOqrBfGnRcvSN1xmgGiXLUBPgbZQkRQT77T8iDxwfUIT
+spring:
+  jpa:
+    hibernate.ddl-auto: create-drop
+    show-sql: true
+    database-platform: org.hibernate.dialect.H2Dialect
+    defer-datasource-initialization: true
+  datasource:
+    url: jdbc:h2:mem:testdb
+    username: sa
+    password: mysqlpw
+    driver-class-name: org.h2.Driver
+
