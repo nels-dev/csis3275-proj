@@ -31,6 +31,8 @@ public class AppUser implements UserDetails {
     private String password;
     private String email;
     private String preferredUserName;
+    private String address;
+    private String mobile;
     @Enumerated(value = EnumType.STRING)
     private UserRole role;
     @CreatedDate

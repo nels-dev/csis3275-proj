@@ -1,4 +1,4 @@
-package csis3275.project.seasell.user.model;
+package csis3275.project.seasell.user.dto;
 
 import lombok.Data;
 
