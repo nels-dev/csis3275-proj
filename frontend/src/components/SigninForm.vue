@@ -7,6 +7,11 @@
             @click:append="showPassword = !showPassword" />
         <v-btn color="primary" variant="outlined" class="ma-2" :loading="loading" :disabled="loading"
             @click="login()">Sign in</v-btn>
+        <div>
+            <h4>Don't have an account yet? Register now!</h4>
+            <v-btn color="primary" variant="outlined" class="ma-2" :loading="loading" :disabled="loading"
+            router-link to="/register">Register</v-btn>
+        </div> 
     </v-form>
 </template>
 <script>

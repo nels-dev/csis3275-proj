@@ -1,8 +1,8 @@
 package csis3275.project.seasell.configuration;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import csis3275.project.seasell.user.model.LoginRequest;
-import csis3275.project.seasell.user.model.LoginResponse;
+import csis3275.project.seasell.user.dto.LoginRequest;
+import csis3275.project.seasell.user.dto.LoginResponse;
 import csis3275.project.seasell.user.model.AppUser;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Header;

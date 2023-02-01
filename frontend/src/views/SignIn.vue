@@ -1,6 +1,4 @@
 <template>
-   
-      
         <v-row class="fill-height">
           <v-col id="signinImage" class="d-none d-md-block" 
                 :style="{'background-image': `url(${require('@/assets/signin_background_2.jpg')})`}">
@@ -15,9 +13,6 @@
           
           </v-col>
         </v-row>
-     
-     
-    
   </template>
   
   <script>
