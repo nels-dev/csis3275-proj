@@ -9,6 +9,11 @@
             @click:append="showPassword = !showPassword" 
             :rules="inputRules"
         />
+        <v-text-field v-model="password" :append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
+            :type="showPassword ? 'text' : 'password'" required label="Confirmed Password*"
+            @click:append="showPassword = !showPassword" 
+            :rules="inputRules"
+        />
         <v-text-field v-model="preferredUserName" required label="Preferred User Name*"/>
         <v-text-field v-model="address" required label="Address*"/>
         <v-text-field v-model="phone" required label="Phone Number*"/>
