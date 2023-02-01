@@ -33,7 +33,7 @@ jobs:
           command: npm install
       - run:
           name: Build production package
-          command: npm run build
+          command: npm run build -- --mode sit
       - persist_to_workspace:
           root: .
           paths:
