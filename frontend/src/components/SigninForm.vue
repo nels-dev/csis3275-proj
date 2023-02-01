@@ -4,13 +4,13 @@
         <v-text-field v-model="email" required label="E-mail" />
         <v-text-field v-model="password" :append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
             :type="showPassword ? 'text' : 'password'" required label="Password"
-            @click:append="password = !showPassword" />
+            @click:append="showPassword = !showPassword" />
         <v-btn color="primary" variant="outlined" class="ma-2" :loading="loading" :disabled="loading"
             @click="login()">Sign in</v-btn>
         <div>
             <h4>Don't have an account yet? Register now!</h4>
             <v-btn color="primary" variant="outlined" class="ma-2" :loading="loading" :disabled="loading"
-            @click="this.$router.push({path: '/register'})">Register</v-btn>
+            router-link to="/register">Register</v-btn>
         </div> 
     </v-form>
 </template>

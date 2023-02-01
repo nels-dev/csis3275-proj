@@ -23,11 +23,7 @@
     </v-form>
 </template>
 
-<!-- class="{'form-control':true, 'is-invalid' : !validEmail(email) && emailBlured}" v-on:blur="emailBlured = true" -->
-<!-- v-bind:class="{'form-control':true, 'is-invalid' : !validPassword(password) && passwordBlured}" v-on:blur="passwordBlured = true" -->
-
 <script>
-// import userService from '@/services/user.service';
 import FormAlert from './FormAlert.vue'
 
 export default{
@@ -35,15 +31,8 @@ export default{
         return {
             showPassword: false,
             loading: false,
-            // fields
             email: "",    
             password: "",
-            // validation
-            // emailBlured: false,
-            // valid: false,
-            // submitted: false, 
-            // passwordBlured: false,
-            // 
             preferredUserName: "",
             address: "",
             mobile: "",
@@ -69,31 +58,11 @@ export default{
                 this.$router.push("/signin");
             }).catch((error) => {
                 this.loading = false;
-                // validataion: 1. passwords input must be the same, 2. email is in correct format(Done)
-                // Bad request 400 
                 if (error.response?.status == 400) {
                     this.error = "Duplicated email address! Please use another email address.";
                 }
             });
         },
-        // validate(){
-        //     this.emailBlured = true;
-        //     this.passwordBlured = true;
-        //     if( this.validEmail(this.email) && this.validPassword(this.password)){
-        //         this.valid = true;
-        //     }
-        // },
-        // validEmail(email){
-        //     var re = /(.+)@(.+){2,}\.(.+){2,}/;
-        //     if(re.test(email.toLowerCase())){
-        //         return true;
-        //     } 
-        // },
-        // validPassword(password){
-        //     if (password.length > 7) {
-        //         return true;
-        //     }
-        // },
     },
     components: { FormAlert }
 }
