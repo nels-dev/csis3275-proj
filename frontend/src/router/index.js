@@ -4,6 +4,7 @@ import AdminDashboard from '../views/AdminDashboard.vue'
 import ClientMarketplace from '../views/ClientMarketplace.vue'
 import DefaultRedirect from '../views/DefaultRedirect.vue'
 import RegistrationPage from '../views/RegistrationPage.vue'
+import ProductDetailsPage from '../views/ProductDetailsPage.vue'
 
 const routes = [
     {
@@ -25,6 +26,10 @@ const routes = [
     {
         path: "/register",
         component: RegistrationPage,
+    },
+    {
+        path: "/ProductDetailsPage",
+        component: ProductDetailsPage,
     }
 ]
 
