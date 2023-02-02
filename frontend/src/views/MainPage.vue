@@ -1,11 +1,10 @@
 <template>
   
-  <v-app id="inspire">
+  <v-main >
     <v-app-bar
       app
       shrink-on-scroll
     >
-      <v-app-bar-nav-icon></v-app-bar-nav-icon>
 
       <v-toolbar-title class="color:teal lighten-4">SeaSell</v-toolbar-title>
       
@@ -18,70 +17,71 @@
       <ClientName/>
       <v-btn icon>
 
-        <!-- start of avatar -->
-        <v-container
-      fluid
-      style="height: 300px"
-    >
-      <v-row justify="center">
-        <v-menu
-          bottom
-          min-width="200px"
-          rounded
-          offset-y
-        >
-          <template v-slot:activator="{ on }">
-            <v-btn
-              icon
-              x-large
-              v-on="on"
+        <!-- start of avatar -->  
+          <v-container
+    fluid
+    style="height: 300px"
+  >
+    <v-row justify="center">
+      <v-menu
+        min-width="200px"
+        rounded
+      >
+        <template v-slot:activator="{ props }">
+          <v-btn
+            icon
+            v-bind="props"
+          >
+            <v-avatar
+              color="brown"
+              size="large"
             >
+              <span class="text-h5">{{ user.initials }}</span>
+            </v-avatar>
+          </v-btn>
+        </template>
+        <v-card>
+          <v-card-text>
+            <div class="mx-auto text-center">
               <v-avatar
                 color="brown"
-                size="48"
               >
-              <span class="white--text text-h5">IW</span>
-                <!-- <span class="white--text text-h5">{{ user.initials }}</span> -->
+                <span class="text-h5">{{ user.initials }}</span>
               </v-avatar>
-            </v-btn>
-          </template>
-          <v-card>
-            <v-list-item-content class="justify-center">
-              <div class="mx-auto text-center">
-                <v-avatar
-                  color="brown"
-                >
-                  <span class="white--text text-h5">IW</span>
-                  <!-- <span class="white--text text-h5">{{ user.initials }}</span> -->
-                </v-avatar>
-                <h3>Ivan Wong</h3>
-                <!-- <h3>{{ user.fullName }}</h3> -->
-                <p class="text-caption mt-1">
-                  ivanwong@professor.douglascollege.ca
-                  <!-- {{ user.email }} -->
-                </p>
-                <v-divider class="my-3"></v-divider>
-                <v-btn
-                  depressed
-                  rounded
-                  text
-                >
-                  My order
-                </v-btn>
-                <v-divider class="my-3"></v-divider>
-                <v-btn
-                  depressed
-                  rounded
-                  text
-                >
-                  My store
-                </v-btn>
-              </div>
-            </v-list-item-content>
-          </v-card>
-        </v-menu>
-      </v-row>
-    </v-container>
+              <h3>{{ user.fullName }}</h3>
+              <p class="text-caption mt-1">
+                {{ user.email }}
+              </p>
+              <v-divider class="my-3"></v-divider>
+              <v-btn
+                rounded
+                variant="text"
+              >
+                My store
+              </v-btn>
+              <v-divider class="my-3"></v-divider>
+              <v-btn
+                rounded
+                variant="text"
+              >
+                My order
+              </v-btn>
+                            <v-divider class="my-3"></v-divider>
+              <v-btn
+                rounded
+                variant="text"
+              >
+                Logout
+              </v-btn>
+
+            </div>
+            
+          </v-card-text>
+        </v-card>
+      </v-menu>
+    </v-row>
+  </v-container>
+
         <!-- end of avatar -->
       </v-btn>
     </v-app-bar>
@@ -124,33 +124,13 @@
     <v-card-subtitle>
       Size: 130cm for riders 80-150lbs
     </v-card-subtitle>
-
-    <v-card-actions >
-
-    <v-btn
-      depressed
-      color="success"
-    >
-      Purchase
-    </v-btn>
-
-
-    
-
-
-      <v-spacer></v-spacer>
-      
-
-
-    </v-card-actions>
-
   </v-card>
             <!-- end of the card -->
           </v-col>
         </v-row>
       </v-container>
     </v-main>
-  </v-app>
+  </v-main>
   <!-- footer -->
   <v-footer padless color="teal accent-1">
     <v-col
@@ -170,6 +150,11 @@ import ClientName from '@/components/ClientName.vue';
     //  start of slideshow
     data() {
         return {
+                user: {
+        initials: '',
+        fullName: '',
+        email: '',
+      },
             items: [
                 {
                     src: "https://m.media-amazon.com/images/I/71PeTiNaOCL._AC_SX679_.jpg",
@@ -185,7 +170,10 @@ import ClientName from '@/components/ClientName.vue';
                 },
             ],
         };
+
+        
     },
     components: { ClientName }
+    
 }
 </script>
