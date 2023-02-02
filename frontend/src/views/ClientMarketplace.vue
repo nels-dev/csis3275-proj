@@ -144,17 +144,17 @@
 
 <script>
 import ClientName from '@/components/ClientName.vue';
-
+import userService from '@/services/user.service';
 
   export default {
     //  start of slideshow
     data() {
-
         return {
+
                 user: {
-        initials: 'CC',
-        fullName: 'Cliff Chan',
-        email: 'cliff@test.io',
+                  initials: '',
+        fullName: '',
+        email: '',
       },
             items: [
                 {
@@ -173,8 +173,15 @@ import ClientName from '@/components/ClientName.vue';
         };
 
         
+    }, 
+
+    components: { ClientName},    mounted(){
+        userService.getCurrentClientUser().then((resp)=>{
+            this.user.FullName = resp.data.preferredUserName;
+            this.user.email=resp.data.email;
+            this.user.initials=resp.data.preferredUserName[0];
+        })
     },
-    components: { ClientName }
     
 }
 </script>

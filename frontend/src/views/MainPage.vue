@@ -149,12 +149,11 @@ import ClientName from '@/components/ClientName.vue';
   export default {
     //  start of slideshow
     data() {
-
         return {
                 user: {
-        initials: 'CC',
-        fullName: 'Cliff Chan',
-        email: 'cliff@test.io',
+        initials: '',
+        fullName: '',
+        email: '',
       },
             items: [
                 {
