@@ -3,12 +3,11 @@
       app
       shrink-on-scroll
     >
-
-      <v-toolbar-title class="color:teal lighten-4">SeaSell</v-toolbar-title>
-      
+      <v-toolbar-title class="color:teal lighten-4" @click="$router.push('/Home')">SeaSell</v-toolbar-title>
       <v-img
       src="../assets/seasell_logo.svg"
       height="200px"
+      @click="$router.push('/Home')"
     ></v-img>
 
       <v-spacer></v-spacer>
