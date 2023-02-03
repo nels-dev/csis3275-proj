@@ -54,9 +54,11 @@ import FooterPage from '@/components/FooterPage.vue';
         };
     }, 
 
-    components: { HeaderPage,ProductCard,HeroSection,FooterPage},    mounted(){
+    components: { HeaderPage,ProductCard,HeroSection,FooterPage}, 
+    
+       mounted(){
         userService.getCurrentClientUser().then((resp)=>{
-            this.user.FullName = resp.data.preferredUserName;
+            this.user.fullName = resp.data.preferredUserName;
             this.user.email=resp.data.email;
             this.user.initials=resp.data.preferredUserName[0];
         })

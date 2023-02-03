@@ -60,7 +60,8 @@ import ProductCard from '@/components/ProductCard.vue';
         };
     }, 
 
-    components: { HeaderPage,ProductCard},    mounted(){
+    components: { HeaderPage,ProductCard}
+    ,    mounted(){
         userService.getCurrentClientUser().then((resp)=>{
             this.user.FullName = resp.data.preferredUserName;
             this.user.email=resp.data.email;

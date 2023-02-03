@@ -103,7 +103,7 @@ import ClientName from '@/components/ClientName.vue';
 
     components: {ClientName},    mounted(){
         userService.getCurrentClientUser().then((resp)=>{
-            this.user.FullName = resp.data.preferredUserName;
+            this.user.fullName = resp.data.preferredUserName;
             this.user.email=resp.data.email;
             this.user.initials=resp.data.preferredUserName[0];
         })
