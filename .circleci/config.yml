@@ -32,6 +32,9 @@ jobs:
           name: Install NPM dependencies
           command: npm install
       - run:
+          name: Check format
+          command: npm run format-test
+      - run:
           name: Build production package
           command: npm run build -- --mode sit
       - persist_to_workspace:
