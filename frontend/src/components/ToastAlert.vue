@@ -6,39 +6,38 @@
     this.$store.dispatch("alert/push", "<message here>")
 -->
 <template>
-    <v-snackbar
-      v-model="show"
-      :timeout=3000
-      :multi-line="multiLine"
-      top
-      right
-      @click="show=false"
-      color="red"
-      location="top right"
-    >
-      {{ message }}
-    </v-snackbar>
-</template> 
+  <v-snackbar
+    v-model="show"
+    :timeout="3000"
+    :multi-line="multiLine"
+    top
+    right
+    @click="show = false"
+    color="red"
+    location="top right"
+  >
+    {{ message }}
+  </v-snackbar>
+</template>
 <script>
-
-export default{
-    data: ()=> {
-        return {
-            show: false
-        }
+export default {
+  data: () => {
+    return {
+      show: false,
+    };
+  },
+  computed: {
+    message() {
+      return this.$store.state.alert.message;
     },
-    computed:{
-        message(){
-            return this.$store.state.alert.message
-        },
-        timestamp(){
-            return this.$store.state.alert.timestamp
-        }
+    timestamp() {
+      return this.$store.state.alert.timestamp;
     },
-    watch:{
-        timestamp(){
-            this.show=true;
-        }
-    }
-}
+  },
+  watch: {
+    timestamp() {
+      this.show = true;
+    },
+  },
+};
 </script>

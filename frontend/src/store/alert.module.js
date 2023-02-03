@@ -1,20 +1,20 @@
 const initialState = {
-    'message':null,
-    'timestamp': new Date()
-}
+  message: null,
+  timestamp: new Date(),
+};
 
 export const alert = {
-    namespaced: true,
-    state: initialState,
-    actions:{
-        push({ commit }, message){
-            commit('showAlert', message)
-        }
+  namespaced: true,
+  state: initialState,
+  actions: {
+    push({ commit }, message) {
+      commit("showAlert", message);
     },
-    mutations:{
-        showAlert(state, message){
-            state.message = message
-            state.timestamp = new Date()
-        }
-    }
-}
+  },
+  mutations: {
+    showAlert(state, message) {
+      state.message = message;
+      state.timestamp = new Date();
+    },
+  },
+};
