@@ -14,7 +14,7 @@ Note: No metal edge.Not for resort use"
       ></v-text-field>
 Price:
       <v-text-field
-        value="95.48"
+        value="$95.48"
       ></v-text-field>
 Product image(s):
     <v-img
