@@ -1,70 +1,96 @@
 <template>
-    <v-form>
-        <FormAlert :message="error" />
-        <v-text-field v-model="email" required label="E-mail*" 
-            :rules="emailRules"
-        />
-        <v-text-field v-model="password" :append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
-            :type="showPassword ? 'text' : 'password'" required label="Password*"
-            @click:append="showPassword = !showPassword" 
-            :rules="inputRules"
-        />
-        <v-text-field v-model="password" :append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
-            :type="showPassword ? 'text' : 'password'" required label="Confirmed Password*"
-            @click:append="showPassword = !showPassword" 
-            :rules="inputRules"
-        />
-        <v-text-field v-model="preferredUserName" required label="Preferred User Name*"/>
-        <v-text-field v-model="address" required label="Address*"/>
-        <v-text-field v-model="phone" required label="Phone Number*"/>
+  <v-form>
+    <FormAlert :message="error" />
+    <v-text-field
+      v-model="email"
+      required
+      label="E-mail*"
+      :rules="emailRules"
+    />
+    <v-text-field
+      v-model="password"
+      :append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
+      :type="showPassword ? 'text' : 'password'"
+      required
+      label="Password*"
+      @click:append="showPassword = !showPassword"
+      :rules="inputRules"
+    />
+    <v-text-field
+      v-model="password"
+      :append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
+      :type="showPassword ? 'text' : 'password'"
+      required
+      label="Confirmed Password*"
+      @click:append="showPassword = !showPassword"
+      :rules="inputRules"
+    />
+    <v-text-field
+      v-model="preferredUserName"
+      required
+      label="Preferred User Name*"
+    />
+    <v-text-field v-model="address" required label="Address*" />
+    <v-text-field v-model="phone" required label="Phone Number*" />
 
-        <v-btn color="primary" variant="outlined" class="ma-2" :loading="loading" :disabled="loading"
-            @click="register()">Register</v-btn>
-    </v-form>
+    <v-btn
+      color="primary"
+      variant="outlined"
+      class="ma-2"
+      :loading="loading"
+      :disabled="loading"
+      @click="register()"
+      >Register</v-btn
+    >
+  </v-form>
 </template>
 
 <script>
-import FormAlert from './FormAlert.vue'
+import FormAlert from "./FormAlert.vue";
 
-export default{
-    data: () => {
-        return {
-            showPassword: false,
-            loading: false,
-            email: "",    
-            password: "",
-            preferredUserName: "",
-            address: "",
-            mobile: "",
-            inputRules:[
-                v => v.length >=7 || 'Minimum length is 8 characters'
-            ],
-            emailRules:[
-                v => !v || /(.+)@(.+){2,}\.(.+){2,}/.test(v) || 'Please input a correct email address'
-            ],
-            error: "",
-        };
+export default {
+  data: () => {
+    return {
+      showPassword: false,
+      loading: false,
+      email: "",
+      password: "",
+      preferredUserName: "",
+      address: "",
+      mobile: "",
+      inputRules: [(v) => v.length >= 7 || "Minimum length is 8 characters"],
+      emailRules: [
+        (v) =>
+          !v ||
+          /(.+)@(.+){2,}\.(.+){2,}/.test(v) ||
+          "Please input a correct email address",
+      ],
+      error: "",
+    };
+  },
+  methods: {
+    register() {
+      this.loading = true;
+      this.userService
+        .register({
+          email: this.email,
+          password: this.password,
+          preferredUserName: this.preferredUserName,
+          address: this.address,
+          mobile: this.mobile,
+        })
+        .then(() => {
+          this.$router.push("/signin");
+        })
+        .catch((error) => {
+          this.loading = false;
+          if (error.response?.status == 400) {
+            this.error =
+              "Duplicated email address! Please use another email address.";
+          }
+        });
     },
-    methods: {
-        register() {
-            this.loading = true;
-            this.userService.register({
-                email: this.email,
-                password: this.password,
-                preferredUserName: this.preferredUserName,
-                address: this.address,
-                mobile: this.mobile,
-            }).then(() => {
-                this.$router.push("/signin");
-            }).catch((error) => {
-                this.loading = false;
-                if (error.response?.status == 400) {
-                    this.error = "Duplicated email address! Please use another email address.";
-                }
-            });
-        },
-    },
-    components: { FormAlert }
-}
-
+  },
+  components: { FormAlert },
+};
 </script>
