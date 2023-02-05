@@ -39,6 +39,7 @@ public class ProductService {
 
     private ProductDto toProductDto(Product product) {
         return ProductDto.builder().name(product.getName()).condition(product.getCondition())
+                .price(product.getPrice())
                 .description(product.getDescription())
                 .images(product.getImages().stream().map(ProductImage::getPath).collect(Collectors.toList())).build();
     }

@@ -9,6 +9,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToMany;
+import java.math.BigDecimal;
 import java.util.List;
 import lombok.Data;
 
@@ -29,6 +30,8 @@ public class Product {
 
     @Enumerated(value = EnumType.STRING)
     private ProductStatus status;
+
+    private double price;
 
     @OneToMany
     @JoinColumn(name = "product_id")

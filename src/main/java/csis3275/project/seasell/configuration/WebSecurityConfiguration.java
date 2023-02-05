@@ -50,7 +50,7 @@ public class WebSecurityConfiguration {
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
                 .addFilter(jwtAuthenticationFilter).authorizeHttpRequests()
                 // Public endpoints always permitted
-                .requestMatchers("/", "/api/login", "/api/register", "/hello", "/images").permitAll()
+                .requestMatchers("/", "/api/login", "/api/register", "/hello", "/images/**").permitAll()
                 // Configure Client-Facing endpoints
                 .requestMatchers("/api/client/**").hasRole("CLIENT")
                 // Configure Admin-Facing endpoints

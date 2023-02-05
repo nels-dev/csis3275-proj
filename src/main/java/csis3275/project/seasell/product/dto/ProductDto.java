@@ -11,5 +11,6 @@ public class ProductDto {
     String name;
     String description;
     String condition;
+    double price;
     List<String> images;
 }

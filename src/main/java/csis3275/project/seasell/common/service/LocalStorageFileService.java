@@ -16,9 +16,9 @@ import org.springframework.stereotype.Service;
 @Slf4j
 public class LocalStorageFileService implements FileService {
 
-    @Value("${storage.local.basePath:.}")
+    @Value("${storage.local.base-path}")
     @Setter
-    private String basePath = ".";
+    private String basePath;
 
     @Override
     public String store(byte[] fileContent, String extension) throws IOException {
