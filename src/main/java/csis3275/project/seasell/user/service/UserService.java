@@ -32,8 +32,8 @@ public class UserService {
                 .orElseThrow(() -> new UsernameNotFoundException("Unable to load user"));
     }
 
-    public void register(UserDto userDto){
-        if (userRepository.existsByEmail(userDto.getEmail())){
+    public void register(UserDto userDto) {
+        if (userRepository.existsByEmail(userDto.getEmail())) {
             throw new IllegalArgumentException("Email exist");
         }
         String encrypted = passwordEncoder.encode(userDto.getPassword());

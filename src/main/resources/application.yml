@@ -5,6 +5,11 @@ logging:
     csis3275.project.seasell: debug
 jwt:
   secret: ghm5XUtja+0LNWQ2TCOOPlAaABz8atEU8hzDV0RejM5Hsf8SfZQ4cEwJYFZOmd26
+
+storage:
+  type: local
+  local:
+    base-path: ./images
 spring:
   sql:
     init:
