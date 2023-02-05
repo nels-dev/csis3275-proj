@@ -12,10 +12,11 @@ class LocalStorageFileServiceTest {
     @Test
     public void storeAndRetrieveFile_success() throws IOException {
         LocalStorageFileService fileService = new LocalStorageFileService();
+        fileService.setBasePath("./images");
         String fileName = fileService.store("ABC".getBytes(StandardCharsets.UTF_8), "dat");
         byte[] fileContent = fileService.retrieve(fileName);
         assertEquals("ABC", new String(fileContent));
         // Clean up
-        new File("./" + fileName).delete();
+        new File("./images/" + fileName).delete();
     }
 }
