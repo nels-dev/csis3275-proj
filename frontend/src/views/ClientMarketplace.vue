@@ -4,8 +4,8 @@
     <HeroSection />
     <v-container>
       <v-row>
-        <v-col v-for="n in 4" :key="n" cols="4">
-          <ProductCard />
+        <v-col v-for="item in items" :key="item" cols="4">
+          <ProductCard :item="item" />
         </v-col>
       </v-row>
     </v-container>
@@ -15,6 +15,7 @@
 
 <script>
 import userService from "@/services/user.service";
+import productService from "@/services/product.service";
 import HeaderPage from "@/components/HeaderPage.vue";
 import ProductCard from "@/components/ProductCard.vue";
 import HeroSection from "@/components/HeroSection.vue";
@@ -29,20 +30,7 @@ export default {
         fullName: "",
         email: "",
       },
-      items: [
-        {
-          src: "https://m.media-amazon.com/images/I/71PeTiNaOCL._AC_SX679_.jpg",
-        },
-        {
-          src: "https://m.media-amazon.com/images/I/71PeTiNaOCL._AC_SX679_.jpg",
-        },
-        {
-          src: "https://m.media-amazon.com/images/I/71PeTiNaOCL._AC_SX679_.jpg",
-        },
-        {
-          src: "https://m.media-amazon.com/images/I/71PeTiNaOCL._AC_SX679_.jpg",
-        },
-      ],
+      items: [],
     };
   },
 
@@ -53,6 +41,10 @@ export default {
       this.user.fullName = resp.data.preferredUserName;
       this.user.email = resp.data.email;
       this.user.initials = resp.data.preferredUserName[0];
+    });
+    productService.getProducts().then((resp) => {
+      console.log(resp.data);
+      this.items = resp.data;
     });
   },
 };

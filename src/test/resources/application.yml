@@ -5,6 +5,10 @@ logging:
     csis3275.project.seasell: DEBUG
 jwt:
   secret: 1TivnN7cyruKcEwJorqrOqrBfGnRcvSN1xmgGiXLUBPgbZQkRQT77T8iDxwfUIT
+storage:
+  type: local
+  local:
+    base-path: ./images
 spring:
   jpa:
     hibernate.ddl-auto: create-drop

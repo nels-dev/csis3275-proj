@@ -19,14 +19,13 @@ public class RegistrationController {
     @PostMapping
     public ResponseEntity<?> saveUser(@RequestBody UserDto userDTO) {
 
-        try{
+        try {
             userService.register(userDTO);
             return ResponseEntity.ok().build();
-        }catch(Exception e){
+        } catch (Exception e) {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
 
     }
-
 
 }
