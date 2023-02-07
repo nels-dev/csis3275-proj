@@ -38,7 +38,15 @@
                   <v-divider class="my-3"></v-divider>
                   <v-btn rounded variant="text"> My order </v-btn>
                   <v-divider class="my-3"></v-divider>
-                  <v-btn rounded variant="text"> Logout </v-btn>
+                  <v-btn
+                    rounded
+                    variant="text"
+                    :loading="loading"
+                    :disabled="loading"
+                    @click="logout()"
+                  >
+                    Logout
+                  </v-btn>
                 </div>
               </v-card-text>
             </v-card>
@@ -61,8 +69,15 @@ export default {
         initials: "",
         fullName: "",
         email: "",
+        loading: false,
       },
     };
+  },
+  methods: {
+    logout() {
+      this.loading = true;
+      this.$store.dispatch("auth/logout");
+    },
   },
 
   components: { ClientName },
