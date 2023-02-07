@@ -13,7 +13,7 @@
     top
     right
     @click="show = false"
-    color="red"
+    :color="isAlert ? 'red' : 'green'"
     location="top right"
   >
     {{ message }}
@@ -32,6 +32,9 @@ export default {
     },
     timestamp() {
       return this.$store.state.alert.timestamp;
+    },
+    isAlert() {
+      return this.$store.state.alert.isAlert;
     },
   },
   watch: {
