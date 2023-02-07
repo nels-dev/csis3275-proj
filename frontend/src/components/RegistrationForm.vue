@@ -100,6 +100,10 @@ export default {
         })
         .then(() => {
           this.$router.push("/signin");
+          this.$store.dispatch(
+            "alert/pushInfo",
+            "Account registered! You can login now!"
+          );
         })
         .catch((error) => {
           this.loading = false;

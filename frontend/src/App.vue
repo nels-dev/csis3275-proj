@@ -17,6 +17,14 @@ export default {
       return this.$store.state.auth.status.loggedIn;
     },
   },
+  watch: {
+    loggedIn() {
+      if (!this.loggedIn) {
+        this.$router.push("/signin");
+        this.$store.dispatch("alert/push", "You are successfully logout.");
+      }
+    },
+  },
   mounted() {
     console.log("App started", this.$store.state.auth.status);
     if (!this.loggedIn) {

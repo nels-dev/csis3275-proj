@@ -38,7 +38,7 @@ public class UserService {
         }
 
         if (userRepository.existsByPreferredUserName(userDto.getPreferredUserName())) {
-            throw new IllegalArgumentException("User Name exists. Please choose another user name");
+            throw new IllegalArgumentException("User name exists. Please choose another user name");
         }
 
         String encrypted = passwordEncoder.encode(userDto.getPassword());

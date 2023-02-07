@@ -38,13 +38,7 @@
                   <v-divider class="my-3"></v-divider>
                   <v-btn rounded variant="text"> My order </v-btn>
                   <v-divider class="my-3"></v-divider>
-                  <v-btn
-                    rounded
-                    variant="text"
-                    :loading="loading"
-                    :disabled="loading"
-                    @click="logout()"
-                  >
+                  <v-btn rounded variant="text" @click="logout()">
                     Logout
                   </v-btn>
                 </div>
@@ -75,7 +69,6 @@ export default {
   },
   methods: {
     logout() {
-      this.loading = true;
       this.$store.dispatch("auth/logout");
     },
   },
