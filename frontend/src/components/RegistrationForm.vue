@@ -1,45 +1,36 @@
 <template>
-  <v-form>
+  <v-form ref="form" v-model="valid">
     <FormAlert :message="error" />
+    <v-text-field label="Email*" v-model="email" :rules="emailRules" />
     <v-text-field
-      v-model="email"
-      required
-      label="E-mail*"
-      :rules="emailRules"
-    />
-    <v-text-field
-      v-model="password"
-      :append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
-      :type="showPassword ? 'text' : 'password'"
-      required
       label="Password*"
-      @click:append="showPassword = !showPassword"
-      :rules="inputRules"
-    />
-    <v-text-field
       v-model="password"
+      :rules="passwordRules"
       :append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
       :type="showPassword ? 'text' : 'password'"
-      required
-      label="Confirmed Password*"
       @click:append="showPassword = !showPassword"
-      :rules="inputRules"
     />
     <v-text-field
-      v-model="preferredUserName"
-      required
-      label="Preferred User Name*"
+      label="Confirmed Password*"
+      v-model="confirmPassword"
+      :rules="confirmPasswordRules"
+      :append-icon="showPassword2 ? 'mdi-eye' : 'mdi-eye-off'"
+      :type="showPassword2 ? 'text' : 'password'"
+      @click:append="showPassword2 = !showPassword2"
     />
-    <v-text-field v-model="address" required label="Address*" />
-    <v-text-field v-model="phone" required label="Phone Number*" />
-
+    <v-text-field
+      label="Preferred User Name*"
+      v-model="preferredUserName"
+      :rules="userNameRules"
+    />
+    <v-text-field label="Address*" v-model="address" :rules="userNameRules" />
+    <v-text-field label="Phone Number*" v-model="mobile" :rules="mobileRules" />
     <v-btn
+      :disabled="!valid"
       color="primary"
-      variant="outlined"
-      class="ma-2"
+      class="mr-2"
       :loading="loading"
-      :disabled="loading"
-      @click="register()"
+      @click="validate"
       >Register</v-btn
     >
   </v-form>
@@ -47,37 +38,65 @@
 
 <script>
 import FormAlert from "./FormAlert.vue";
+import userService from "../services/user.service";
 
 export default {
   data: () => {
     return {
       showPassword: false,
+      showPassword2: false,
       loading: false,
+      valid: true,
       email: "",
       password: "",
+      confirmPassword: "",
       preferredUserName: "",
       address: "",
       mobile: "",
-      inputRules: [(v) => v.length >= 7 || "Minimum length is 8 characters"],
       emailRules: [
-        (v) =>
-          !v ||
-          /(.+)@(.+){2,}\.(.+){2,}/.test(v) ||
-          "Please input a correct email address",
+        (v) => !!v || "E-mail is required",
+        (v) => /.+@.+\..+/.test(v) || "E-mail must be valid",
+      ],
+      passwordRules: [
+        (v) => !!v || "This field cannot be empty.",
+        (v) => (v && v.length > 7) || "minimum 8 characters",
+      ],
+      userNameRules: [
+        (v) => !!v || "This field cannot be empty.",
+        (v) => (v && v.length > 2) || "minimum 3 characters",
+      ],
+      mobileRules: [
+        (v) => !!v || "Please input correct telephone number (10 digits).",
+        (v) => (v && v.length > 9) || "minimum 10 characters",
+        (v) => Number.isInteger(Number(v)) || "Must be a 10 digits number",
       ],
       error: "",
     };
   },
+  computed: {
+    confirmPasswordRules() {
+      return [
+        (v) => !!v || "Confirm Password is required",
+        (v) => v === this.password || "Passwords do not match",
+      ];
+    },
+  },
   methods: {
-    register() {
-      this.loading = true;
-      this.userService
-        .register({
-          email: this.email,
-          password: this.password,
-          preferredUserName: this.preferredUserName,
-          address: this.address,
-          mobile: this.mobile,
+    validate() {
+      this.load = true;
+      this.$refs.form
+        .validate()
+        .then((valid) => {
+          if (valid) {
+            console.log("Form submitted!");
+            return userService.register({
+              email: this.email,
+              password: this.password,
+              preferredUserName: this.preferredUserName,
+              address: this.address,
+              mobile: this.mobile,
+            });
+          }
         })
         .then(() => {
           this.$router.push("/signin");
@@ -85,8 +104,10 @@ export default {
         .catch((error) => {
           this.loading = false;
           if (error.response?.status == 400) {
-            this.error =
-              "Duplicated email address! Please use another email address.";
+            // this.error = error.response.body;
+            console.log(error);
+            this.error = error.response.data;
+            //   "Duplicated email address! Please use another email address.";
           }
         });
     },

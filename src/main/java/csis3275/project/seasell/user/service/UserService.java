@@ -34,8 +34,13 @@ public class UserService {
 
     public void register(UserDto userDto) {
         if (userRepository.existsByEmail(userDto.getEmail())) {
-            throw new IllegalArgumentException("Email exist");
+            throw new IllegalArgumentException("Email exists. Please use another email address");
         }
+
+        if (userRepository.existsByPreferredUserName(userDto.getPreferredUserName())) {
+            throw new IllegalArgumentException("User Name exists. Please choose another user name");
+        }
+
         String encrypted = passwordEncoder.encode(userDto.getPassword());
         AppUser user = new AppUser();
         user.setPassword(encrypted);

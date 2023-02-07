@@ -1,10 +1,10 @@
 <template>
   <v-row class="fill-height">
     <v-col
-      id="signinImage"
+      id="registerImage"
       class="d-none d-md-block"
       :style="{
-        'background-image': `url(${require('@/assets/signin_background.jpg')})`,
+        'background-image': `url(${require('@/assets/register_background.jpg')})`,
       }"
     >
     </v-col>
@@ -29,7 +29,7 @@ export default {
 </script>
 
 <style>
-#signinImage {
+#registerImage {
   background-size: cover;
   background-position: right bottom;
 }
