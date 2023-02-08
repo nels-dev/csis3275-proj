@@ -8,9 +8,11 @@ import csis3275.project.seasell.product.model.ProductStatus;
 import csis3275.project.seasell.product.repository.ProductRepository;
 import java.io.IOException;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -35,6 +37,9 @@ public class ProductService {
     public List<ProductDto> getProducts() {
         return productRepository.findAllByStatus(ProductStatus.LISTED).stream().map(this::toProductDto)
                 .collect(Collectors.toList());
+    }
+    public ProductDto getProduct(int id) {
+    	return toProductDto(productRepository.findById(id).get());
     }
 
     private ProductDto toProductDto(Product product) {
