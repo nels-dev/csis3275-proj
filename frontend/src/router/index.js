@@ -29,7 +29,7 @@ const routes = [
     component: RegistrationPage,
   },
   {
-    path: "/ProductDetailsPage",
+    path: "/productdetails/:id",
     component: ProductDetailsPage,
   },
   {

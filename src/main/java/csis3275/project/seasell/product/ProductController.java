@@ -34,11 +34,12 @@ public class ProductController {
 
         return productService.getProducts();
     }
+
     @GetMapping("/{id}")
     public ProductDto getProduct(@PathVariable int id) {
-    	return productService.getProduct(id);
+        return productService.getProduct(id);
     }
-    
+
     @PostMapping
     public ResponseEntity<?> saveProduct(@RequestParam("file") MultipartFile file, @RequestParam String name)
             throws IOException {

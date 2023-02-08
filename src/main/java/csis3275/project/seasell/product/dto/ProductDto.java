@@ -7,7 +7,7 @@ import lombok.Value;
 @Builder
 @Value
 public class ProductDto {
-
+    int id;
     String name;
     String description;
     String condition;

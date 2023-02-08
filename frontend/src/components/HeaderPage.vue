@@ -10,7 +10,6 @@
     ></v-img>
 
     <v-spacer></v-spacer>
-    <ClientName />
     <v-btn icon>
       <!-- start of avatar -->
       <v-container fluid style="height: 300px">
@@ -54,7 +53,6 @@
 </template>
 <script>
 import userService from "@/services/user.service";
-import ClientName from "@/components/ClientName.vue";
 export default {
   //  start of slideshow
   data() {
@@ -73,7 +71,7 @@ export default {
     },
   },
 
-  components: { ClientName },
+  components: {},
   mounted() {
     userService.getCurrentClientUser().then((resp) => {
       this.user.fullName = resp.data.preferredUserName;
