@@ -58,5 +58,6 @@ public class UserService {
         user.setCreatedAt(OffsetDateTime.now());
 
         userRepository.save(user);
+
     }
 }

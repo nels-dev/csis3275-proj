@@ -5,6 +5,7 @@ import ClientMarketplace from "../views/ClientMarketplace.vue";
 import DefaultRedirect from "../views/DefaultRedirect.vue";
 import RegistrationPage from "../views/RegistrationPage.vue";
 import ProductDetailsPage from "../views/ProductDetailsPage.vue";
+import MyStore from "../views/MyStore.vue";
 
 const routes = [
   {
@@ -30,6 +31,10 @@ const routes = [
   {
     path: "/ProductDetailsPage",
     component: ProductDetailsPage,
+  },
+  {
+    path: "/Mystore",
+    component: MyStore,
   },
 ];
 
