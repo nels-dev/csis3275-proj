@@ -17,6 +17,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
@@ -44,13 +45,17 @@ public class WebSecurityConfiguration {
         http
                 // Allow cross-origin requests
                 .cors().and()
-                // Disable CSRF (it has no use since are not storing cookies)
+                // Disable CSRF (it has no use since we are not storing cookies)
                 .csrf().disable()
+                // disable x-frame-options. This is essential for h2-console
+                .headers().frameOptions().disable().and()
                 // Stateless session
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
                 .addFilter(jwtAuthenticationFilter).authorizeHttpRequests()
                 // Public endpoints always permitted
                 .requestMatchers("/", "/api/login", "/api/register", "/hello", "/images/**").permitAll()
+                // Essential for h2-console
+                .requestMatchers(AntPathRequestMatcher.antMatcher("/h2-console/**")).permitAll()
                 // Configure Client-Facing endpoints
                 .requestMatchers("/api/client/**").hasRole("CLIENT")
                 // Configure Admin-Facing endpoints
