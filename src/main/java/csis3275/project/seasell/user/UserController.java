@@ -18,4 +18,6 @@ public class UserController {
     public AppUser getCurrentUser() {
         return userService.getCurrentUser();
     }
+
+    //comment
 }
