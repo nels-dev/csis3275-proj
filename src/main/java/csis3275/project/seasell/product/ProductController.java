@@ -2,9 +2,12 @@ package csis3275.project.seasell.product;
 
 import csis3275.project.seasell.common.service.FileService;
 import csis3275.project.seasell.product.dto.ProductDto;
+import csis3275.project.seasell.product.model.Product;
 import csis3275.project.seasell.product.service.ProductService;
 import java.io.IOException;
 import java.util.List;
+import java.util.Optional;
+
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatusCode;
@@ -31,7 +34,11 @@ public class ProductController {
 
         return productService.getProducts();
     }
-
+    @GetMapping("/{id}")
+    public ProductDto getProduct(@PathVariable int id) {
+    	return productService.getProduct(id);
+    }
+    
     @PostMapping
     public ResponseEntity<?> saveProduct(@RequestParam("file") MultipartFile file, @RequestParam String name)
             throws IOException {
