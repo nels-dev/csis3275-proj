@@ -13,7 +13,8 @@
       <v-text-field :value="item.condition"></v-text-field>
       Mode of delivery (assumed standard charge $30):
       <v-text-field value="Shippment"></v-text-field>
-      <v-btn @click="$router.push('/Home')">Return</v-btn>
+      <v-btn color="teal accent-1"> Checkout Now </v-btn>
+      <v-btn @click="$router.push('/Home')" variant="text">Return</v-btn>
     </v-form>
   </v-sheet>
 </template>
