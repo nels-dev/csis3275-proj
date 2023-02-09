@@ -9,7 +9,7 @@
       <v-text-field :value="item.price?.toFixed(2)"></v-text-field>
       Product image(s):
       <v-img :src="imageUrl" height="200px" scale-down></v-img>
-      Condition (eg. 95% new):
+      Condition:
       <v-text-field :value="item.condition"></v-text-field>
       Mode of delivery (assumed standard charge $30):
       <v-text-field value="Shippment"></v-text-field>
