@@ -1,9 +1,13 @@
 <template>
   <v-app-bar app shrink-on-scroll>
-    <v-toolbar-title class="color:teal lighten-4" @click="$router.push('/Home')"
+    <v-toolbar-title
+      type="button"
+      class="color:teal lighten-4"
+      @click="$router.push('/Home')"
       >SeaSell</v-toolbar-title
     >
     <v-img
+      type="button"
       src="../assets/seasell_logo.svg"
       height="200px"
       @click="$router.push('/Home')"
