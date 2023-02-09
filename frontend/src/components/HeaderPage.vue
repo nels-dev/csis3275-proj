@@ -77,10 +77,7 @@ export default {
       this.user.fullName = resp.data.preferredUserName;
       this.user.email = resp.data.email;
       this.user.initials =
-        resp.data.preferredUserName[0] +
-        resp.data.preferredUserName[
-          resp.data.preferredUserName.indexOf(" ") + 1
-        ];
+        resp.data.preferredUserName[0];
     });
   },
 };
