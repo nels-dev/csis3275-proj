@@ -22,7 +22,7 @@ export default {
   props: ["item"],
   computed: {
     imageUrl() {
-      return "http://localhost:8080/images/" + this.item.images;
+      return process.env.VUE_APP_API_URL + "/images/" + this.item.images;
     },
   },
   data: () => ({
