@@ -4,7 +4,7 @@
   </v-main>
 
   <v-main>
-    <ProductForm />
+    <ProductForm :item="item" />
   </v-main>
 
   <v-main>

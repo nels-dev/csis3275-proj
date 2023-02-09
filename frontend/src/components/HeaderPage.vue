@@ -76,8 +76,11 @@ export default {
     userService.getCurrentClientUser().then((resp) => {
       this.user.fullName = resp.data.preferredUserName;
       this.user.email = resp.data.email;
-      this.user.initials = resp.data.preferredUserName[0] +
-       resp.data.preferredUserName[resp.data.preferredUserName.indexOf(' ')+1];
+      this.user.initials =
+        resp.data.preferredUserName[0] +
+        resp.data.preferredUserName[
+          resp.data.preferredUserName.indexOf(" ") + 1
+        ];
     });
   },
 };

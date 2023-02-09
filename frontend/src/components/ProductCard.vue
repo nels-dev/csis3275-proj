@@ -7,7 +7,6 @@
       cover
       @click="$router.push('/productdetails/' + item.id)"
     ></v-img>
-
     <v-card-title @click="$router.push('/productdetails' + item.id)">
       {{ item.name }}
     </v-card-title>
