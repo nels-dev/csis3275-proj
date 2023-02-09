@@ -5,10 +5,13 @@
       :src="imageUrl"
       height="200px"
       cover
-      @click="$router.push('/ProductDetailsPage')"
+      @click="$router.push('/productdetails/' + item.id)"
+      type="button"
     ></v-img>
-
-    <v-card-title @click="$router.push('/ProductDetailsPage')">
+    <v-card-title
+      type="button"
+      @click="$router.push('/productdetails/' + item.id)"
+    >
       {{ item.name }}
     </v-card-title>
     <v-card-title> C{{ item.price?.toFixed(2) }} </v-card-title>

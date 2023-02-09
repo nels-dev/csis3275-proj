@@ -1,16 +1,16 @@
 <template>
   <v-app-bar app shrink-on-scroll>
-    <v-toolbar-title class="color:teal lighten-4" @click="$router.push('/Home')"
+    <v-toolbar-title type="button" @click="$router.push('/Home')"
       >SeaSell</v-toolbar-title
     >
     <v-img
+      type="button"
       src="../assets/seasell_logo.svg"
       height="200px"
       @click="$router.push('/Home')"
     ></v-img>
 
     <v-spacer></v-spacer>
-    <ClientName />
     <v-btn icon>
       <!-- start of avatar -->
       <v-container fluid style="height: 300px">
@@ -54,7 +54,6 @@
 </template>
 <script>
 import userService from "@/services/user.service";
-import ClientName from "@/components/ClientName.vue";
 export default {
   //  start of slideshow
   data() {
@@ -73,7 +72,7 @@ export default {
     },
   },
 
-  components: { ClientName },
+  components: {},
   mounted() {
     userService.getCurrentClientUser().then((resp) => {
       this.user.fullName = resp.data.preferredUserName;

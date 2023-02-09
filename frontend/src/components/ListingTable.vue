@@ -41,7 +41,7 @@
 export default {
   data() {
     return {
-      notEmpty: false,
+      notEmpty: true,
       listings: [
         {
           name: "Frozen Yogurt",

@@ -12,5 +12,6 @@ import org.springframework.stereotype.Repository;
 public interface ProductRepository extends JpaRepository<Product, Integer> {
 
     List<Product> findAllByStatus(ProductStatus status);
+
     Optional<Product> findById(int id);
 }

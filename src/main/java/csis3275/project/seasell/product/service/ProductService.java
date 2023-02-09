@@ -38,13 +38,14 @@ public class ProductService {
         return productRepository.findAllByStatus(ProductStatus.LISTED).stream().map(this::toProductDto)
                 .collect(Collectors.toList());
     }
+
     public ProductDto getProduct(int id) {
-    	return toProductDto(productRepository.findById(id).get());
+        return toProductDto(productRepository.findById(id).get());
     }
 
     private ProductDto toProductDto(Product product) {
         return ProductDto.builder().name(product.getName()).condition(product.getCondition()).price(product.getPrice())
-                .description(product.getDescription())
+                .id(product.getId()).description(product.getDescription())
                 .images(product.getImages().stream().map(ProductImage::getPath).collect(Collectors.toList())).build();
     }
 

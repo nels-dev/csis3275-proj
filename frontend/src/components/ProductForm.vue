@@ -2,36 +2,30 @@
   <v-sheet width="1000" class="mx-auto">
     <v-form disabled>
       Product name:
-      <v-text-field value="Snowboard"></v-text-field>
+      <v-text-field :value="item.name"></v-text-field>
       Detailed product description:
-      <v-text-field
-        value=" Perfect for Beginners: This snowboard will enter you into the world of cruising' the slopes
-Durable: Hardwood construction for long lasting, repetitive use
-Easy Adjusting: Hook and loop binding allows for them to be adjusted easily
-Note: No metal edge.Not for resort use"
-      ></v-text-field>
+      <v-text-field :value="item.description"></v-text-field>
       Price:
-      <v-text-field value="$95.48"></v-text-field>
+      <v-text-field :value="item.price?.toFixed(2)"></v-text-field>
       Product image(s):
-      <v-img
-        src="https://m.media-amazon.com/images/I/71PeTiNaOCL._AC_SX679_.jpg"
-        height="200px"
-      ></v-img>
-      Date published:
-      <v-text-field value="2023/01/01"></v-text-field>
-      Condition (eg. 95% new):
-      <v-text-field value="95% new"></v-text-field>
+      <v-img :src="imageUrl" height="200px" scale-down></v-img>
+      Condition:
+      <v-text-field :value="item.condition"></v-text-field>
       Mode of delivery (assumed standard charge $30):
       <v-text-field value="Shippment"></v-text-field>
-      Product category (with sub-categories):
-      <v-text-field value="Sports"></v-text-field>
-
-      <v-btn @click="$router.push('/Home')">Return</v-btn>
+      <v-btn color="teal accent-1"> Checkout Now </v-btn>
+      <v-btn @click="$router.push('/Home')" variant="text">Return</v-btn>
     </v-form>
   </v-sheet>
 </template>
 <script>
 export default {
+  props: ["item"],
+  computed: {
+    imageUrl() {
+      return process.env.VUE_APP_API_URL + "/images/" + this.item.images;
+    },
+  },
   data: () => ({
     firstName: "",
     firstNameRules: [
