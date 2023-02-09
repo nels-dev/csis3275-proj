@@ -22,10 +22,7 @@ export default {
   props: ["item"],
   computed: {
     imageUrl() {
-      return (
-        "http://localhost:8080/images/" +
-        "6fadada5-87c2-43d3-8002-fe2596b18d43.jpg"
-      );
+      return "http://localhost:8080/images/"+this.item.images;
     },
   },
   data: () => ({
