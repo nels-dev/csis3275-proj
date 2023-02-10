@@ -9,5 +9,5 @@ insert into product_image(path, product_id) values ('6fadada5-87c2-43d3-8002-fe2
 
 
 -- Configure balance accounts for client users
-insert into balance_account(id, available_balance, held_balance, last_update, user_id) VALUE (1,1000.00, 20.00, CURRENT_TIMESTAMP, 1);
-insert into balance_account(id, available_balance, held_balance, last_update, user_id) VALUE (2, 0, 0, CURRENT_TIMESTAMP, 3);
+insert into balance_account(id, available_balance, held_balance, last_update, user_id) VALUES (1,1000.00, 20.00, CURRENT_TIMESTAMP, 1);
+insert into balance_account(id, available_balance, held_balance, last_update, user_id) VALUES (2, 0, 0, CURRENT_TIMESTAMP, 3);
