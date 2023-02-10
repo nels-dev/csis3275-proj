@@ -2,6 +2,7 @@ package csis3275.project.seasell.user;
 
 import csis3275.project.seasell.product.model.Product;
 import csis3275.project.seasell.user.model.AppUser;
+import csis3275.project.seasell.user.service.CurrentUserService;
 import csis3275.project.seasell.user.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,11 +17,11 @@ import java.util.List;
 public class UserController {
 
     @Autowired
-    UserService userService;
+    CurrentUserService currentUserService;
 
     @GetMapping
     public AppUser getCurrentUser() {
-        return userService.getCurrentUser();
+        return currentUserService.getCurrentUser();
     }
 
 
