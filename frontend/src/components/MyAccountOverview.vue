@@ -12,7 +12,7 @@
               <v-col class="text-h3" cols="12">
                 C${{ availableBalance.toFixed(2) }}
               </v-col>
-              <v-col cols="12"> Last updated: {{ lastUpdated }} </v-col>
+              <v-col cols="12"> Last updated: {{ lastUpdate }} </v-col>
             </v-row>
           </v-card-text>
 
@@ -54,7 +54,7 @@ export default {
     return {
       availableBalance: 0,
       heldBalance: 0,
-      lastUpdated: "-",
+      lastUpdate: "-",
     };
   },
   name: "MyAccountOverview",
@@ -62,7 +62,8 @@ export default {
     accountService.getAccount().then((resp) => {
       this.availableBalance = resp.data?.availableBalance ?? 0;
       this.heldBalance = resp.data?.heldBalance ?? 0;
-      this.lastUpdated = moment(resp.data?.lastUpdated).fromNow();
+      this.lastUpdate = moment(resp.data?.lastUpdate).fromNow();
+      console.log(moment(resp.data?.lastUpdate, "Y"));
     });
   },
 };
