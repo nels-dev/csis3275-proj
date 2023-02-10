@@ -11,7 +11,6 @@
     ></v-img>
 
     <v-spacer></v-spacer>
-    <CreditChip />
     <v-btn icon>
       <!-- start of avatar -->
       <v-container fluid style="height: 300px">
@@ -55,7 +54,6 @@
 </template>
 <script>
 import userService from "@/services/user.service";
-import CreditChip from "@/components/CreditChip";
 export default {
   //  start of slideshow
   data() {
@@ -74,7 +72,7 @@ export default {
     },
   },
 
-  components: { CreditChip },
+  components: {},
   mounted() {
     userService.getCurrentClientUser().then((resp) => {
       this.user.fullName = resp.data.preferredUserName;
