@@ -1,17 +1,11 @@
 package csis3275.project.seasell.product;
 
-import csis3275.project.seasell.common.service.FileService;
 import csis3275.project.seasell.product.dto.ProductDto;
-import csis3275.project.seasell.product.model.Product;
 import csis3275.project.seasell.product.service.ProductService;
 import java.io.IOException;
 import java.util.List;
-import java.util.Optional;
-
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatusCode;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;

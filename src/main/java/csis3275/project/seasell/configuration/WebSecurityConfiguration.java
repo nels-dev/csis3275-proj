@@ -1,7 +1,6 @@
 package csis3275.project.seasell.configuration;
 
 import csis3275.project.seasell.user.repository.UserRepository;
-import java.util.Arrays;
 import java.util.List;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

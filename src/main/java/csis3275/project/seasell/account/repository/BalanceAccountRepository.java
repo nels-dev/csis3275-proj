@@ -4,7 +4,6 @@ import csis3275.project.seasell.account.model.BalanceAccount;
 import csis3275.project.seasell.user.model.AppUser;
 import java.util.Optional;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Repository;
 
 public interface BalanceAccountRepository extends JpaRepository<BalanceAccount, Integer> {
 

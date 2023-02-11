@@ -1,6 +1,5 @@
 package csis3275.project.seasell.common.service;
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
 
 public interface FileService {
