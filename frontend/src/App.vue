@@ -21,7 +21,10 @@ export default {
     loggedIn() {
       if (!this.loggedIn) {
         this.$router.push("/signin");
-        this.$store.dispatch("alert/push", "You are successfully logout.");
+        this.$store.dispatch(
+          "alert/pushInfo",
+          "You have successfully logged out."
+        );
       }
     },
   },

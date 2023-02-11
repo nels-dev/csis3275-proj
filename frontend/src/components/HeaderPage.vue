@@ -19,7 +19,7 @@
           <v-menu min-width="200px" rounded>
             <template v-slot:activator="{ props }">
               <v-btn icon v-bind="props">
-                <v-avatar color="brown" size="large">
+                <v-avatar color="primary" size="large">
                   <span class="text-h5">{{ user.initials }}</span>
                 </v-avatar>
               </v-btn>
@@ -27,7 +27,7 @@
             <v-card>
               <v-card-text>
                 <div class="mx-auto text-center">
-                  <v-avatar color="brown">
+                  <v-avatar color="primary">
                     <span class="text-h5">{{ user.initials }}</span>
                   </v-avatar>
                   <h3>{{ user.fullName }}</h3>
