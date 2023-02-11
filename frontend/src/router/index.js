@@ -6,6 +6,7 @@ import DefaultRedirect from "../views/DefaultRedirect.vue";
 import RegistrationPage from "../views/RegistrationPage.vue";
 import ProductDetailsPage from "../views/ProductDetailsPage.vue";
 import MyStore from "../views/MyStore.vue";
+import MyAccountPage from "@/views/MyAccountPage";
 
 const routes = [
   {
@@ -35,6 +36,10 @@ const routes = [
   {
     path: "/Mystore",
     component: MyStore,
+  },
+  {
+    path: "/account",
+    component: MyAccountPage,
   },
 ];
 

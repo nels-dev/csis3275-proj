@@ -6,6 +6,7 @@ import csis3275.project.seasell.product.model.Product;
 import csis3275.project.seasell.product.model.ProductImage;
 import csis3275.project.seasell.product.model.ProductStatus;
 import csis3275.project.seasell.product.repository.ProductRepository;
+import csis3275.project.seasell.user.service.CurrentUserService;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -31,7 +32,7 @@ public class ProductService {
     FileService fileService;
 
     @Autowired
-    UserService userService;
+    CurrentUserService currentUserService;
 
     public void addProduct(MultipartFile file, String productName) throws IOException {
         // TODO: save product details and images in service
@@ -57,13 +58,13 @@ public class ProductService {
     }
 
     public List<ProductDto> getUserProducts() {
-        List<Product> myProducts  = productRepository.findAllBySeller(userService.getCurrentUser());
+        List<Product> myProducts = productRepository.findAllBySeller(currentUserService.getCurrentUser());
         List<ProductDto> myProductDtos = new ArrayList<>();
 
-        for(int i =0; i<myProducts.size(); i++){
+        for (int i = 0; i < myProducts.size(); i++) {
             ProductDto aproductDto;
-            Product aproduct=myProducts.get(i);
-            aproductDto=toProductDto(aproduct);
+            Product aproduct = myProducts.get(i);
+            aproductDto = toProductDto(aproduct);
             myProductDtos.add(aproductDto);
         }
         return myProductDtos;

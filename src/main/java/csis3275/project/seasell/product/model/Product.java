@@ -31,10 +31,8 @@ public class Product {
     @JoinColumn(name = "product_id")
     private List<ProductImage> images;
 
-
     @ManyToOne
     @JoinColumn(name = "user_id")
     private AppUser seller;
-
 
 }

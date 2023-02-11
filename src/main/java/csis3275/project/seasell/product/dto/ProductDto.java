@@ -16,5 +16,4 @@ public class ProductDto {
     double price;
     List<String> images;
 
-
 }

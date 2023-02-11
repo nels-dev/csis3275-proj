@@ -20,7 +20,7 @@ public class StoreController {
     ProductService productService;
 
     @GetMapping("/products")
-    public List<ProductDto> getUserProducts(){
+    public List<ProductDto> getUserProducts() {
         return productService.getUserProducts();
     }
 
