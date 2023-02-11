@@ -1,14 +1,8 @@
 package csis3275.project.seasell.product.model;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.OneToMany;
+import csis3275.project.seasell.user.model.AppUser;
+import jakarta.persistence.*;
+
 import java.math.BigDecimal;
 import java.util.List;
 import lombok.Data;
@@ -36,4 +30,11 @@ public class Product {
     @OneToMany
     @JoinColumn(name = "product_id")
     private List<ProductImage> images;
+
+
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private AppUser seller;
+
+
 }
