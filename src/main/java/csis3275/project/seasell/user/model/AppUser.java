@@ -82,5 +82,4 @@ public class AppUser implements UserDetails {
         return true;
     }
 
-
 }
