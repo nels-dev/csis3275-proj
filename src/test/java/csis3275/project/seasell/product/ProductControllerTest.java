@@ -1,11 +1,10 @@
 package csis3275.project.seasell.product;
 
-import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-import csis3275.project.seasell.common.exception.ResourceNotFound;
+import csis3275.project.seasell.common.exception.ResourceNotFoundException;
 import csis3275.project.seasell.product.dto.ProductDto;
 import csis3275.project.seasell.product.service.ProductService;
 import java.util.List;
@@ -54,7 +53,7 @@ class ProductControllerTest {
 
     @Test
     public void getProduct_notFound() throws Exception {
-        when(productService.getProduct(1)).thenThrow(ResourceNotFound.class);
+        when(productService.getProduct(1)).thenThrow(ResourceNotFoundException.class);
         mockMvc.perform(MockMvcRequestBuilders.get("/api/products/1")).andExpect(status().reason("Resource not found"))
                 .andExpect(status().isNotFound());
     }

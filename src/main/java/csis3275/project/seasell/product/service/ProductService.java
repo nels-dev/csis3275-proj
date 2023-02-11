@@ -1,6 +1,6 @@
 package csis3275.project.seasell.product.service;
 
-import csis3275.project.seasell.common.exception.ResourceNotFound;
+import csis3275.project.seasell.common.exception.ResourceNotFoundException;
 import csis3275.project.seasell.common.service.FileService;
 import csis3275.project.seasell.product.dto.ProductDto;
 import csis3275.project.seasell.product.model.Product;
@@ -44,7 +44,7 @@ public class ProductService {
     }
 
     public ProductDto getProduct(int id) {
-        return toProductDto(productRepository.findById(id).orElseThrow(ResourceNotFound::new));
+        return toProductDto(productRepository.findById(id).orElseThrow(ResourceNotFoundException::new));
     }
 
     private ProductDto toProductDto(Product product) {
