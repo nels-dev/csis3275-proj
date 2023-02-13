@@ -11,8 +11,8 @@
       @click:append="showPassword = !showPassword"
     />
     <v-btn
+      type="submit"
       color="primary"
-      variant="outlined"
       class="ma-2"
       :loading="loading"
       :disabled="loading"

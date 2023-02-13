@@ -11,7 +11,7 @@
     </v-container>
   </v-main>
   <!-- footer -->
-  <v-footer padless color="teal accent-1">
+  <v-footer padless color="secondary">
     <v-col class="text-center" cols="12">
       {{ new Date().getFullYear() }} — <strong>SeaSell</strong>
     </v-col>
