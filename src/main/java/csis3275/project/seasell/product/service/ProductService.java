@@ -1,5 +1,6 @@
 package csis3275.project.seasell.product.service;
 
+import csis3275.project.seasell.common.exception.ResourceNotFoundException;
 import csis3275.project.seasell.common.service.FileService;
 import csis3275.project.seasell.product.dto.ProductDto;
 import csis3275.project.seasell.product.model.Product;
@@ -10,14 +11,9 @@ import csis3275.project.seasell.user.service.CurrentUserService;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
-
-import csis3275.project.seasell.user.model.AppUser;
-import csis3275.project.seasell.user.service.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -48,7 +44,7 @@ public class ProductService {
     }
 
     public ProductDto getProduct(int id) {
-        return toProductDto(productRepository.findById(id).get());
+        return toProductDto(productRepository.findById(id).orElseThrow(ResourceNotFoundException::new));
     }
 
     private ProductDto toProductDto(Product product) {

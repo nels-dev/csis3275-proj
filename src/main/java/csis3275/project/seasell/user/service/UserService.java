@@ -5,14 +5,10 @@ import csis3275.project.seasell.user.dto.UserDto;
 import csis3275.project.seasell.user.model.AppUser;
 import csis3275.project.seasell.user.model.UserRole;
 import csis3275.project.seasell.user.repository.UserRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.oauth2.jwt.Jwt;
-import org.springframework.stereotype.Service;
-
 import java.time.OffsetDateTime;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Service;
 
 @Service
 public class UserService {

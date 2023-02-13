@@ -2,8 +2,6 @@ package csis3275.project.seasell.product.model;
 
 import csis3275.project.seasell.user.model.AppUser;
 import jakarta.persistence.*;
-
-import java.math.BigDecimal;
 import java.util.List;
 import lombok.Data;
 

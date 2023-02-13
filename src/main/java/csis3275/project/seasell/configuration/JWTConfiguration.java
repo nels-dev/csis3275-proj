@@ -1,7 +1,6 @@
 package csis3275.project.seasell.configuration;
 
 import java.util.Base64;
-import javax.crypto.KeyGenerator;
 import javax.crypto.SecretKey;
 import javax.crypto.spec.SecretKeySpec;
 import lombok.Data;

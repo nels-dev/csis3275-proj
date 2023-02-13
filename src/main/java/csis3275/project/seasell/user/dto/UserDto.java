@@ -1,13 +1,7 @@
 package csis3275.project.seasell.user.dto;
 
-import csis3275.project.seasell.product.model.Product;
-import csis3275.project.seasell.user.model.UserRole;
 import jakarta.persistence.*;
 import lombok.Data;
-import org.springframework.data.annotation.CreatedDate;
-
-import java.time.OffsetDateTime;
-import java.util.List;
 
 @Data
 public class UserDto {
