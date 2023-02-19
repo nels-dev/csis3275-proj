@@ -1,16 +1,21 @@
 <template>
   <v-app-bar app shrink-on-scroll>
+    <v-img
+      class="mx-2"
+      src="../assets/seasell_logo.svg"
+      max-height="50"
+      max-width="50"
+      contain
+      @click="goMainPage()"
+    ></v-img>
     <v-toolbar-title type="button" @click="$router.push('/Home')"
       >SeaSell</v-toolbar-title
     >
-    <v-img
-      type="button"
-      src="../assets/seasell_logo.svg"
-      height="200px"
-      @click="$router.push('/Home')"
-    ></v-img>
-
     <v-spacer></v-spacer>
+    <v-btn class="mx-2" size="large" @click="$router.push('/mystore')">
+      <font-awesome-icon icon="fa-solid fa-shop" size="2x" />
+      My Store
+    </v-btn>
     <CreditChip />
     <v-btn icon>
       <!-- start of avatar -->
@@ -35,7 +40,13 @@
                     {{ user.email }}
                   </p>
                   <v-divider class="my-3"></v-divider>
-                  <v-btn rounded variant="text"> My store </v-btn>
+                  <v-btn
+                    rounded
+                    variant="text"
+                    @click="$router.push('/mystore')"
+                  >
+                    My store
+                  </v-btn>
                   <v-divider class="my-3"></v-divider>
                   <v-btn rounded variant="text"> My order </v-btn>
                   <v-divider class="my-3"></v-divider>
