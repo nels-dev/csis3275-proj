@@ -20,4 +20,9 @@ public class StoreController {
         return productService.getUserProducts();
     }
 
+    @GetMapping("/products/{status}")
+    public List<ProductDto> getUserProductsByStatus(@PathVariable("status") String status) {
+        return productService.getUserProductsByStatus(status);
+    }
+
 }

@@ -9,7 +9,6 @@ import csis3275.project.seasell.product.model.ProductStatus;
 import csis3275.project.seasell.product.repository.ProductRepository;
 import csis3275.project.seasell.user.service.CurrentUserService;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 import lombok.extern.slf4j.Slf4j;
@@ -49,25 +48,18 @@ public class ProductService {
 
     private ProductDto toProductDto(Product product) {
         return ProductDto.builder().name(product.getName()).condition(product.getCondition()).price(product.getPrice())
-                .id(product.getId()).description(product.getDescription())
-                .status(product.getStatus())
+                .id(product.getId()).description(product.getDescription()).status(product.getStatus())
                 .images(product.getImages().stream().map(ProductImage::getPath).collect(Collectors.toList())).build();
     }
 
     public List<ProductDto> getUserProducts() {
         List<Product> myProducts = productRepository.findAllBySeller(currentUserService.getCurrentUser());
-        return myProducts.stream()
-                .map(this::toProductDto)
-                .collect(Collectors.toList());
+        return myProducts.stream().map(this::toProductDto).collect(Collectors.toList());
+    }
 
-            //for reference
-//        List<ProductDto> myProductDtos = new ArrayList<>();
-//        for (Product myProduct : myProducts) {
-//            ProductDto aproductDto;
-//            Product aproduct = myProduct;
-//            aproductDto = toProductDto(aproduct);
-//            myProductDtos.add(aproductDto);
-//        }
-//        return myProductDtos;
+    public List<ProductDto> getUserProductsByStatus(String status) {
+        List<Product> myProducts = productRepository.findAllBySellerAndStatus(currentUserService.getCurrentUser(),
+                ProductStatus.valueOf(status));
+        return myProducts.stream().map(this::toProductDto).collect(Collectors.toList());
     }
 }
