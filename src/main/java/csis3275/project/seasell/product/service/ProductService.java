@@ -50,19 +50,24 @@ public class ProductService {
     private ProductDto toProductDto(Product product) {
         return ProductDto.builder().name(product.getName()).condition(product.getCondition()).price(product.getPrice())
                 .id(product.getId()).description(product.getDescription())
+                .status(product.getStatus())
                 .images(product.getImages().stream().map(ProductImage::getPath).collect(Collectors.toList())).build();
     }
 
     public List<ProductDto> getUserProducts() {
         List<Product> myProducts = productRepository.findAllBySeller(currentUserService.getCurrentUser());
-        List<ProductDto> myProductDtos = new ArrayList<>();
+        return myProducts.stream()
+                .map(this::toProductDto)
+                .collect(Collectors.toList());
 
-        for (int i = 0; i < myProducts.size(); i++) {
-            ProductDto aproductDto;
-            Product aproduct = myProducts.get(i);
-            aproductDto = toProductDto(aproduct);
-            myProductDtos.add(aproductDto);
-        }
-        return myProductDtos;
+            //for reference
+//        List<ProductDto> myProductDtos = new ArrayList<>();
+//        for (Product myProduct : myProducts) {
+//            ProductDto aproductDto;
+//            Product aproduct = myProduct;
+//            aproductDto = toProductDto(aproduct);
+//            myProductDtos.add(aproductDto);
+//        }
+//        return myProductDtos;
     }
 }
