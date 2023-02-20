@@ -36,9 +36,15 @@ export default {
   components: { SellerProductCard },
 
   mounted() {
-    storeService.getSellerProductsByStatus(this.status).then((res) => {
-      this.sellerProducts = res.data;
-    });
+    if (this.status != "ALL") {
+      storeService.getSellerProductsByStatus(this.status).then((res) => {
+        this.sellerProducts = res.data;
+      });
+    } else {
+      storeService.getSellerProducts().then((res) => {
+        this.sellerProducts = res.data;
+      });
+    }
   },
   props: ["status"],
   computed: {

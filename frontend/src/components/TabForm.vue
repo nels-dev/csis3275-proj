@@ -1,6 +1,7 @@
 <template>
   <v-card>
     <v-tabs v-model="tab" bg-color="primary">
+      <v-tab value="ALL"> ALL</v-tab>
       <v-tab value="LISTED"> LISTED</v-tab>
       <v-tab value="UNLISTED">UNLISTED</v-tab>
       <v-tab value="SOLD">SOLD</v-tab>
@@ -12,6 +13,9 @@
 
     <v-card-text>
       <v-window v-model="tab">
+        <v-window-item value="ALL">
+          <SellerProductCardForm :status="'ALL'"
+        /></v-window-item>
         <v-window-item value="LISTED">
           <SellerProductCardForm :status="'LISTED'"
         /></v-window-item>
