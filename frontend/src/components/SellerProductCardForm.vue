@@ -34,11 +34,13 @@ export default {
     };
   },
   components: { SellerProductCard },
+
   mounted() {
-    storeService.getSellerProducts().then((res) => {
+    storeService.getSellerProductsByStatus(this.status).then((res) => {
       this.sellerProducts = res.data;
     });
   },
+  props: ["status"],
   computed: {
     filteredProducts() {
       if (!this.search) {

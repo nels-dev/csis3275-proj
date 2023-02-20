@@ -12,13 +12,27 @@
 
     <v-card-text>
       <v-window v-model="tab">
-        <v-window-item value="LISTED"> <SellerProductCardForm /></v-window-item>
-        <v-window-item value="UNLISTED">UNLISTED</v-window-item>
-        <v-window-item value="SOLD"> SOLD</v-window-item>
-        <v-window-item value="DELETED"> DELETED </v-window-item>
-        <v-window-item value="ORDERED"> ORDERED </v-window-item>
-        <v-window-item value="SHIPPED"> SHIPPED</v-window-item>
-        <v-window-item value="DELIVERED"> DELIVERED</v-window-item>
+        <v-window-item value="LISTED">
+          <SellerProductCardForm :status="'LISTED'"
+        /></v-window-item>
+        <v-window-item value="UNLISTED"
+          ><SellerProductCardForm :status="'UNLISTED'"
+        /></v-window-item>
+        <v-window-item value="SOLD">
+          <SellerProductCardForm :status="'SOLD'"
+        /></v-window-item>
+        <v-window-item value="DELETED">
+          <SellerProductCardForm :status="'DELETED'" />
+        </v-window-item>
+        <v-window-item value="ORDERED">
+          <SellerProductCardForm :status="'ORDERED'"
+        /></v-window-item>
+        <v-window-item value="SHIPPED">
+          <SellerProductCardForm :status="'SHIPPED'"
+        /></v-window-item>
+        <v-window-item value="DELIVERED">
+          <SellerProductCardForm :status="'DELIVERED'"
+        /></v-window-item>
       </v-window>
     </v-card-text>
   </v-card>
