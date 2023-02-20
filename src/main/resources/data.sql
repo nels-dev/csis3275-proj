@@ -29,6 +29,11 @@ insert into product(id, product_condition, description, name, status, price, use
 insert into product_image(path, product_id)
     values ('fad65619-bba9-4ebc-ab48-1593ccd44220.jpg', 5);
 
+insert into product(id, product_condition, description, name, status, price, user_id)
+    values (6, '85%', 'Old snow gloves of my son bought 2 years ago', 'Ski Gloves', 'UNLISTED', 10.00, 1);
+insert into product_image(path, product_id)
+    values ('dcb4bf91-9923-498d-a864-40a93d15f9df.jpg', 6);
+
 
 
 -- Configure balance accounts for client users
