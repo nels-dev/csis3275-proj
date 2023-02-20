@@ -2,7 +2,7 @@
   <v-container fluid class="container">
     <v-row>
       <v-col>
-        <h2>Listing</h2>
+        <h2>{{ this.status }}</h2>
       </v-col>
       <v-col>
         <v-text-field
