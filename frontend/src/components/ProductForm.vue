@@ -13,20 +13,33 @@
       <v-text-field :value="item.condition"></v-text-field>
       Mode of delivery (assumed standard charge $30):
       <v-text-field value="Shippment"></v-text-field>
-      <v-btn color="primary "> Checkout Now </v-btn>
+      <v-btn color="primary " @click="showCheckoutDialog = true">
+        Checkout Now
+      </v-btn>
       <v-btn @click="$router.push('/Home')" variant="text">Return</v-btn>
     </v-form>
+    <CheckoutModal
+      :item="item"
+      v-model="showCheckoutDialog"
+      @checkout-confirmed="confirmCheckout"
+      @checkout-canceled="cancelCheckout"
+    />
   </v-sheet>
 </template>
 <script>
+import CheckoutModal from "./CheckoutModal.vue";
 export default {
   props: ["item"],
+  components: {
+    CheckoutModal,
+  },
   computed: {
     imageUrl() {
       return process.env.VUE_APP_API_URL + "/images/" + this.item.images;
     },
   },
   data: () => ({
+    showCheckoutDialog: false,
     firstName: "",
     firstNameRules: [
       (value) => {
@@ -44,5 +57,13 @@ export default {
       },
     ],
   }),
+  methods: {
+    confirmCheckout() {
+      this.showCheckoutDialog = false;
+    },
+    cancelCheckout() {
+      this.showCheckoutDialog = false;
+    },
+  },
 };
 </script>
