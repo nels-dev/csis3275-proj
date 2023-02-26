@@ -36,7 +36,7 @@ public class ClientWithdrawalRequestController {
     }
 
     @ExceptionHandler(InsufficientBalanceException.class)
-    public ResponseEntity<?> handleInsufficientBalance(){
+    public ResponseEntity<?> handleInsufficientBalance() {
         return ResponseEntity.badRequest().body("You do not have sufficient credit available in your account.");
     }
 }

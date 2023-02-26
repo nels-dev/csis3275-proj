@@ -47,7 +47,7 @@ class ClientWithdrawalRequestControllerTest {
     public void addWithdrawalRequest() throws Exception {
         mockMvc.perform(MockMvcRequestBuilders.post("/api/client/withdrawalRequests")
                 .contentType(MediaType.APPLICATION_JSON).content(
-                        "{\"bankAccountNumber\":\"12378573\", \"bankInstitutionNumber\":\"004\", \"bankTransitNumber\":\"65245\", \"amount\":250}"))
+                        "{\"bankAccountNumber\":\"12378573\", \"bankInstitutionNumber\":\"004\",\"beneficiaryName\":\"Cliff\", \"bankTransitNumber\":\"65245\", \"amount\":250}"))
                 .andExpect(status().isCreated());
         verify(withdrawRequestService).addWithdrawalRequest(ArgumentMatchers.refEq(expectedDto()));
     }
@@ -58,6 +58,7 @@ class ClientWithdrawalRequestControllerTest {
         dto.setBankAccountNumber("12378573");
         dto.setBankInstitutionNumber("004");
         dto.setBankTransitNumber("65245");
+        dto.setBeneficiaryName("Cliff");
         dto.setAmount(new BigDecimal(250));
         return dto;
     }
