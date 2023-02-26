@@ -1,5 +1,6 @@
 package csis3275.project.seasell.account.model;
 
+import csis3275.project.seasell.user.model.AppUser;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
@@ -14,21 +15,30 @@ import lombok.Data;
 
 @Entity
 @Data
-public class JournalEntry {
+public class WithdrawalRequest {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
+    private OffsetDateTime createdAt;
+
     @ManyToOne
-    @JoinColumn(name = "account_id")
-    private BalanceAccount account;
+    @JoinColumn(name = "created_by")
+    private AppUser createdBy;
+
+    private String bankInstitutionNumber;
+
+    private String bankTransitNumber;
+
+    private String bankAccountNumber;
+
+    private String beneficiaryName;
 
     private BigDecimal amount;
 
     @Enumerated(EnumType.STRING)
-    private TransactionType transactionType;
+    private RequestStatus status;
 
-    private OffsetDateTime createdAt;
-
-    private String description;
+    private String rejectReason;
 }

@@ -39,3 +39,10 @@ insert into product_image(path, product_id)
 -- Configure balance accounts for client users
 insert into balance_account(id, available_balance, held_balance, last_update, user_id) VALUES (1,1000.00, 20.00, CURRENT_TIMESTAMP, 1);
 insert into balance_account(id, available_balance, held_balance, last_update, user_id) VALUES (2, 0, 0, CURRENT_TIMESTAMP, 3);
+
+
+-- Configure financial requests for client users
+insert into deposit_request(amount, bank_reference, created_at, deposit_date, reject_reason, status, created_by)
+values (100.00, 'R-105102401248', CURRENT_TIMESTAMP, '2022-02-25',null, 'PENDING',1);
+insert into withdrawal_request(amount, bank_account_number, bank_institution_number, bank_transit_number, beneficiary_name, created_at, reject_reason, status, created_by)
+values (100.00, '82850129', '001', '98765', 'Cliff Chan',CURRENT_TIMESTAMP, null,'PENDING',1);

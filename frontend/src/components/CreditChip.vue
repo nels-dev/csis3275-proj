@@ -20,13 +20,26 @@ export default {
   },
   name: "CreditChip",
   mounted() {
-    accountService.getAccount().then((resp) => {
-      this.credit = resp.data?.availableBalance ?? 0;
-    });
+    this.getData();
   },
   methods: {
     openAccount() {
       this.$router.push("/account");
+    },
+    getData() {
+      accountService.getAccount().then((resp) => {
+        this.credit = resp.data?.availableBalance ?? 0;
+      });
+    },
+  },
+  computed: {
+    lastRefresh() {
+      return this.$store.state.account.lastRefresh;
+    },
+  },
+  watch: {
+    lastRefresh() {
+      this.getData();
     },
   },
 };
