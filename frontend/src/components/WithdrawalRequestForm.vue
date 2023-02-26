@@ -13,49 +13,39 @@
             label="Amount"
             v-model="form.amount"
             hint="The amount you are going withdraw"
-            :error-messages="
-              vuelidate.form.amount.$errors.map((e) => e.$message)
-            "
+            :error-messages="getMessage('amount')"
             prefix="C$"
           ></v-text-field>
           <v-text-field
             label="Bank Institution Number"
             v-model="form.bankInstitutionNumber"
             hint="3-digit bank institution number. Usually found in remittance instruction of your bank account"
-            :error-messages="
-              vuelidate.form.bankInstitutionNumber.$errors.map(
-                (e) => e.$message
-              )
-            "
+            :error-messages="getMessage('bankInstitutionNumber')"
             maxlength="3"
           ></v-text-field>
           <v-text-field
             label="Bank Transit Number"
             v-model="form.bankTransitNumber"
             hint="5-digit bank transit number. Usually found in remittance instruction of your bank account"
-            :error-messages="
-              vuelidate.form.bankTransitNumber.$errors.map((e) => e.$message)
-            "
+            :error-messages="getMessage('bankTransitNumber')"
             maxlength="5"
           ></v-text-field>
           <v-text-field
             label="Bank Account Number"
             v-model="form.bankAccountNumber"
             hint="Your bank account number"
-            :error-messages="
-              vuelidate.form.bankAccountNumber.$errors.map((e) => e.$message)
-            "
+            :error-messages="getMessage('bankAccountNumber')"
           ></v-text-field>
           <v-text-field
             label="Name of Beneficiary"
             v-model="form.beneficiaryName"
-            :error-messages="
-              vuelidate.form.beneficiaryName.$errors.map((e) => e.$message)
-            "
+            :error-messages="getMessage('beneficiaryName')"
             hint="Name of account holder"
           ></v-text-field>
           <v-btn color="primary" class="me-4" type="submit">Submit</v-btn>
-          <v-btn color="red" @click="cancel">Cancel</v-btn>
+          <v-btn color="secondary" variant="outlined" @click="cancel"
+            >Cancel</v-btn
+          >
         </form>
       </v-container>
     </v-card>
@@ -132,6 +122,9 @@ export default {
     },
     cancel() {
       this.dialog = false;
+    },
+    getMessage(field) {
+      return this.vuelidate.form[field].$errors.map((e) => e.$message);
     },
   },
 };

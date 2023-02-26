@@ -13,23 +13,15 @@
           <v-text-field
             label="Amount"
             v-model="form.amount"
-            :error-messages="
-              vuelidate.form.amount.$errors.map((e) => e.$message)
-            "
+            :error-messages="getMessage('amount')"
             prefix="C$"
           ></v-text-field>
           <v-text-field
             label="Bank reference"
             v-model="form.bankReference"
-            :error-messages="
-              vuelidate.form.bankReference.$errors.map((e) => e.$message)
-            "
+            :error-messages="getMessage('bankReference')"
           ></v-text-field>
-          <v-input
-            :error-messages="
-              vuelidate.form.depositDate.$errors.map((e) => e.$message)
-            "
-          >
+          <v-input :error-messages="getMessage('depositDate')">
             <Datepicker
               v-model="form.depositDate"
               auto-apply
@@ -39,7 +31,9 @@
             />
           </v-input>
           <v-btn color="primary" class="me-4" type="submit">Submit</v-btn>
-          <v-btn color="red" @click="cancel">Cancel</v-btn>
+          <v-btn color="secondary" variant="outlined" @click="cancel"
+            >Cancel</v-btn
+          >
         </form>
       </v-container>
     </v-card>
@@ -113,6 +107,9 @@ export default {
     },
     cancel() {
       this.dialog = false;
+    },
+    getMessage(field) {
+      return this.vuelidate.form[field].$errors.map((e) => e.$message);
     },
   },
 };
