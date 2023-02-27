@@ -1,42 +1,79 @@
 <template>
-  <v-dialog v-model="dialog" width="80vw">
+  <v-dialog v-model="dialog" width="800" persistent>
     <template v-slot:activator="{ props }">
       <v-btn class="ma-2" color="primary" v-bind="props"> New request </v-btn>
     </template>
+    <form @submit.prevent="submit">
+      <v-card elevation="12">
+        <v-card-title>
+          <span class="text-h5"> New Deposit Request </span>
+        </v-card-title>
+        <v-card-text>
+          <v-container>
+            <v-alert
+              color="primary"
+              variant="outlined"
+              class="mb-8"
+              icon="mdi-cash-plus"
+            >
+              <template v-slot:title> Instructions </template>
+              <br />
+              To topup your account, please deposit into the following bank
+              account, and let us know about the details of the deposits. Your
+              account balance will be credited within 1 business day after we
+              have verified the transfer details.
+              <br /><br />
+              <strong>Bank:</strong> Canadian Imperial Bank of Commerce (CIBC)
+              <br />
+              <strong>Bank Account Number:</strong> 001-00001-1234567
+            </v-alert>
+            <FormAlert :message="error" />
+            <v-row>
+              <v-col cols="12">
+                <v-text-field
+                  label="Amount"
+                  v-model="form.amount"
+                  :error-messages="getMessage('amount')"
+                  prefix="C$"
+                ></v-text-field>
+              </v-col>
+            </v-row>
+            <v-row>
+              <v-col cols="12">
+                <v-text-field
+                  label="Bank reference"
+                  v-model="form.bankReference"
+                  :error-messages="getMessage('bankReference')"
+                ></v-text-field>
+              </v-col>
+            </v-row>
+            <v-row>
+              <v-col cols="12">
+                <v-input :error-messages="getMessage('depositDate')">
+                  <Datepicker
+                    v-model="form.depositDate"
+                    auto-apply
+                    utc="preserve"
+                    format="yyyy-MM-dd"
+                    teleport-center
+                    :enable-time-picker="false"
+                    placeholder="Date of deposit"
+                  />
+                </v-input>
+              </v-col>
+            </v-row>
+          </v-container>
+        </v-card-text>
+        <v-card-actions>
+          <v-spacer></v-spacer>
 
-    <v-card height="70vh">
-      <v-card-title>New Deposit Request</v-card-title>
-      <v-container>
-        <form @submit.prevent="submit">
-          <FormAlert :message="error" />
-
-          <v-text-field
-            label="Amount"
-            v-model="form.amount"
-            :error-messages="getMessage('amount')"
-            prefix="C$"
-          ></v-text-field>
-          <v-text-field
-            label="Bank reference"
-            v-model="form.bankReference"
-            :error-messages="getMessage('bankReference')"
-          ></v-text-field>
-          <v-input :error-messages="getMessage('depositDate')">
-            <Datepicker
-              v-model="form.depositDate"
-              auto-apply
-              :enable-time-picker="false"
-              placeholder="Date of deposit"
-              position="left"
-            />
-          </v-input>
-          <v-btn color="primary" class="me-4" type="submit">Submit</v-btn>
-          <v-btn color="secondary" variant="outlined" @click="cancel"
-            >Cancel</v-btn
-          >
-        </form>
-      </v-container>
-    </v-card>
+          <v-btn color="secondary" variant="text" @click="cancel">
+            Cancel
+          </v-btn>
+          <v-btn color="primary" variant="text" type="submit"> Submit </v-btn>
+        </v-card-actions>
+      </v-card>
+    </form>
   </v-dialog>
 </template>
 

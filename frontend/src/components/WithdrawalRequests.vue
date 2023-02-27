@@ -4,23 +4,23 @@
       <v-card-title>
         <v-row>
           <v-col align-self="center"> Withdrawal Requests </v-col>
-          <v-col align-self="center" cols="12" md="3">
+          <v-spacer></v-spacer>
+          <v-col align-self="center" cols="auto">
             <v-select
-              class="ma-1"
               v-model="status"
               hide-details="true"
               density="compact"
               :items="filterItems()"
             ></v-select>
           </v-col>
-          <v-col align-self="center" cols="12" md="3">
+          <v-col align-self="center" cols="auto">
             <WithdrawalRequestForm
               @withdrawal-submitted="withdrawalSubmitted"
             />
           </v-col>
         </v-row>
       </v-card-title>
-      <v-table height="35vh">
+      <v-table height="30vh" class="ma-6">
         <thead>
           <tr>
             <th class="text-left">Submitted at</th>
@@ -34,9 +34,10 @@
             <td>{{ moment(request.createdAt).fromNow() }}</td>
             <td>{{ request.amount }}</td>
             <td>
-              {{
-                `${request.beneficiaryName} (${request.bankInstitutionNumber}-${request.bankTransitNumber}-${request.bankAccountNumber})`
-              }}
+              {{ `${request.beneficiaryName}` }}<br />
+              <small>{{
+                `${request.bankInstitutionNumber}-${request.bankTransitNumber}-${request.bankAccountNumber}`
+              }}</small>
             </td>
             <td>{{ translateStatus(request.status) }}</td>
           </tr>
