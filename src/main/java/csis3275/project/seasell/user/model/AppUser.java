@@ -1,12 +1,15 @@
 package csis3275.project.seasell.user.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import csis3275.project.seasell.account.model.BalanceAccount;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Transient;
 import java.time.OffsetDateTime;
 import java.util.Collection;
@@ -37,6 +40,10 @@ public class AppUser implements UserDetails {
     private UserRole role;
     @CreatedDate
     private OffsetDateTime createdAt;
+
+    @JsonIgnore
+    @OneToOne(mappedBy = "user", fetch = FetchType.LAZY)
+    private BalanceAccount balanceAccount;
 
     @Override
     @Transient

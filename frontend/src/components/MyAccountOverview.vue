@@ -58,13 +58,27 @@ export default {
     };
   },
   name: "MyAccountOverview",
+  methods: {
+    getData() {
+      accountService.getAccount().then((resp) => {
+        this.availableBalance = resp.data?.availableBalance ?? 0;
+        this.heldBalance = resp.data?.heldBalance ?? 0;
+        this.lastUpdate = moment(resp.data?.lastUpdate).fromNow();
+      });
+    },
+  },
   mounted() {
-    accountService.getAccount().then((resp) => {
-      this.availableBalance = resp.data?.availableBalance ?? 0;
-      this.heldBalance = resp.data?.heldBalance ?? 0;
-      this.lastUpdate = moment(resp.data?.lastUpdate).fromNow();
-      console.log(moment(resp.data?.lastUpdate, "Y"));
-    });
+    this.getData();
+  },
+  computed: {
+    lastRefresh() {
+      return this.$store.state.account.lastRefresh;
+    },
+  },
+  watch: {
+    lastRefresh() {
+      this.getData();
+    },
   },
 };
 </script>
