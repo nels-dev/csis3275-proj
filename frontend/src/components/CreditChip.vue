@@ -1,7 +1,7 @@
 <template>
   <v-chip
-    size="large"
-    class="ma-2"
+    size="x-large"
+    class="mr-5"
     prepend-icon="mdi-currency-usd"
     @click="openAccount"
   >

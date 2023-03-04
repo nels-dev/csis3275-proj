@@ -1,16 +1,9 @@
 <template>
   <!-- start of the card -->
-  <v-card width="300px">
-    <v-card-title
-      type="button"
-      @click="$router.push('/productdetails/' + item.id)"
-    >
-      {{ item.name }}
-    </v-card-title>
+  <v-card>
     <v-img
       :src="imageUrl"
-      height="220px"
-      width="280px"
+      height="250"
       @click="$router.push('/productdetails/' + item.id)"
       type="button"
     >
@@ -27,9 +20,15 @@
         "
       ></v-card-title>
     </v-img>
-
-    <v-card-title> C${{ item.price?.toFixed(2) }} </v-card-title>
+    <v-card-title @click="$router.push('/productdetails/' + item.id)">
+      {{ item.name }}
+    </v-card-title>
     <v-card-subtitle> {{ item.description }} </v-card-subtitle>
+    <v-card-text>
+      <v-row no-gutters>
+        <v-col class="text-h6"> C${{ item.price?.toFixed(2) }} </v-col>
+      </v-row>
+    </v-card-text>
     <v-card-actions>
       <v-btn color="primary" text>some function</v-btn>
       <v-spacer></v-spacer>

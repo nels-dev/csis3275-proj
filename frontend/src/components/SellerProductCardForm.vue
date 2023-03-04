@@ -1,8 +1,8 @@
 <template>
-  <v-container fluid class="container">
-    <v-row>
+  <v-container>
+    <v-row align="center">
       <v-col>
-        <h2>{{ this.status }}</h2>
+        <h2>My Store - {{ this.status }}</h2>
       </v-col>
       <v-col>
         <v-text-field
@@ -14,7 +14,12 @@
       </v-col>
     </v-row>
     <v-row>
-      <v-col v-for="product in filteredProducts" :key="product.id" cols="auto">
+      <v-col
+        v-for="product in filteredProducts"
+        :key="product.id"
+        cols="12"
+        md="4"
+      >
         <SellerProductCard :item="product" />
       </v-col>
     </v-row>
