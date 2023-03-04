@@ -42,6 +42,11 @@ public class ProductService {
                 .collect(Collectors.toList());
     }
 
+    public List<ProductDto> getProductsExceptCurrentUser() {
+        return productRepository.findAllByStatusAndSellerNot(ProductStatus.LISTED, currentUserService.getCurrentUser())
+                .stream().map(this::toProductDto).collect(Collectors.toList());
+    }
+
     public ProductDto getProduct(int id) {
         return toProductDto(productRepository.findById(id).orElseThrow(ResourceNotFoundException::new));
     }
@@ -62,4 +67,5 @@ public class ProductService {
                 ProductStatus.valueOf(status));
         return myProducts.stream().map(this::toProductDto).collect(Collectors.toList());
     }
+
 }

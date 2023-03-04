@@ -26,7 +26,7 @@ public class ProductController {
     @GetMapping
     public List<ProductDto> getProducts() {
 
-        return productService.getProducts();
+        return productService.getProductsExceptCurrentUser();
     }
 
     @GetMapping("/{id}")

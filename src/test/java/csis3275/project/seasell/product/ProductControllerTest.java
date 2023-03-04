@@ -29,7 +29,7 @@ class ProductControllerTest {
 
     @Test
     public void getProducts() throws Exception {
-        when(productService.getProducts()).thenReturn(List.of(createProductDto()));
+        when(productService.getProductsExceptCurrentUser()).thenReturn(List.of(createProductDto()));
         mockMvc.perform(MockMvcRequestBuilders.get("/api/products")).andExpect(content().json(
                 "[{\"id\":0,\"name\":\"Table\",\"description\":\"A good item\",\"condition\":\"90% new\",\"price\":100.24,\"images\":[\"item.jpg\"]}]"))
                 .andExpect(status().isOk());
