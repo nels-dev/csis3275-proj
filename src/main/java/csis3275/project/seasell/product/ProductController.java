@@ -2,7 +2,6 @@ package csis3275.project.seasell.product;
 
 import csis3275.project.seasell.product.dto.ProductDto;
 import csis3275.project.seasell.product.model.ProductStatus;
-import csis3275.project.seasell.product.repository.ProductRepository;
 import csis3275.project.seasell.product.service.ProductService;
 import java.io.IOException;
 import java.util.List;
