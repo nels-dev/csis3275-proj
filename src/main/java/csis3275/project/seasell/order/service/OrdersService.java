@@ -2,8 +2,8 @@ package csis3275.project.seasell.order.service;
 
 import csis3275.project.seasell.account.service.JournalEntryService;
 import csis3275.project.seasell.common.service.FileService;
-import csis3275.project.seasell.order.model.Order;
 import csis3275.project.seasell.order.model.OrderStatus;
+import csis3275.project.seasell.order.model.Orders;
 import csis3275.project.seasell.product.repository.ProductRepository;
 import csis3275.project.seasell.product.service.ProductService;
 import csis3275.project.seasell.user.service.CurrentUserService;
@@ -13,7 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class OrderService {
+public class OrdersService {
 
     @Autowired
     private ProductRepository productRepository;
@@ -31,7 +31,7 @@ public class OrderService {
     ProductService productService;
 
     public void addOrder(int id) throws IOException {
-        Order order = new Order();
+        Orders order = new Orders();
         OffsetDateTime time = OffsetDateTime.now();
         time.getYear();
         order.setBuyer(currentUserService.getCurrentUser());

@@ -21,8 +21,9 @@ public class BalanceAccountService {
 
         return repository.findByUser(currentUserService.getCurrentUser()).map(this::toDto).orElse(null);
     }
+
     public BalanceAccount getAccountData() {
-    	return repository.findByUser(currentUserService.getCurrentUser()).orElse(null);
+        return repository.findByUser(currentUserService.getCurrentUser()).orElse(null);
     }
 
     public void createAccountForNewUser(AppUser user) {
