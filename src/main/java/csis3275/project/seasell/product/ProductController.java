@@ -26,9 +26,6 @@ public class ProductController {
     @Autowired
     ProductService productService;
 
-    @Autowired
-    ProductRepository productRepository;
-
     @GetMapping
     public List<ProductDto> getProducts() {
 
