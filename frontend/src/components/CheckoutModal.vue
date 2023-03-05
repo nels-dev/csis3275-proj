@@ -87,7 +87,6 @@ export default {
     confirmCheckout() {
       const Id = this.item.id;
       orderService.addOrder(Id);
-      console.log(Id);
       this.$emit("checkout-confirmed");
       router.push("/Home");
       this.showDialog = false;
