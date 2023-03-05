@@ -1,5 +1,7 @@
 package csis3275.project.seasell.order.model;
 
+import java.time.OffsetDateTime;
+
 import csis3275.project.seasell.product.model.Product;
 import csis3275.project.seasell.user.model.AppUser;
 import jakarta.persistence.Entity;
@@ -25,4 +27,8 @@ public class Order {
     @ManyToOne
     @JoinColumn(name = "product_id")
     private Product product;
+    
+    private OffsetDateTime ordertime;
+    
+    private OrderStatus status;
 }

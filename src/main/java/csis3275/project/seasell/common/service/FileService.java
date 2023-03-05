@@ -7,4 +7,6 @@ public interface FileService {
     String store(byte[] fileContent, String extension) throws IOException;
 
     byte[] retrieve(String key) throws IOException;
+    
+    void update(String key,byte[] newContent) throws IOException;
 }

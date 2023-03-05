@@ -10,9 +10,11 @@ import csis3275.project.seasell.product.repository.ProductRepository;
 import csis3275.project.seasell.user.service.CurrentUserService;
 import java.io.IOException;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -28,7 +30,15 @@ public class ProductService {
 
     @Autowired
     CurrentUserService currentUserService;
-
+    
+    public Product updateProductStatus(int id , ProductStatus newStatus) {
+    	Product product=productRepository.findById(id).orElseThrow(ResourceNotFoundException::new);
+    	product.setStatus(newStatus);
+    	return productRepository.save(product);
+    }
+    
+    
+    
     public void addProduct(MultipartFile file, String productName) throws IOException {
         // TODO: save product details and images in service
         String ext = file.getOriginalFilename().substring(file.getOriginalFilename().lastIndexOf(".") + 1);
@@ -51,6 +61,10 @@ public class ProductService {
         return toProductDto(productRepository.findById(id).orElseThrow(ResourceNotFoundException::new));
     }
 
+    public Product getProductData(int id) {
+        return productRepository.findById(id).orElseThrow(ResourceNotFoundException::new);
+    }
+    
     private ProductDto toProductDto(Product product) {
         return ProductDto.builder().name(product.getName()).condition(product.getCondition()).price(product.getPrice())
                 .id(product.getId()).description(product.getDescription()).status(product.getStatus())
