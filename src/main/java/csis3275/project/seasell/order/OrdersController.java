@@ -44,7 +44,8 @@ public class OrdersController {
     public ResponseEntity<Orders> createOrder(@RequestParam int id) throws IOException {
 
         productService.updateProductStatus(id, ProductStatus.valueOf("ORDERED"));
-        journalEntryService.post(balanceAccountService.getAccountData(), new BigDecimal(productService.getProductData(id).getPrice()),
+        journalEntryService.post(balanceAccountService.getAccountData(),
+                new BigDecimal(productService.getProductData(id).getPrice()),
                 TransactionType.valueOf("PURCHASE_CREDIT_HOLD"), "ORDER");
         orderService.addOrder(id);
         return ResponseEntity.status(201).build();
