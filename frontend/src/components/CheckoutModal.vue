@@ -86,10 +86,13 @@ export default {
   methods: {
     confirmCheckout() {
       const productId = this.item.id;
-      orderService.addOrder(productId);
-      this.$emit("checkout-confirmed");
-      router.push("/Home");
-      this.showDialog = false;
+      orderService.addOrder(productId).then(() => {
+        this.$emit("checkout-confirmed");
+        this.$store.dispatch("account/balanceChanged");
+        this.$store.dispatch("alert/pushInfo", "Checkout successful!");
+        router.push("/Home");
+        this.showDialog = false;
+      });
     },
     cancelCheckout() {
       this.$emit("checkout-canceled");
