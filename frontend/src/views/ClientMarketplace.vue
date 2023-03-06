@@ -4,7 +4,7 @@
     <HeroSection />
     <v-container>
       <v-row>
-        <v-col v-for="item in items" :key="item" cols="4">
+        <v-col v-for="item in items" :key="item" cols="12" md="4" xl="3">
           <ProductCard :item="item" />
         </v-col>
       </v-row>

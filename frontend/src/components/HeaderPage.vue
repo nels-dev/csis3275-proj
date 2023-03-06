@@ -1,64 +1,60 @@
 <template>
-  <v-app-bar app shrink-on-scroll>
+  <v-app-bar height="80" elevation="1">
     <v-img
-      class="mx-2"
-      src="../assets/seasell_logo.svg"
-      max-height="50"
-      max-width="50"
+      src="../assets/seasell_logo.png"
+      max-height="60"
+      max-width="60"
       contain
-      @click="goMainPage()"
+      class="ml-8 mr-5"
+      type="button"
+      @click="$router.push('/Home')"
     ></v-img>
-    <v-toolbar-title type="button" @click="$router.push('/Home')"
-      >SeaSell</v-toolbar-title
-    >
+
+    <v-img
+      src="../assets/title.svg"
+      contain
+      max-height="50"
+      max-width="200"
+      type="button"
+      @click="$router.push('/Home')"
+    ></v-img>
     <v-spacer></v-spacer>
-    <v-btn class="mx-2" size="large" @click="$router.push('/mystore')">
-      <font-awesome-icon icon="fa-solid fa-shop" size="2x" />
-      My Store
-    </v-btn>
+    <v-btn @click="$router.push('/Home')"> Marketplace</v-btn>
+    <v-btn @click="$router.push('/mystore')"> My Store </v-btn>
+    <v-btn @click="$router.push('/Home')"> Orders </v-btn>
+    <v-spacer></v-spacer>
     <CreditChip />
-    <v-btn icon>
+
+    <v-btn icon class="mr-8">
       <!-- start of avatar -->
-      <v-container fluid style="height: 300px">
-        <v-row justify="center">
-          <v-menu min-width="200px" rounded>
-            <template v-slot:activator="{ props }">
-              <v-btn icon v-bind="props">
-                <v-avatar color="primary" size="large">
-                  <span class="text-h5">{{ user.initials }}</span>
-                </v-avatar>
-              </v-btn>
-            </template>
-            <v-card>
-              <v-card-text>
-                <div class="mx-auto text-center">
-                  <v-avatar color="primary">
-                    <span class="text-h5">{{ user.initials }}</span>
-                  </v-avatar>
-                  <h3>{{ user.fullName }}</h3>
-                  <p class="text-caption mt-1">
-                    {{ user.email }}
-                  </p>
-                  <v-divider class="my-3"></v-divider>
-                  <v-btn
-                    rounded
-                    variant="text"
-                    @click="$router.push('/mystore')"
-                  >
-                    My store
-                  </v-btn>
-                  <v-divider class="my-3"></v-divider>
-                  <v-btn rounded variant="text"> My order </v-btn>
-                  <v-divider class="my-3"></v-divider>
-                  <v-btn rounded variant="text" @click="logout()">
-                    Logout
-                  </v-btn>
-                </div>
-              </v-card-text>
-            </v-card>
-          </v-menu>
-        </v-row>
-      </v-container>
+
+      <v-menu min-width="200px" rounded>
+        <template v-slot:activator="{ props }">
+          <v-btn icon v-bind="props">
+            <v-avatar color="primary">
+              <span class="text-h5">{{ user.initials }}</span>
+            </v-avatar>
+          </v-btn>
+        </template>
+        <v-card>
+          <v-card-text>
+            <div class="mx-auto text-center">
+              <v-avatar color="primary">
+                <span class="text-h5">{{ user.initials }}</span>
+              </v-avatar>
+              <h3>{{ user.fullName }}</h3>
+              <p class="text-caption mt-1">
+                {{ user.email }}
+              </p>
+              <v-divider class="my-3"></v-divider>
+
+              <v-btn rounded variant="text"> Profile </v-btn>
+              <v-divider class="my-3"></v-divider>
+              <v-btn rounded variant="text" @click="logout()"> Logout </v-btn>
+            </div>
+          </v-card-text>
+        </v-card>
+      </v-menu>
 
       <!-- end of avatar -->
     </v-btn>

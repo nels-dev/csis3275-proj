@@ -1,22 +1,16 @@
 <template>
   <!-- start of the card -->
-  <v-card class="mx-auto" max-width="344">
-    <v-img
-      :src="imageUrl"
-      height="200px"
-      cover
-      @click="$router.push('/productdetails/' + item.id)"
-      type="button"
-    ></v-img>
-    <v-card-title
-      type="button"
-      @click="$router.push('/productdetails/' + item.id)"
-    >
+  <v-card @click="$router.push('/productdetails/' + item.id)" type="button">
+    <v-img :src="imageUrl" height="250" />
+    <v-card-title>
       {{ item.name }}
     </v-card-title>
-    <v-card-title> C{{ item.price?.toFixed(2) }} </v-card-title>
-
     <v-card-subtitle> {{ item.description }} </v-card-subtitle>
+    <v-card-text>
+      <v-row no-gutters>
+        <v-col class="text-h6"> C${{ item.price?.toFixed(2) }} </v-col>
+      </v-row>
+    </v-card-text>
   </v-card>
   <!-- end of the card -->
 </template>
