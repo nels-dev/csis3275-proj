@@ -1,7 +1,8 @@
 import axios from "./axios";
 
 const orderService = {
-  addOrder: (Id) => axios.post(`/api/client/order?id=${Id}`),
+  addOrder: (productId) =>
+    axios.post(`/api/client/order?productId=${productId}`),
 };
 
 export default orderService;

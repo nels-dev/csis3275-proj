@@ -41,13 +41,13 @@ public class OrderController {
     OrderService orderService;
 
     @PostMapping
-    public ResponseEntity<Order> createOrder(@RequestParam int productIId) throws IOException {
+    public ResponseEntity<Order> createOrder(@RequestParam int productId) throws IOException {
 
-        productService.updateProductStatus(productIId, ProductStatus.valueOf("ORDERED"));
+        productService.updateProductStatus(productId, ProductStatus.valueOf("ORDERED"));
         journalEntryService.post(balanceAccountService.getAccountData(),
-                new BigDecimal(productService.getProductData(productIId).getPrice()),
+                new BigDecimal(productService.getProductData(productId).getPrice()),
                 TransactionType.valueOf("PURCHASE_CREDIT_HOLD"), "ORDER");
-        orderService.addOrder(productIId);
+        orderService.addOrder(productId);
         return ResponseEntity.status(201).build();
     }
 

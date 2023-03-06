@@ -85,8 +85,8 @@ export default {
   }),
   methods: {
     confirmCheckout() {
-      const Id = this.item.id;
-      orderService.addOrder(Id);
+      const productId = this.item.id;
+      orderService.addOrder(productId);
       this.$emit("checkout-confirmed");
       router.push("/Home");
       this.showDialog = false;
