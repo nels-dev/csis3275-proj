@@ -3,9 +3,9 @@ package csis3275.project.seasell.order;
 import csis3275.project.seasell.account.model.TransactionType;
 import csis3275.project.seasell.account.service.BalanceAccountService;
 import csis3275.project.seasell.account.service.JournalEntryService;
-import csis3275.project.seasell.order.model.Orders;
-import csis3275.project.seasell.order.repository.OrdersRepository;
-import csis3275.project.seasell.order.service.OrdersService;
+import csis3275.project.seasell.order.model.Order;
+import csis3275.project.seasell.order.repository.OrderRepository;
+import csis3275.project.seasell.order.service.OrderService;
 import csis3275.project.seasell.product.model.ProductStatus;
 import csis3275.project.seasell.product.repository.ProductRepository;
 import csis3275.project.seasell.product.service.ProductService;
@@ -20,10 +20,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/api/client/order")
-public class OrdersController {
+public class OrderController {
 
     @Autowired
-    OrdersRepository orderRepository;
+    OrderRepository orderRepository;
 
     @Autowired
     private ProductRepository productRepository;
@@ -38,16 +38,16 @@ public class OrdersController {
     BalanceAccountService balanceAccountService;
 
     @Autowired
-    OrdersService orderService;
+    OrderService orderService;
 
     @PostMapping
-    public ResponseEntity<Orders> createOrder(@RequestParam int id) throws IOException {
+    public ResponseEntity<Order> createOrder(@RequestParam int productIId) throws IOException {
 
-        productService.updateProductStatus(id, ProductStatus.valueOf("ORDERED"));
+        productService.updateProductStatus(productIId, ProductStatus.valueOf("ORDERED"));
         journalEntryService.post(balanceAccountService.getAccountData(),
-                new BigDecimal(productService.getProductData(id).getPrice()),
+                new BigDecimal(productService.getProductData(productIId).getPrice()),
                 TransactionType.valueOf("PURCHASE_CREDIT_HOLD"), "ORDER");
-        orderService.addOrder(id);
+        orderService.addOrder(productIId);
         return ResponseEntity.status(201).build();
     }
 
