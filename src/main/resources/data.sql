@@ -45,8 +45,8 @@ insert into balance_account(id, available_balance, held_balance, last_update, us
 insert into deposit_request(amount, bank_reference, created_at, deposit_date, reject_reason, status, created_by)
 values (100.00, 'R-105102401248', CURRENT_TIMESTAMP, '2022-02-25',null, 'PENDING',1);
 insert into deposit_request(amount, bank_reference, created_at, deposit_date, reject_reason, status, created_by)
-values (250.00, 'R-120095192441', CURRENT_TIMESTAMP, '2022-02-26',null, 'PENDING',1);
+values (250.00, 'R-120095192441', CURRENT_TIMESTAMP, '2022-02-26',null, 'PENDING',3);
 insert into withdrawal_request(amount, bank_account_number, bank_institution_number, bank_transit_number, beneficiary_name, created_at, reject_reason, status, created_by)
-values (50.00, '82850129', '001', '98765', 'Cliff Chan',CURRENT_TIMESTAMP, null,'PENDING',1);
+values (100.00, '82850129', '001', '98765', 'Cliff Chan',CURRENT_TIMESTAMP, null,'PENDING',1);
 insert into withdrawal_request(amount, bank_account_number, bank_institution_number, bank_transit_number, beneficiary_name, created_at, reject_reason, status, created_by)
-values (300.00, '41024824', '003', '12598', 'Nelson',CURRENT_TIMESTAMP, null,'PENDING',1);
+values (300.00, '41024824', '003', '12598', 'Nelson',CURRENT_TIMESTAMP, null,'PENDING',3);
