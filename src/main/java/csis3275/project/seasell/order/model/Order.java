@@ -8,10 +8,13 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
+import java.time.OffsetDateTime;
 import lombok.Data;
 
 @Entity
 @Data
+@Table(name = "Orders")
 public class Order {
 
     @Id
@@ -25,4 +28,8 @@ public class Order {
     @ManyToOne
     @JoinColumn(name = "product_id")
     private Product product;
+
+    private OffsetDateTime ordertime;
+
+    private OrderStatus status;
 }

@@ -71,6 +71,8 @@
 
 <script>
 import accountService from "@/services/account.service";
+import orderService from "@/services/order.service";
+import router from "@/router";
 
 export default {
   props: {
@@ -83,7 +85,10 @@ export default {
   }),
   methods: {
     confirmCheckout() {
+      const productId = this.item.id;
+      orderService.addOrder(productId);
       this.$emit("checkout-confirmed");
+      router.push("/Home");
       this.showDialog = false;
     },
     cancelCheckout() {

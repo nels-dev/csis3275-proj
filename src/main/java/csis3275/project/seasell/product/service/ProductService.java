@@ -29,6 +29,12 @@ public class ProductService {
     @Autowired
     CurrentUserService currentUserService;
 
+    public Product updateProductStatus(int id, ProductStatus newStatus) {
+        Product product = productRepository.findById(id).orElseThrow(ResourceNotFoundException::new);
+        product.setStatus(newStatus);
+        return productRepository.save(product);
+    }
+
     public void addProduct(MultipartFile file, String productName) throws IOException {
         // TODO: save product details and images in service
         String ext = file.getOriginalFilename().substring(file.getOriginalFilename().lastIndexOf(".") + 1);
@@ -49,6 +55,10 @@ public class ProductService {
 
     public ProductDto getProduct(int id) {
         return toProductDto(productRepository.findById(id).orElseThrow(ResourceNotFoundException::new));
+    }
+
+    public Product getProductData(int id) {
+        return productRepository.findById(id).orElseThrow(ResourceNotFoundException::new);
     }
 
     private ProductDto toProductDto(Product product) {
