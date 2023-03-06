@@ -1,13 +1,14 @@
 <template>
   <v-tabs v-model="tab" bg-color="secondary">
     <v-tab value="ALL"> ALL</v-tab>
+
     <v-tab value="LISTED"> LISTED</v-tab>
-    <v-tab value="UNLISTED">UNLISTED</v-tab>
-    <v-tab value="SOLD">SOLD</v-tab>
-    <v-tab value="DELETED">DELETED</v-tab>
     <v-tab value="ORDERED">ORDERED</v-tab>
     <v-tab value="SHIPPED">SHIPPED</v-tab>
     <v-tab value="DELIVERED">DELIVERED</v-tab>
+    <v-tab value="SOLD">SOLD</v-tab>
+    <v-tab value="UNLISTED">UNLISTED</v-tab>
+    <v-tab value="DELETED">DELETED</v-tab>
   </v-tabs>
 
   <v-window v-model="tab">
