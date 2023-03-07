@@ -1,10 +1,12 @@
 package csis3275.project.seasell.product;
 
 import csis3275.project.seasell.product.dto.ProductDto;
+import csis3275.project.seasell.product.model.ProductStatus;
 import csis3275.project.seasell.product.service.ProductService;
 import java.util.List;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -25,4 +27,9 @@ public class StoreController {
         return productService.getUserProductsByStatus(status);
     }
 
+    @PatchMapping("/products/{id}/status")
+    public ResponseEntity<?> updateProductStatusToOrdered(@RequestParam ProductStatus status, @PathVariable("id") int id) {
+        productService.updateProductStatus(id, status);
+        return ResponseEntity.ok().build();
+    }
 }

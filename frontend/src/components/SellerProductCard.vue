@@ -30,24 +30,55 @@
       </v-row>
     </v-card-text>
     <v-card-actions>
-      <v-btn color="primary" text>some function</v-btn>
+      <v-btn
+        color="primary"
+        text
+        v-if="item.status === 'UNLISTED'"
+        @click="toggleProductStatus(item.id, 'LISTED')"
+      >
+        List
+      </v-btn>
+      <v-btn
+        color="primary"
+        text
+        v-if="item.status === 'LISTED'"
+        @click="toggleProductStatus(item.id, 'UNLISTED')"
+      >
+        Unlist
+      </v-btn>
       <v-spacer></v-spacer>
-      <v-btn color="secondary" text
-        ><font-awesome-icon icon="fa-solid fa-gear"
-      /></v-btn>
-      <v-btn color="error" text>
-        <font-awesome-icon icon="fa-solid fa-trash-can" />
+      <v-btn @click="$router.push('/editProduct/' + item.id)">
+        <font-awesome-icon icon="fa-regular fa-pen-to-square" />
       </v-btn>
     </v-card-actions>
   </v-card>
   <!-- end of the card -->
 </template>
 <script>
+// import productService from "@/services/product.service";
+import productService from "@/services/product.service";
+import { library } from "@fortawesome/fontawesome-svg-core";
+import { faPenToSquare } from "@fortawesome/free-regular-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
+
+library.add(faPenToSquare);
+
 export default {
+  components: {
+    FontAwesomeIcon,
+  },
   props: ["item"],
   computed: {
     imageUrl() {
       return process.env.VUE_APP_API_URL + "/images/" + this.item.images[0];
+    },
+  },
+  methods: {
+    toggleProductStatus(id, newStatus) {
+      productService.editProductStatus(id, newStatus).then(() => {
+        this.$store.dispatch("mystore/productUpdated");
+        this.$store.dispatch("alert/pushInfo", "Product status changed");
+      });
     },
   },
 };

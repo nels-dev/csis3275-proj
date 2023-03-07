@@ -4,6 +4,7 @@ import csis3275.project.seasell.user.model.AppUser;
 import jakarta.persistence.*;
 import java.util.List;
 import lombok.Data;
+import net.minidev.json.annotate.JsonIgnore;
 
 @Entity
 @Data
@@ -31,6 +32,7 @@ public class Product {
 
     @ManyToOne
     @JoinColumn(name = "user_id")
+    @JsonIgnore
     private AppUser seller;
 
 }
