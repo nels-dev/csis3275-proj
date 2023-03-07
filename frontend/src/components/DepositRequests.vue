@@ -26,6 +26,7 @@
             <th class="text-left">Amount</th>
             <th class="text-left">Bank reference</th>
             <th class="text-left">Status</th>
+            <th class="text-left" v-if="status === 'REJECTED'">Reason</th>
           </tr>
         </thead>
         <tbody>
@@ -35,6 +36,7 @@
             <td>{{ request.amount }}</td>
             <td>{{ request.bankReference }}</td>
             <td>{{ translateStatus(request.status) }}</td>
+            <td v-if="status === 'REJECTED'">{{ request.rejectReason }}</td>
           </tr>
         </tbody>
       </v-table>
