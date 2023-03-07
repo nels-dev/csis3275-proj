@@ -41,15 +41,7 @@ export default {
   components: { SellerProductCard },
 
   mounted() {
-    if (this.status != "ALL") {
-      storeService.getSellerProductsByStatus(this.status).then((res) => {
-        this.sellerProducts = res.data;
-      });
-    } else {
-      storeService.getSellerProducts().then((res) => {
-        this.sellerProducts = res.data;
-      });
-    }
+    this.loadData();
   },
   props: ["status"],
   computed: {
@@ -60,6 +52,27 @@ export default {
       return this.sellerProducts.filter((product) =>
         product.name.toLowerCase().includes(this.search.toLowerCase())
       );
+    },
+    lastRefresh() {
+      return this.$store.state.mystore.lastRefresh;
+    },
+  },
+  watch: {
+    lastRefresh() {
+      this.loadData();
+    },
+  },
+  methods: {
+    loadData() {
+      if (this.status != "ALL") {
+        storeService.getSellerProductsByStatus(this.status).then((res) => {
+          this.sellerProducts = res.data;
+        });
+      } else {
+        storeService.getSellerProducts().then((res) => {
+          this.sellerProducts = res.data;
+        });
+      }
     },
   },
 };

@@ -7,6 +7,7 @@ import RegistrationPage from "../views/RegistrationPage.vue";
 import ProductDetailsPage from "../views/ProductDetailsPage.vue";
 import MyStore from "../views/MyStore.vue";
 import MyAccountPage from "@/views/MyAccountPage";
+import EditProductPage from "../views/EditProductPage.vue";
 
 const routes = [
   {
@@ -40,6 +41,10 @@ const routes = [
   {
     path: "/account",
     component: MyAccountPage,
+  },
+  {
+    path: "/editProduct/:id",
+    component: EditProductPage,
   },
 ];
 
