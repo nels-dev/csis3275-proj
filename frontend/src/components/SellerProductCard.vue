@@ -48,7 +48,7 @@
       </v-btn>
       <v-spacer></v-spacer>
       <v-btn @click="$router.push('/editProduct/' + item.id)">
-        <font-awesome-icon icon="fa-regular fa-pen-to-square" />
+        <v-icon icon="mdi-square-edit-outline" />
       </v-btn>
     </v-card-actions>
   </v-card>
@@ -57,16 +57,8 @@
 <script>
 // import productService from "@/services/product.service";
 import productService from "@/services/product.service";
-import { library } from "@fortawesome/fontawesome-svg-core";
-import { faPenToSquare } from "@fortawesome/free-regular-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
-
-library.add(faPenToSquare);
 
 export default {
-  components: {
-    FontAwesomeIcon,
-  },
   props: ["item"],
   computed: {
     imageUrl() {
