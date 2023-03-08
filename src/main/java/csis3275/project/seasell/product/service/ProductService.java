@@ -7,8 +7,10 @@ import csis3275.project.seasell.product.model.Product;
 import csis3275.project.seasell.product.model.ProductImage;
 import csis3275.project.seasell.product.model.ProductStatus;
 import csis3275.project.seasell.product.repository.ProductRepository;
+import csis3275.project.seasell.user.model.AppUser;
 import csis3275.project.seasell.user.service.CurrentUserService;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 import lombok.extern.slf4j.Slf4j;
@@ -35,12 +37,29 @@ public class ProductService {
         return productRepository.save(product);
     }
 
-    public void addProduct(MultipartFile file, String productName) throws IOException {
+    public void addProduct(String name, String description, Double price, String condition, MultipartFile image ) throws IOException {
         // TODO: save product details and images in service
-        String ext = file.getOriginalFilename().substring(file.getOriginalFilename().lastIndexOf(".") + 1);
-        String fileName = fileService.store(file.getBytes(), ext);
+        AppUser seller = currentUserService.getCurrentUser();
+        Product prod = new Product();
+
+        prod.setName(name);
+        prod.setDescription(description);
+        prod.setPrice(price);
+        prod.setCondition(condition);
+        prod.setStatus(ProductStatus.LISTED);
+        prod.setSeller(seller);
+//        List<ProductImage> productImages = new ArrayList<>();
+
+
+        String ext = image.getOriginalFilename().substring(image.getOriginalFilename().lastIndexOf(".") + 1);
+        String fileName = fileService.store(image.getBytes(), ext);
+        ProductImage productImage = new ProductImage();
+        productImage.setPath(fileName);
+        productImage.setProduct(prod);
+        prod.setImages(List.of(productImage));
+        productRepository.save(prod);
+
         log.info("Saved file name: " + fileName);
-        log.info("Product name: " + productName);
     }
 
     public List<ProductDto> getProducts() {

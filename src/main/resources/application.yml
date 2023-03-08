@@ -11,6 +11,10 @@ storage:
   local:
     base-path: ./images
 spring:
+  http:
+    multipart:
+      max-file-size: 10MB
+      max-request-size: 50MB
   sql:
     init:
       mode: always #always initialize database using script even for non-embeded database

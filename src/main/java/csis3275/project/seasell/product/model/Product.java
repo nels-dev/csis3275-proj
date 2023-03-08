@@ -25,7 +25,7 @@ public class Product {
 
     private double price;
 
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "product_id")
     private List<ProductImage> images;
 

@@ -14,6 +14,7 @@
       </v-col>
     </v-row>
     <v-row>
+      <v-col v-if="this.status === 'ALL'"> <CreateProductCard />></v-col>
       <v-col
         v-for="product in filteredProducts"
         :key="product.id"
@@ -31,6 +32,7 @@
 <script>
 import storeService from "@/services/store.service";
 import SellerProductCard from "@/components/SellerProductCard.vue";
+import CreateProductCard from "@/components/CreateProductCard.vue";
 export default {
   data() {
     return {
@@ -38,7 +40,7 @@ export default {
       sellerProducts: [],
     };
   },
-  components: { SellerProductCard },
+  components: { SellerProductCard, CreateProductCard },
 
   mounted() {
     if (this.status != "ALL") {
