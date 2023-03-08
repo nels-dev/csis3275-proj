@@ -33,6 +33,7 @@
       @click="validate"
       >Register</v-btn
     >
+    <v-btn @click="$router.push('/')" variant="text">Return</v-btn>
   </v-form>
 </template>
 
@@ -108,10 +109,8 @@ export default {
         .catch((error) => {
           this.loading = false;
           if (error.response?.status == 400) {
-            // this.error = error.response.body;
             console.log(error);
             this.error = error.response.data;
-            //   "Duplicated email address! Please use another email address.";
           }
         });
     },

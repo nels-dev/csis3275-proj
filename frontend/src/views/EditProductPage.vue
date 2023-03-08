@@ -4,7 +4,7 @@
   </v-main>
 
   <v-main>
-    <ProductForm :item="item" />
+    <EditProductForm :item="item" />
   </v-main>
 
   <v-main>
@@ -14,8 +14,8 @@
 <script>
 import HeaderPage from "@/components/HeaderPage.vue";
 import FooterPage from "@/components/FooterPage.vue";
-import ProductForm from "@/components/ProductForm.vue";
 import productService from "@/services/product.service";
+import EditProductForm from "@/components/EditProductForm.vue";
 
 export default {
   data: () => ({
@@ -26,7 +26,7 @@ export default {
       return this.$route.params.id;
     },
   },
-  components: { HeaderPage, FooterPage, ProductForm },
+  components: { HeaderPage, FooterPage, EditProductForm },
   mounted() {
     productService.getProduct(this.id).then((resp) => {
       console.log(resp.data);

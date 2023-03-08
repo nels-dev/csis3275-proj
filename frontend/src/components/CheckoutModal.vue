@@ -80,7 +80,6 @@ export default {
     dialog: Boolean,
   },
   data: () => ({
-    // showDialog: this.dialog,
     availableBalance: 0,
   }),
   methods: {
