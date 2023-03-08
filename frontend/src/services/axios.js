@@ -14,7 +14,7 @@ axiosInstance.interceptors.response.use(
   (error) => {
     if (error.response?.status == 401) {
       localStorage.removeItem("authentication");
-      store.dispatch("alert/logout");
+      store.dispatch("auth/logout");
     }
     console.log("Http Error Response: ", error.response);
     return Promise.reject(error);
