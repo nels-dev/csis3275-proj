@@ -7,16 +7,17 @@
       <v-text-field v-model="form.description"></v-text-field>
       Price:
       <v-text-field v-model="form.price"></v-text-field>
-      Product image(s):
-      <v-file-input label="File input"></v-file-input>
+
       Condition:
       <v-text-field v-model="form.condition"></v-text-field>
-      Mode of delivery:
+      Delivery method:
       <v-select
         label="Select from below"
         :items="['Standard shipment (Fixed charge C$30)', 'Self Pick-up']"
         v-model="form.deliveryMode"
       ></v-select>
+      Product image(s):
+      <v-file-input label="Upload product images"></v-file-input>
       <v-btn color="primary" class="mr-2" type="submit">Save</v-btn>
       <v-btn @click="$router.push('/mystore')" variant="text">Return</v-btn>
     </form>

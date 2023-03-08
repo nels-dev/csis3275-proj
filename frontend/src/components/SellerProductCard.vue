@@ -46,8 +46,27 @@
       >
         Unlist
       </v-btn>
+      <v-btn
+        color="primary"
+        text
+        v-if="item.status === 'ORDERED'"
+        @click="toggleProductStatus(item.id, 'SHIPPED')"
+      >
+        SHIPPED
+      </v-btn>
+      <v-btn
+        color="primary"
+        text
+        v-if="item.status === 'SHIPPED'"
+        @click="toggleProductStatus(item.id, 'DELIVERED')"
+      >
+        DELIVERED
+      </v-btn>
       <v-spacer></v-spacer>
-      <v-btn @click="$router.push('/editProduct/' + item.id)">
+      <v-btn
+        v-if="['LISTED', 'UNLISTED'].includes(item.status)"
+        @click="$router.push('/editProduct/' + item.id)"
+      >
         <v-icon icon="mdi-square-edit-outline" />
       </v-btn>
     </v-card-actions>
