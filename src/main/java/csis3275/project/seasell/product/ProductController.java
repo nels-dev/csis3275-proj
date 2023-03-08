@@ -27,7 +27,6 @@ public class ProductController {
 
     @GetMapping
     public List<ProductDto> getProducts() {
-
         return productService.getProductsExceptCurrentUser();
     }
 
@@ -39,10 +38,12 @@ public class ProductController {
 
 
     @PostMapping
-    public ResponseEntity<?> saveProduct(@RequestParam("file") MultipartFile file, @RequestParam String name)
-            throws IOException {
-        productService.addProduct(file, name);
+    public ResponseEntity<?> saveProduct(@RequestParam("name") String name,
+                                         @RequestParam("description") String description,
+                                         @RequestParam("condition") String condition,
+                                         @RequestParam("price") Double price,
+                                         @RequestParam("images") MultipartFile file) throws IOException {
+        productService.addProduct(name, description, price,condition, file);
         return ResponseEntity.status(201).build();
     }
-
 }
