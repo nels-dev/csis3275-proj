@@ -1,5 +1,5 @@
 <template>
-  <v-dialog v-model="dialog" width="800" persistent>
+  <v-dialog v-model="dialog" width="800" scrollable>
     <template v-slot:activator="{ props }">
       <v-btn class="ma-2" color="primary" v-bind="props"> New request </v-btn>
     </template>
@@ -8,7 +8,7 @@
         <v-card-title>
           <span class="text-h5">New Withdrawal Request</span></v-card-title
         >
-        <v-card-text>
+        <v-card-text style="height: 70vh">
           <v-container>
             <v-alert
               color="primary"

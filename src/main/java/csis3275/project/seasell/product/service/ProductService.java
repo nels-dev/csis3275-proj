@@ -35,6 +35,16 @@ public class ProductService {
         return productRepository.save(product);
     }
 
+    public void updateProduct(int id, ProductDto updatedProduct){
+        Product product = productRepository.findById(id).orElseThrow(ResourceNotFoundException::new);
+        product.setName(updatedProduct.getName());
+        product.setDescription(updatedProduct.getDescription());
+        product.setPrice(updatedProduct.getPrice());
+        product.setCondition(updatedProduct.getCondition());
+//        product.setImages(updatedProduct.getImages());
+        productRepository.save(product);
+    }
+
     public void addProduct(MultipartFile file, String productName) throws IOException {
         // TODO: save product details and images in service
         String ext = file.getOriginalFilename().substring(file.getOriginalFilename().lastIndexOf(".") + 1);
