@@ -33,11 +33,11 @@ public class JournalEntryService {
         entry.setAccount(to);
         entry.setTransactionType(type);
         entry.setAmount(amount);
-        adjustAccountBlaance(to, amount, type);
+        adjustAccountBalance(to, amount, type);
         repository.save(entry);
     }
 
-    private void adjustAccountBlaance(BalanceAccount to, BigDecimal amount, TransactionType type) {
+    private void adjustAccountBalance(BalanceAccount to, BigDecimal amount, TransactionType type) {
         BigDecimal adjustmentToAvailableBalance = BigDecimal.ZERO;
         BigDecimal adjustmentToHeldBalance = BigDecimal.ZERO;
         if (type == DEPOSIT_FULFILLED || type == WITHDRAWAL_REJECTED || type == SALES_PROCEED) {

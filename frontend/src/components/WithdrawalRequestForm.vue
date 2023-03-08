@@ -149,7 +149,7 @@ export default {
             } else {
               this.$store.dispatch(
                 "alert/push",
-                "Sorry, we encountered error while trying to submit your reqquest. Please try again later"
+                "Sorry, we encountered error while trying to submit your request. Please try again later"
               );
             }
           }
