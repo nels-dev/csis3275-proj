@@ -93,7 +93,7 @@ import "@vuepic/vue-datepicker/dist/main.css";
 import FormAlert from "./FormAlert.vue";
 
 import { useVuelidate } from "@vuelidate/core";
-import { required, minValue } from "@vuelidate/validators";
+import { required, minValue, numeric } from "@vuelidate/validators";
 export default {
   setup() {
     return { vuelidate: useVuelidate() };
@@ -114,9 +114,9 @@ export default {
   validations: {
     form: {
       beneficiaryName: { required },
-      bankInstitutionNumber: { required },
-      bankTransitNumber: { required },
-      bankAccountNumber: { required },
+      bankInstitutionNumber: { required, numeric },
+      bankTransitNumber: { required, numeric },
+      bankAccountNumber: { required, numeric },
       amount: { minValue: minValue(10), required },
     },
   },
