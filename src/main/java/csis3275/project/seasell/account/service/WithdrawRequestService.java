@@ -1,5 +1,6 @@
 package csis3275.project.seasell.account.service;
 
+import csis3275.project.seasell.account.dto.RequestStatusChangeDto;
 import csis3275.project.seasell.account.dto.WithdrawalRequestDto;
 import csis3275.project.seasell.account.model.BalanceAccount;
 import csis3275.project.seasell.account.model.RequestStatus;
@@ -7,6 +8,8 @@ import csis3275.project.seasell.account.model.TransactionType;
 import csis3275.project.seasell.account.model.WithdrawalRequest;
 import csis3275.project.seasell.account.repository.WithdrawalRequestRepository;
 import csis3275.project.seasell.common.exception.InsufficientBalanceException;
+import csis3275.project.seasell.common.exception.InvalidStateException;
+import csis3275.project.seasell.common.exception.ResourceNotFoundException;
 import csis3275.project.seasell.user.model.AppUser;
 import csis3275.project.seasell.user.service.CurrentUserService;
 import jakarta.transaction.Transactional;
@@ -41,6 +44,34 @@ public class WithdrawRequestService {
         journalEntryService.post(account, dto.getAmount(), TransactionType.WITHDRAWAL_REQUESTED,
                 "Account balance withdrawal submitted by client");
         repository.save(toEntity(dto));
+    }
+
+    @Transactional
+    public void changeStatus(long id, RequestStatusChangeDto dto) {
+        WithdrawalRequest request = repository.findById(id).orElseThrow(ResourceNotFoundException::new);
+        // Check current status
+        if (request.getStatus() != RequestStatus.PENDING) {
+            throw new InvalidStateException();
+        }
+
+        if (dto.getStatus() == RequestStatus.REJECTED) {
+            reject(request, dto.getRejectReason());
+        } else if (dto.getStatus() == RequestStatus.FULFILLED) {
+            fulfill(request);
+        }
+        repository.save(request);
+    }
+
+    private void fulfill(WithdrawalRequest request) {
+        request.setStatus(RequestStatus.FULFILLED);
+    }
+
+    private void reject(WithdrawalRequest request, String rejectReason) {
+        request.setStatus(RequestStatus.REJECTED);
+        request.setRejectReason(rejectReason);
+        BalanceAccount account = request.getCreatedBy().getBalanceAccount();
+        journalEntryService.post(account, request.getAmount(), TransactionType.WITHDRAWAL_REJECTED,
+                "Client withdrawal rejected.");
     }
 
     public List<WithdrawalRequestDto> getAllWithdrawalRequestsForAdmin(RequestStatus status) {

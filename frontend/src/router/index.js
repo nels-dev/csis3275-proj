@@ -8,6 +8,8 @@ import ProductDetailsPage from "../views/ProductDetailsPage.vue";
 import MyStore from "../views/MyStore.vue";
 import MyAccountPage from "@/views/MyAccountPage";
 import CreateProductPage from "../views/CreateProductPage.vue";
+import EditProductPage from "../views/EditProductPage.vue";
+
 const routes = [
   {
     path: "/",
@@ -34,7 +36,7 @@ const routes = [
     component: ProductDetailsPage,
   },
   {
-    path: "/Mystore",
+    path: "/mystore",
     component: MyStore,
   },
   {
@@ -44,6 +46,10 @@ const routes = [
   {
     path: "/createproduct",
     component: CreateProductPage,
+  },
+  {
+    path: "/editProduct/:id",
+    component: EditProductPage,
   },
 ];
 

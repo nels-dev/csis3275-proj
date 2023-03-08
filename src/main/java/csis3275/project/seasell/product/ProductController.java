@@ -35,10 +35,7 @@ public class ProductController {
         return productService.getProduct(id);
     }
 
-    @PatchMapping("/{id}")
-    public ResponseEntity<?> updateProductStatusToOrdered(@PathVariable("id") int id) {
-        return ResponseEntity.ok(productService.updateProductStatus(id, ProductStatus.valueOf("ORDERED")));
-    }
+
 
     @PostMapping
     public ResponseEntity<?> saveProduct(@RequestParam("name") String name,

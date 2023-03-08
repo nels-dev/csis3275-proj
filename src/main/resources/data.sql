@@ -25,12 +25,12 @@ insert into product_image(path, product_id)
     values ('05595596-dd2e-44a0-a5bc-980bfac06d52.jpg', 4);
 
 insert into product(product_condition, description, name, status, price, user_id)
-    values ('OK', 'Old helmet I purchased from 5 years ago', 'Oakley Helmet', 'LISTED', 10.00, 1);
+    values ('OK', 'Old helmet I purchased from 5 years ago', 'Oakley Helmet', 'LISTED', 10.00, 3);
 insert into product_image(path, product_id)
     values ('fad65619-bba9-4ebc-ab48-1593ccd44220.jpg', 5);
 
 insert into product(product_condition, description, name, status, price, user_id)
-    values ('85%', 'Old snow gloves of my son bought 2 years ago', 'Ski Gloves', 'UNLISTED', 10.00, 1);
+    values ('85%', 'Old snow gloves of my son bought 2 years ago', 'Ski Gloves', 'UNLISTED', 10.00, 3);
 insert into product_image(path, product_id)
     values ('dcb4bf91-9923-498d-a864-40a93d15f9df.jpg', 6);
 
@@ -44,5 +44,9 @@ insert into balance_account(id, available_balance, held_balance, last_update, us
 -- Configure financial requests for client users
 insert into deposit_request(amount, bank_reference, created_at, deposit_date, reject_reason, status, created_by)
 values (100.00, 'R-105102401248', CURRENT_TIMESTAMP, '2022-02-25',null, 'PENDING',1);
+insert into deposit_request(amount, bank_reference, created_at, deposit_date, reject_reason, status, created_by)
+values (250.00, 'R-120095192441', CURRENT_TIMESTAMP, '2022-02-26',null, 'PENDING',3);
 insert into withdrawal_request(amount, bank_account_number, bank_institution_number, bank_transit_number, beneficiary_name, created_at, reject_reason, status, created_by)
 values (100.00, '82850129', '001', '98765', 'Cliff Chan',CURRENT_TIMESTAMP, null,'PENDING',1);
+insert into withdrawal_request(amount, bank_account_number, bank_institution_number, bank_transit_number, beneficiary_name, created_at, reject_reason, status, created_by)
+values (300.00, '41024824', '003', '12598', 'Nelson',CURRENT_TIMESTAMP, null,'PENDING',3);
