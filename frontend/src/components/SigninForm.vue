@@ -1,5 +1,5 @@
 <template>
-  <v-form>
+  <v-form @submit.prevent="login">
     <FormAlert :message="error" />
     <v-text-field v-model="email" required label="E-mail" />
     <v-text-field
@@ -16,7 +16,6 @@
       class="ma-2"
       :loading="loading"
       :disabled="loading"
-      @click="login()"
       >Sign in</v-btn
     >
     <div>
