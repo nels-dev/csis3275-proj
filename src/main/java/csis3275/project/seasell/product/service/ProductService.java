@@ -10,7 +10,6 @@ import csis3275.project.seasell.product.repository.ProductRepository;
 import csis3275.project.seasell.user.model.AppUser;
 import csis3275.project.seasell.user.service.CurrentUserService;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 import lombok.extern.slf4j.Slf4j;
@@ -37,18 +36,19 @@ public class ProductService {
         return productRepository.save(product);
     }
 
-    public void updateProduct(int id, ProductDto updatedProduct){
+    public void updateProduct(int id, ProductDto updatedProduct) {
         Product product = productRepository.findById(id).orElseThrow(ResourceNotFoundException::new);
         product.setName(updatedProduct.getName());
         product.setDescription(updatedProduct.getDescription());
         product.setPrice(updatedProduct.getPrice());
         product.setCondition(updatedProduct.getCondition());
-//        product.setImages(updatedProduct.getImages());
+        // product.setImages(updatedProduct.getImages());
         productRepository.save(product);
     }
 
-//    public void addProduct(MultipartFile file, String productName) throws IOException {
-    public void addProduct(String name, String description, Double price, String condition, MultipartFile image ) throws IOException {
+    // public void addProduct(MultipartFile file, String productName) throws IOException {
+    public void addProduct(String name, String description, Double price, String condition, MultipartFile image)
+            throws IOException {
         // TODO: save product details and images in service
         AppUser seller = currentUserService.getCurrentUser();
         Product prod = new Product();
@@ -59,8 +59,7 @@ public class ProductService {
         prod.setCondition(condition);
         prod.setStatus(ProductStatus.LISTED);
         prod.setSeller(seller);
-//        List<ProductImage> productImages = new ArrayList<>();
-
+        // List<ProductImage> productImages = new ArrayList<>();
 
         String ext = image.getOriginalFilename().substring(image.getOriginalFilename().lastIndexOf(".") + 1);
         String fileName = fileService.store(image.getBytes(), ext);
