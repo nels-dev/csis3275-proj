@@ -25,6 +25,7 @@
 </template>
 <script>
 import productService from "@/services/product.service";
+import storeService from "@/services/store.service";
 import { useVuelidate } from "@vuelidate/core";
 import { required, numeric } from "@vuelidate/validators";
 
@@ -77,7 +78,7 @@ export default {
         .$validate()
         .then((valid) => {
           if (valid) {
-            return productService.editProduct(this.id, this.form);
+            return storeService.editProduct(this.id, this.form);
           } else {
             return Promise.reject();
           }

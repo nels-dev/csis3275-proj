@@ -15,20 +15,20 @@ const accountService = {
   submitWithdrawalRequest: (form) =>
     axios.post(`/api/client/withdrawalRequests`, form),
   fulfillDepositRequest: (id) =>
-    axios.patch(`/api/admin/depositRequests/${id}/status`, {
+    axios.put(`/api/admin/depositRequests/${id}/status`, {
       status: "FULFILLED",
     }),
   fulfillWithdrawalRequest: (id) =>
-    axios.patch(`/api/admin/withdrawalRequests/${id}/status`, {
+    axios.put(`/api/admin/withdrawalRequests/${id}/status`, {
       status: "FULFILLED",
     }),
   rejectDepositRequest: (id, reason) =>
-    axios.patch(`/api/admin/depositRequests/${id}/status`, {
+    axios.put(`/api/admin/depositRequests/${id}/status`, {
       status: "REJECTED",
       rejectReason: reason,
     }),
   rejectWithdrawalRequest: (id, reason) =>
-    axios.patch(`/api/admin/withdrawalRequests/${id}/status`, {
+    axios.put(`/api/admin/withdrawalRequests/${id}/status`, {
       status: "REJECTED",
       rejectReason: reason,
     }),

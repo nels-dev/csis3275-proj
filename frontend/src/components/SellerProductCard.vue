@@ -74,8 +74,7 @@
   <!-- end of the card -->
 </template>
 <script>
-// import productService from "@/services/product.service";
-import productService from "@/services/product.service";
+import storeService from "@/services/store.service";
 
 export default {
   props: ["item"],
@@ -86,7 +85,7 @@ export default {
   },
   methods: {
     toggleProductStatus(id, newStatus) {
-      productService.editProductStatus(id, newStatus).then(() => {
+      storeService.editProductStatus(id, newStatus).then(() => {
         this.$store.dispatch("mystore/productUpdated");
         this.$store.dispatch("alert/pushInfo", "Product status changed");
       });
