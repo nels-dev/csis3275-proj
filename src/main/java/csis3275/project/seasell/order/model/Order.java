@@ -32,4 +32,6 @@ public class Order {
     private OffsetDateTime ordertime;
 
     private OrderStatus status;
+
+    private String shippmentReference;
 }

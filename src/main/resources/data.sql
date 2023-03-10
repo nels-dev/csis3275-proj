@@ -15,12 +15,12 @@ insert into product_image(path, product_id)
     values ('05f36f60-4edf-42cb-81c9-e1d550dcfc31.jpg', 2);
 
 insert into product(product_condition, description, name, status, price, user_id)
-    values ('100% new', 'Does not fit my face, never wore', 'Oakley Goggle', 'LISTED', 120.00, 1);
+    values ('100% new', 'Does not fit my face, never wore', 'Oakley Goggle', 'ORDERED', 120.00, 1);
 insert into product_image(path, product_id)
     values ('675991b5-2325-4d19-a144-560100aaf60d.jpg', 3);
 
 insert into product(product_condition, description, name, status, price, user_id)
-    values ('Like new', 'Upgraded to a better bindings, selling it for cheap', 'Burton Bindings', 'LISTED', 50.00, 1);
+    values ('Like new', 'Upgraded to a better bindings, selling it for cheap', 'Burton Bindings', 'SHIPPED', 50.00, 1);
 insert into product_image(path, product_id)
     values ('05595596-dd2e-44a0-a5bc-980bfac06d52.jpg', 4);
 
