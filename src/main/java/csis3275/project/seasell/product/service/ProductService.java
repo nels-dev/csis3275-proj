@@ -96,14 +96,13 @@ public class ProductService {
                 .images(product.getImages().stream().map(ProductImage::getPath).collect(Collectors.toList())).build();
     }
 
-    public List<ProductDto> getUserProducts() {
-        List<Product> myProducts = productRepository.findAllBySeller(currentUserService.getCurrentUser());
-        return myProducts.stream().map(this::toProductDto).collect(Collectors.toList());
-    }
-
-    public List<ProductDto> getUserProductsByStatus(String status) {
-        List<Product> myProducts = productRepository.findAllBySellerAndStatus(currentUserService.getCurrentUser(),
-                ProductStatus.valueOf(status));
+    public List<ProductDto> getUserProductsByStatus(ProductStatus status) {
+        List<Product> myProducts;
+        if (status == null) {
+            myProducts = productRepository.findAllBySeller(currentUserService.getCurrentUser());
+        } else {
+            myProducts = productRepository.findAllBySellerAndStatus(currentUserService.getCurrentUser(), status);
+        }
         return myProducts.stream().map(this::toProductDto).collect(Collectors.toList());
     }
 

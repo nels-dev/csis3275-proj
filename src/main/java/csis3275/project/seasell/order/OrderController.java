@@ -1,14 +1,16 @@
 package csis3275.project.seasell.order;
 
+import csis3275.project.seasell.order.dto.CreateOrderDto;
 import csis3275.project.seasell.order.model.Order;
 import csis3275.project.seasell.order.repository.OrderRepository;
 import csis3275.project.seasell.order.service.OrderService;
 import java.io.IOException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -22,9 +24,9 @@ public class OrderController {
     OrderService orderService;
 
     @PostMapping
-    public ResponseEntity<Order> createOrder(@RequestParam int productId) throws IOException {
-        orderService.addOrder(productId);
-        return ResponseEntity.status(201).build();
+    public ResponseEntity<Order> createOrder(@RequestBody CreateOrderDto dto) throws IOException {
+        orderService.addOrder(dto);
+        return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
 }

@@ -108,7 +108,7 @@ export default {
         })
         .catch((error) => {
           this.loading = false;
-          if (error.response?.status == 400) {
+          if (error.response?.status == 409) {
             console.log(error);
             this.error = error.response.data;
           }

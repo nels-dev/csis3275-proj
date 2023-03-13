@@ -4,6 +4,7 @@ import csis3275.project.seasell.account.model.TransactionType;
 import csis3275.project.seasell.account.service.BalanceAccountService;
 import csis3275.project.seasell.account.service.JournalEntryService;
 import csis3275.project.seasell.common.service.FileService;
+import csis3275.project.seasell.order.dto.CreateOrderDto;
 import csis3275.project.seasell.order.model.Order;
 import csis3275.project.seasell.order.model.OrderStatus;
 import csis3275.project.seasell.order.repository.OrderRepository;
@@ -37,7 +38,8 @@ public class OrderService {
     @Autowired
     BalanceAccountService balanceAccountService;
 
-    public void addOrder(int productId) throws IOException {
+    public void addOrder(CreateOrderDto dto) throws IOException {
+        int productId = dto.getProductId();
         productService.updateProductStatus(productId, ProductStatus.ORDERED);
         journalEntryService.post(balanceAccountService.getAccountData(),
                 new BigDecimal(productService.getProductData(productId).getPrice()),
