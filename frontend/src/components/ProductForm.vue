@@ -8,7 +8,12 @@
       Price:
       <v-text-field :value="item.price?.toFixed(2)"></v-text-field>
       Product image(s):
-      <v-img :src="imageUrl" height="200px" scale-down></v-img>
+      <v-img
+        v-if="!!imageUrl"
+        :src="imageUrl"
+        height="200px"
+        scale-down
+      ></v-img>
       Condition:
       <v-text-field :value="item.condition"></v-text-field>
       Mode of delivery (assumed standard charge $30):
@@ -35,7 +40,9 @@ export default {
   },
   computed: {
     imageUrl() {
-      return process.env.VUE_APP_API_URL + "/images/" + this.item.images;
+      return this.item.images
+        ? process.env.VUE_APP_API_URL + "/images/" + this.item.images
+        : "";
     },
   },
   data: () => ({
