@@ -21,7 +21,7 @@
     <v-spacer></v-spacer>
     <v-btn @click="$router.push('/Home')"> Marketplace</v-btn>
     <v-btn @click="$router.push('/mystore')"> My Store </v-btn>
-    <v-btn @click="$router.push('/Home')"> Orders </v-btn>
+    <v-btn @click="$router.push('/myorder')"> Orders </v-btn>
     <v-spacer></v-spacer>
     <CreditChip />
 
