@@ -2,19 +2,31 @@
   <v-sheet width="1000" class="mx-auto">
     <form @submit.prevent="submit">
       Product name:
-      <v-text-field v-model="form.name"></v-text-field>
+      <v-text-field
+        v-model="form.name"
+        :error-messages="getMessage('name')"
+      ></v-text-field>
       Detailed product description:
-      <v-text-field v-model="form.description"></v-text-field>
+      <v-text-field
+        v-model="form.description"
+        :error-messages="getMessage('description')"
+      ></v-text-field>
       Price:
-      <v-text-field v-model="form.price"></v-text-field>
-
+      <v-text-field
+        v-model="form.price"
+        :error-messages="getMessage('price')"
+      ></v-text-field>
       Condition:
-      <v-text-field v-model="form.condition"></v-text-field>
+      <v-text-field
+        v-model="form.condition"
+        :error-messages="getMessage('condition')"
+      ></v-text-field>
       Delivery method:
       <v-select
         label="Select from below"
         :items="['Standard shipment (Fixed charge C$30)', 'Self Pick-up']"
         v-model="form.deliveryMode"
+        :error-messages="getMessage('deliveryMode')"
       ></v-select>
       Product image(s):
       <v-file-input label="Upload product images"></v-file-input>
@@ -30,11 +42,6 @@ import { useVuelidate } from "@vuelidate/core";
 import { required, numeric } from "@vuelidate/validators";
 
 export default {
-  // computed: {
-  //   imageUrl() {
-  //     return process.env.VUE_APP_API_URL + "/images/" + this.item.images;
-  //   },
-  // },
   computed: {
     id() {
       return this.$route.params.id;
@@ -51,8 +58,6 @@ export default {
   },
   data() {
     return {
-      // loading: false,
-      // valid: true,
       form: {
         name: "",
         description: "",
@@ -93,6 +98,9 @@ export default {
             this.error = error.response.data;
           }
         });
+    },
+    getMessage(field) {
+      return this.vuelidate.form[field].$errors.map((e) => e.$message);
     },
   },
 };
