@@ -2,11 +2,9 @@
   <v-main>
     <HeaderPage />
   </v-main>
-
   <v-main>
     <EditProductForm :item="item" />
   </v-main>
-
   <v-main>
     <FooterPage />
   </v-main>

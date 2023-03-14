@@ -9,6 +9,7 @@ import MyStore from "../views/MyStore.vue";
 import MyAccountPage from "@/views/MyAccountPage";
 import CreateProductPage from "../views/CreateProductPage.vue";
 import EditProductPage from "../views/EditProductPage.vue";
+import MyOrderPage from "../views/MyOrderPage.vue";
 
 const routes = [
   {
@@ -50,6 +51,10 @@ const routes = [
   {
     path: "/editProduct/:id",
     component: EditProductPage,
+  },
+  {
+    path: "/myorder",
+    component: MyOrderPage,
   },
 ];
 
