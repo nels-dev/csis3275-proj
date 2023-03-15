@@ -61,6 +61,7 @@
 <script>
 import accountService from "@/services/account.service";
 import orderService from "@/services/order.service";
+import storeService from "@/services/store.service";
 import router from "@/router";
 
 export default {
@@ -77,10 +78,13 @@ export default {
       let orderId = 0;
       const status = "SHIPPED";
       for (let i = 0; i < orderList.length; i++) {
-        if (orderList.get(i).getProductName().equals(item.getProductName())) {
+        if (
+          orderList.get(i).getProductName().equals(this.item.getProductName())
+        ) {
           orderId = orderList.getId();
         }
       }
+      storeService.editProductStatus(this.item.id, "SHIPPED");
       const shippmentReference = this.$refs.shipmentRef.value;
       orderService.updateOrder(orderId, shippmentReference, status).then(() => {
         this.$emit("ship-confirmed");

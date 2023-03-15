@@ -7,7 +7,6 @@ import csis3275.project.seasell.order.repository.OrderRepository;
 import csis3275.project.seasell.order.service.OrderService;
 import csis3275.project.seasell.product.model.ProductStatus;
 import csis3275.project.seasell.product.service.ProductService;
-
 import java.io.IOException;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,7 +29,7 @@ public class OrderController {
 
     @Autowired
     OrderService orderService;
-    
+
     @Autowired
     ProductService productService;
 
@@ -41,10 +40,10 @@ public class OrderController {
     }
 
     @PatchMapping
-    public ResponseEntity<Order> UpdateOrder(@RequestParam int orderId, @RequestParam String shippmentReference,@RequestParam ProductStatus status)
-            throws IOException {
+    public ResponseEntity<Order> UpdateOrder(@RequestParam int orderId, @RequestParam String shippmentReference,
+            @RequestParam ProductStatus status) throws IOException {
         orderService.updateShipmentReferenceInOrder(orderId, shippmentReference);
-        productService.updateProductStatus(orderService.getOrder(orderId).getProduct().getId(),status);
+        productService.updateProductStatus(orderService.getOrder(orderId).getProduct().getId(), status);
         return ResponseEntity.status(201).build();
     }
 
