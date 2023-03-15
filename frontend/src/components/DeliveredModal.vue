@@ -39,19 +39,14 @@
 
       <v-container>
         <v-text-field
+          ref="shipmentRef"
           hide-details="auto"
-          label="Shippment Reference"
-          placeholder="S000000000"
-          >{{ ShippmentReference }}</v-text-field
-        >
+          placeholder="Shippment Reference"
+          v-model="shipmentReference"
+        ></v-text-field>
       </v-container>
       <v-card-actions>
-        <v-btn
-          color="green"
-          @click="confirmDelivered"
-          :disabled="availableBalance < item.price"
-          >Ship</v-btn
-        >
+        <v-btn color="green" @click="confirmDelivered">Ship</v-btn>
         <v-btn color="red" @click="cancelDelivered">Cancel</v-btn>
       </v-card-actions>
     </v-card>
@@ -59,25 +54,28 @@
 </template>
 
 <script>
-import accountService from "@/services/account.service";
 import orderService from "@/services/order.service";
 import router from "@/router";
 
 export default {
+  data() {
+    return {
+      shipmentReference: this.item.id,
+    };
+  },
   props: {
     item: Object,
     dialog: Boolean,
   },
-  data: () => ({
-    availableBalance: 0,
-    // ShippmentReference=orderService.getOrder(),
-  }),
   methods: {
     confirmDelivered() {
-      const productId = this.item.id;
-      orderService.addOrder(productId).then(() => {
-        this.$emit("checkout-confirmed");
-        this.$store.dispatch("alert/pushInfo", "Checkout successful!");
+      const shippmentReference = this.$refs.shipmentRef.value;
+      orderService.updateOrder(1, shippmentReference, "DELIVERED").then(() => {
+        this.$emit("ship-confirmed");
+        this.$store.dispatch(
+          "alert/pushInfo",
+          "Update status to delivered successful!"
+        );
         router.push("/Home");
         this.showDialog = false;
       });
@@ -86,11 +84,6 @@ export default {
       this.$emit("Delivered-canceled");
       this.showDialog = false;
     },
-  },
-  mounted() {
-    accountService.getAccount().then((resp) => {
-      this.availableBalance = resp.data?.availableBalance ?? 0;
-    });
   },
 };
 </script>

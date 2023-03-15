@@ -41,17 +41,11 @@
         <v-text-field
           ref="shipmentRef"
           hide-details="auto"
-          label="Shippment Reference"
           placeholder="S000000000"
         ></v-text-field>
       </v-container>
       <v-card-actions>
-        <v-btn
-          color="green"
-          @click="confirmShip"
-          :disabled="availableBalance < item.price"
-          >Ship</v-btn
-        >
+        <v-btn color="green" @click="confirmShip">Ship</v-btn>
         <v-btn color="red" @click="cancelShip">Cancel</v-btn>
       </v-card-actions>
     </v-card>
@@ -59,9 +53,7 @@
 </template>
 
 <script>
-import accountService from "@/services/account.service";
 import orderService from "@/services/order.service";
-import storeService from "@/services/store.service";
 import router from "@/router";
 
 export default {
@@ -69,24 +61,17 @@ export default {
     item: Object,
     dialog: Boolean,
   },
-  data: () => ({
-    availableBalance: 0,
-  }),
   methods: {
     confirmShip() {
-      const orderList = orderService.getOrders();
-      let orderId = 0;
-      const status = "SHIPPED";
-      for (let i = 0; i < orderList.length; i++) {
-        if (
-          orderList.get(i).getProductName().equals(this.item.getProductName())
-        ) {
-          orderId = orderList.getId();
-        }
-      }
-      storeService.editProductStatus(this.item.id, "SHIPPED");
+      // const orderList = orderService.getOrders();
+      // let orderId = 0;
+      // for (let i = 0; i < orderList.length; i++) {
+      //   if (orderList[i].getProductName().equals(this.item.getProductName())) {
+      //     orderId = orderList[i].getId();
+      //   }
+      // }
       const shippmentReference = this.$refs.shipmentRef.value;
-      orderService.updateOrder(orderId, shippmentReference, status).then(() => {
+      orderService.updateOrder(1, shippmentReference, "SHIPPED").then(() => {
         this.$emit("ship-confirmed");
         this.$store.dispatch(
           "alert/pushInfo",
@@ -100,11 +85,6 @@ export default {
       this.$emit("ship-canceled");
       this.showDialog = false;
     },
-  },
-  mounted() {
-    accountService.getAccount().then((resp) => {
-      this.availableBalance = resp.data?.availableBalance ?? 0;
-    });
   },
 };
 </script>
