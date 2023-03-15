@@ -86,8 +86,6 @@
   <!-- end of the card -->
 </template>
 <script>
-// import productService from "@/services/product.service"; no product but store
-import productService from "@/services/product.service";
 import DeliveredModal from "./DeliveredModal";
 import ShipModal from "./ShipModal";
 import storeService from "@/services/store.service";

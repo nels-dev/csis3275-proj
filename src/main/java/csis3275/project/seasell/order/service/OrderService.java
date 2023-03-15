@@ -10,19 +10,14 @@ import csis3275.project.seasell.order.dto.OrderDto;
 import csis3275.project.seasell.order.model.Order;
 import csis3275.project.seasell.order.model.OrderStatus;
 import csis3275.project.seasell.order.repository.OrderRepository;
-import csis3275.project.seasell.product.dto.ProductDto;
 import csis3275.project.seasell.product.model.ProductStatus;
 import csis3275.project.seasell.product.service.ProductService;
-import csis3275.project.seasell.user.model.AppUser;
 import csis3275.project.seasell.user.service.CurrentUserService;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.time.OffsetDateTime;
-import java.util.List;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -74,16 +69,11 @@ public class OrderService {
         return orderRepository.findById(id).orElseThrow(ResourceNotFoundException::new);
     }
 
-    public List<Order> getOrderByProductId(int productId) {
-        return orderRepository.findAllByProduct_id(productId);
-        orderRepository.save(order);
-    }
-
-    public List<OrderDto> getOrders(){
+    public List<OrderDto> getOrders() {
         List<OrderDto> orderDtos = new ArrayList<>();
         List<Order> orders = orderRepository.findByBuyerOrderByOrdertimeDesc(currentUserService.getCurrentUser());
 
-        for (int i=0; i<orders.size(); i++){
+        for (int i = 0; i < orders.size(); i++) {
             Order order = orders.get(i);
 
             OrderDto orderDto = new OrderDto();
