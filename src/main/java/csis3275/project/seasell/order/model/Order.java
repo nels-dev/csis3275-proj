@@ -3,7 +3,6 @@ package csis3275.project.seasell.order.model;
 import csis3275.project.seasell.product.model.Product;
 import csis3275.project.seasell.user.model.AppUser;
 import jakarta.persistence.*;
-
 import java.time.OffsetDateTime;
 import lombok.Data;
 
@@ -20,7 +19,7 @@ public class Order {
     @JoinColumn(name = "buyer_id")
     private AppUser buyer;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "product_id")
     private Product product;
 

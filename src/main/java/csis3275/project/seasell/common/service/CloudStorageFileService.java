@@ -4,8 +4,10 @@ import com.amazonaws.SdkClientException;
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.model.ObjectMetadata;
 import com.amazonaws.services.s3.model.S3Object;
+import csis3275.project.seasell.common.dto.FileWrapper;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
+import java.util.Date;
 import java.util.UUID;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,10 +40,11 @@ public class CloudStorageFileService implements FileService {
     }
 
     @Override
-    public byte[] retrieve(String key) throws IOException {
+    public FileWrapper retrieve(String key) throws IOException {
         try {
             S3Object object = s3Client.getObject(bucket, key);
-            return object.getObjectContent().readAllBytes();
+            Date lastModified = object.getObjectMetadata().getLastModified();
+            return new FileWrapper(lastModified, object.getObjectContent().readAllBytes());
         } catch (SdkClientException e) {
             log.error("Error reading file from S3", e);
             throw new IOException(e);
