@@ -5,16 +5,24 @@ import csis3275.project.seasell.account.service.BalanceAccountService;
 import csis3275.project.seasell.account.service.JournalEntryService;
 import csis3275.project.seasell.common.exception.ResourceNotFoundException;
 import csis3275.project.seasell.common.service.FileService;
+import csis3275.project.seasell.order.dto.CreateOrderDto;
+import csis3275.project.seasell.order.dto.OrderDto;
 import csis3275.project.seasell.order.model.Order;
 import csis3275.project.seasell.order.model.OrderStatus;
 import csis3275.project.seasell.order.repository.OrderRepository;
+import csis3275.project.seasell.product.dto.ProductDto;
 import csis3275.project.seasell.product.model.ProductStatus;
 import csis3275.project.seasell.product.service.ProductService;
+import csis3275.project.seasell.user.model.AppUser;
 import csis3275.project.seasell.user.service.CurrentUserService;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.time.OffsetDateTime;
 import java.util.List;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -39,7 +47,8 @@ public class OrderService {
     @Autowired
     BalanceAccountService balanceAccountService;
 
-    public void addOrder(int productId) throws IOException {
+    public void addOrder(CreateOrderDto dto) throws IOException {
+        int productId = dto.getProductId();
         productService.updateProductStatus(productId, ProductStatus.ORDERED);
         journalEntryService.post(balanceAccountService.getAccountData(),
                 new BigDecimal(productService.getProductData(productId).getPrice()),
@@ -67,6 +76,24 @@ public class OrderService {
 
     public List<Order> getOrderByProductId(int productId) {
         return orderRepository.findAllByProduct_id(productId);
+        orderRepository.save(order);
     }
 
+    public List<OrderDto> getOrders(){
+        List<OrderDto> orderDtos = new ArrayList<>();
+        List<Order> orders = orderRepository.findByBuyerOrderByOrdertimeDesc(currentUserService.getCurrentUser());
+
+        for (int i=0; i<orders.size(); i++){
+            Order order = orders.get(i);
+
+            OrderDto orderDto = new OrderDto();
+            orderDto.setId(order.getId());
+            orderDto.setOrderTime(order.getOrdertime());
+            orderDto.setStatus(order.getStatus());
+            orderDto.setProductName(order.getProduct().getName());
+            orderDto.setShipmentReference("");
+            orderDtos.add(orderDto);
+        }
+        return orderDtos;
+    }
 }

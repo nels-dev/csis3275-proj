@@ -10,5 +10,9 @@ const orderService = {
     ),
   getOrder: (productId) =>
     axios.get(`/api/client/order?productId=${productId}`),
+  addOrder: (productId) => axios.post(`/api/client/order`, { productId }),
+
+  // should use order.status? by Nelson
+  getOrders: () => axios.get(`/api/client/order`),
 };
 export default orderService;

@@ -43,7 +43,7 @@
 <script>
 import HeaderPage from "@/components/HeaderPage.vue";
 import FooterPage from "@/components/FooterPage.vue";
-import productService from "@/services/product.service";
+import storeService from "@/services/store.service";
 export default {
   data() {
     return {
@@ -73,7 +73,7 @@ export default {
       //   productParams.append("images", this.filePath[i]);
       // }
       console.log(productParams);
-      productService.createProduct(productParams).then((response) => {
+      storeService.createProduct(productParams).then((response) => {
         console.log("creating product...", response);
       });
     },

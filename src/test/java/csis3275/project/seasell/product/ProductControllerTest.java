@@ -30,7 +30,7 @@ class ProductControllerTest {
     @Test
     public void getProducts() throws Exception {
         when(productService.getProductsExceptCurrentUser()).thenReturn(List.of(createProductDto()));
-        mockMvc.perform(MockMvcRequestBuilders.get("/api/products")).andExpect(content().json(
+        mockMvc.perform(MockMvcRequestBuilders.get("/api/client/products")).andExpect(content().json(
                 "[{\"id\":0,\"name\":\"Table\",\"description\":\"A good item\",\"condition\":\"90% new\",\"price\":100.24,\"images\":[\"item.jpg\"]}]"))
                 .andExpect(status().isOk());
     }
@@ -38,14 +38,14 @@ class ProductControllerTest {
     @Test
     public void getProducts_noProduct() throws Exception {
         when(productService.getProducts()).thenReturn(List.of());
-        mockMvc.perform(MockMvcRequestBuilders.get("/api/products")).andExpect(content().json("[]"))
+        mockMvc.perform(MockMvcRequestBuilders.get("/api/client/products")).andExpect(content().json("[]"))
                 .andExpect(status().isOk());
     }
 
     @Test
     public void getProduct() throws Exception {
         when(productService.getProduct(1)).thenReturn(createProductDto());
-        mockMvc.perform(MockMvcRequestBuilders.get("/api/products/1")).andExpect(content().json(
+        mockMvc.perform(MockMvcRequestBuilders.get("/api/client/products/1")).andExpect(content().json(
                 "{\"id\":0,\"name\":\"Table\",\"description\":\"A good item\",\"condition\":\"90% new\",\"price\":100.24,\"images\":[\"item.jpg\"]}"))
                 .andExpect(status().isOk());
 
@@ -54,8 +54,8 @@ class ProductControllerTest {
     @Test
     public void getProduct_notFound() throws Exception {
         when(productService.getProduct(1)).thenThrow(ResourceNotFoundException.class);
-        mockMvc.perform(MockMvcRequestBuilders.get("/api/products/1")).andExpect(status().reason("Resource not found"))
-                .andExpect(status().isNotFound());
+        mockMvc.perform(MockMvcRequestBuilders.get("/api/client/products/1"))
+                .andExpect(status().reason("Resource not found")).andExpect(status().isNotFound());
     }
 
     private ProductDto createProductDto() {

@@ -1,6 +1,7 @@
 package csis3275.project.seasell.user.service;
 
 import csis3275.project.seasell.account.service.BalanceAccountService;
+import csis3275.project.seasell.common.exception.UserAlreadyExistException;
 import csis3275.project.seasell.user.dto.UserDto;
 import csis3275.project.seasell.user.model.AppUser;
 import csis3275.project.seasell.user.model.UserRole;
@@ -23,11 +24,11 @@ public class UserService {
 
     public void register(UserDto userDto) {
         if (userRepository.existsByEmail(userDto.getEmail())) {
-            throw new IllegalArgumentException("Email exists. Please use another email address");
+            throw new UserAlreadyExistException("Email exists. Please use another email address");
         }
 
         if (userRepository.existsByPreferredUserName(userDto.getPreferredUserName())) {
-            throw new IllegalArgumentException("User name exists. Please choose another user name");
+            throw new UserAlreadyExistException("User name exists. Please choose another user name");
         }
 
         String encrypted = passwordEncoder.encode(userDto.getPassword());
