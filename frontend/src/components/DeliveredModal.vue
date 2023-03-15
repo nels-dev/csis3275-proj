@@ -77,7 +77,6 @@ export default {
       const productId = this.item.id;
       orderService.addOrder(productId).then(() => {
         this.$emit("checkout-confirmed");
-        this.$store.dispatch("account/balanceChanged");
         this.$store.dispatch("alert/pushInfo", "Checkout successful!");
         router.push("/Home");
         this.showDialog = false;

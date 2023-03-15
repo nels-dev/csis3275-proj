@@ -39,6 +39,7 @@
 
       <v-container>
         <v-text-field
+          ref="shipmentRef"
           hide-details="auto"
           label="Shippment Reference"
           placeholder="S000000000"
@@ -72,8 +73,16 @@ export default {
   }),
   methods: {
     confirmShip() {
-      const productId = this.item.id;
-      orderService.addOrder(productId).then(() => {
+      const orderList = orderService.getOrders();
+      let orderId = 0;
+      const status = "SHIPPED";
+      for (let i = 0; i < orderList.length; i++) {
+        if (orderList.get(i).getProductName().equals(item.getProductName())) {
+          orderId = orderList.getId();
+        }
+      }
+      const shippmentReference = this.$refs.shipmentRef.value;
+      orderService.updateOrder(orderId, shippmentReference, status).then(() => {
         this.$emit("ship-confirmed");
         this.$store.dispatch(
           "alert/pushInfo",
