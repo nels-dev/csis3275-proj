@@ -63,23 +63,18 @@ export default {
   },
   methods: {
     confirmShip() {
-      // const orderList = orderService.getOrders();
-      // let orderId = 0;
-      // for (let i = 0; i < orderList.length; i++) {
-      //   if (orderList[i].getProductName().equals(this.item.getProductName())) {
-      //     orderId = orderList[i].getId();
-      //   }
-      // }
       const shippmentReference = this.$refs.shipmentRef.value;
-      orderService.updateOrder(1, shippmentReference, "SHIPPED").then(() => {
-        this.$emit("ship-confirmed");
-        this.$store.dispatch(
-          "alert/pushInfo",
-          "Update status to shipped successful!"
-        );
-        router.push("/Home");
-        this.showDialog = false;
-      });
+      orderService
+        .updateOrder(this.item.id, shippmentReference, "SHIPPED")
+        .then(() => {
+          this.$emit("ship-confirmed");
+          this.$store.dispatch(
+            "alert/pushInfo",
+            "Update status to shipped successful!"
+          );
+          router.push("/Home");
+          this.showDialog = false;
+        });
     },
     cancelShip() {
       this.$emit("ship-canceled");

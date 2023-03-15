@@ -1,16 +1,16 @@
 import axios from "./axios";
 
 const orderService = {
-  updateOrder: (orderId, shippmentReference, status) =>
+  updateOrder: (productId, shippmentReference, status) =>
     axios.patch(
-      `/api/client/order?orderId=${orderId}&shippmentReference=${shippmentReference}&status=${status}`
+      `/api/client/order?productId=${productId}&shippmentReference=${shippmentReference}&status=${status}`
     ),
 
   addOrder: (productId) => axios.post(`/api/client/order`, { productId }),
 
   getOrders: () => axios.get(`/api/client/order`),
 
-  getOrderByProductIdAndStatus: (productId, status) =>
-    axios.get(`/api/client/order?orderId=${productId}&status=${status}`),
+  getOrderByProductIdAndStatus: (status, productId) =>
+    axios.get(`/api/client/order?status=${status}&productId=${productId}`),
 };
 export default orderService;

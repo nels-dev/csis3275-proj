@@ -87,14 +87,19 @@ public class OrderService {
         return orderDtos;
     }
 
-    public OrderDto getOrderByProductIdAndStatus(int productId, ProductStatus status) {
-        Order order = orderRepository.findByProduct_IdAndProduct_Status(productId, status);
-        OrderDto orderDto = new OrderDto();
-        orderDto.setId(order.getId());
-        orderDto.setOrderTime(order.getOrdertime());
-        orderDto.setStatus(order.getStatus());
-        orderDto.setProductName(order.getProduct().getName());
-        orderDto.setShipmentReference("");
-        return orderDto;
+    public OrderDto findByStatusAndProduct_Id(OrderStatus status, int productId) {
+        List<Order> orders = orderRepository.findByStatusAndProduct_Id(status, productId);
+        if (orders.isEmpty()) {
+            return null;
+        } else {
+            Order order = orders.get(0);
+            OrderDto orderDto = new OrderDto();
+            orderDto.setId(order.getId());
+            orderDto.setOrderTime(order.getOrdertime());
+            orderDto.setStatus(order.getStatus());
+            orderDto.setProductName(order.getProduct().getName());
+            orderDto.setShipmentReference("");
+            return orderDto;
+        }
     }
 }

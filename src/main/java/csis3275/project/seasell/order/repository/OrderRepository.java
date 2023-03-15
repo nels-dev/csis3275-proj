@@ -1,7 +1,7 @@
 package csis3275.project.seasell.order.repository;
 
 import csis3275.project.seasell.order.model.Order;
-import csis3275.project.seasell.product.model.ProductStatus;
+import csis3275.project.seasell.order.model.OrderStatus;
 import csis3275.project.seasell.user.model.AppUser;
 import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -9,5 +9,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 public interface OrderRepository extends JpaRepository<Order, Integer> {
     List<Order> findByBuyerOrderByOrdertimeDesc(AppUser appUser);
 
-    Order findByProduct_IdAndProduct_Status(int productId, ProductStatus productStatus);
+    List<Order> findByStatusAndProduct_Id(OrderStatus status, int productId);
 }

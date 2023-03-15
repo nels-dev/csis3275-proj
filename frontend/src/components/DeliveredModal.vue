@@ -74,12 +74,7 @@ export default {
     confirmDelivered() {
       const shippmentReference = this.$refs.shipmentRef.value;
       orderService
-        .updateOrder(
-          orderService.getOrderByProductIdAndStatus(this.item.id, "SHIPPED")
-            .getId,
-          shippmentReference,
-          "DELIVERED"
-        )
+        .updateOrder(this.item.id, shippmentReference, "DELIVERED")
         .then(() => {
           this.$emit("ship-confirmed");
           this.$store.dispatch(
