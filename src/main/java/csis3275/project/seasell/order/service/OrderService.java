@@ -86,4 +86,15 @@ public class OrderService {
         }
         return orderDtos;
     }
+
+    public OrderDto getOrderByProductIdAndStatus(int productId, ProductStatus status) {
+        Order order = orderRepository.findByProduct_IdAndProduct_Status(productId, status);
+        OrderDto orderDto = new OrderDto();
+        orderDto.setId(order.getId());
+        orderDto.setOrderTime(order.getOrdertime());
+        orderDto.setStatus(order.getStatus());
+        orderDto.setProductName(order.getProduct().getName());
+        orderDto.setShipmentReference("");
+        return orderDto;
+    }
 }

@@ -46,7 +46,7 @@
         ></v-text-field>
       </v-container>
       <v-card-actions>
-        <v-btn color="green" @click="confirmDelivered">Ship</v-btn>
+        <v-btn color="green" @click="confirmDelivered">Deliver</v-btn>
         <v-btn color="red" @click="cancelDelivered">Cancel</v-btn>
       </v-card-actions>
     </v-card>
@@ -59,8 +59,11 @@ import router from "@/router";
 
 export default {
   data() {
+    // const ref = orderService
+    //   .getOrderByProductIdAndStatus(this.item.id, "ORDERED")
+    //   .getShipmentReference();
     return {
-      shipmentReference: this.item.id,
+      shipmentReference: 1,
     };
   },
   props: {
@@ -70,15 +73,22 @@ export default {
   methods: {
     confirmDelivered() {
       const shippmentReference = this.$refs.shipmentRef.value;
-      orderService.updateOrder(1, shippmentReference, "DELIVERED").then(() => {
-        this.$emit("ship-confirmed");
-        this.$store.dispatch(
-          "alert/pushInfo",
-          "Update status to delivered successful!"
-        );
-        router.push("/Home");
-        this.showDialog = false;
-      });
+      orderService
+        .updateOrder(
+          orderService.getOrderByProductIdAndStatus(this.item.id, "SHIPPED")
+            .getId,
+          shippmentReference,
+          "DELIVERED"
+        )
+        .then(() => {
+          this.$emit("ship-confirmed");
+          this.$store.dispatch(
+            "alert/pushInfo",
+            "Update status to delivered successful!"
+          );
+          router.push("/Home");
+          this.showDialog = false;
+        });
     },
     cancelDelivered() {
       this.$emit("Delivered-canceled");
