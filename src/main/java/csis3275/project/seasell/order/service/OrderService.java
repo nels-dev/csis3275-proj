@@ -21,6 +21,7 @@ import java.io.IOException;
 import java.math.BigDecimal;
 import java.time.OffsetDateTime;
 import java.util.List;
+import java.util.ArrayList;
 import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -97,10 +98,11 @@ public class OrderService {
             completeOrder(order);
         }
         orderRepository.save(order);
-    }
+    
         for (int i = 0; i < orders.size(); i++) {
             Order order = orders.get(i);
         }
+    }
 
     private void completeOrder(Order order) {
         // Prevent illegal status advance
