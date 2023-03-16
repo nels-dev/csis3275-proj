@@ -42,10 +42,10 @@ public class OrderController {
     }
 
     @PatchMapping
-    public ResponseEntity<Order> UpdateOrder(@RequestParam int productId, @RequestParam String shippmentReference,
+    public ResponseEntity<Order> UpdateOrder(@RequestParam int productId, @RequestParam String shipmentReference,
             @RequestParam ProductStatus status) throws IOException {
         int orderId = orderService.findByStatusAndProduct_Id(OrderStatus.ORDERED, productId).getId();
-        orderService.updateShipmentReferenceInOrder(orderId, shippmentReference);
+        orderService.updateShipmentReferenceInOrder(orderId, shipmentReference);
         productService.updateProductStatus(orderService.getOrder(orderId).getProduct().getId(), status);
         return ResponseEntity.status(204).build();
     }
