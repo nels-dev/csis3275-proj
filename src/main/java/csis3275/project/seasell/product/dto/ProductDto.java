@@ -16,6 +16,4 @@ public class ProductDto {
     ProductStatus status;
     List<String> images;
 
-
-
 }
