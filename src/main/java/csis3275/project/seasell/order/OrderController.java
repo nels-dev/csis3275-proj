@@ -9,6 +9,7 @@ import csis3275.project.seasell.order.service.OrderService;
 import java.io.IOException;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.jaxb.SpringDataJaxb;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -32,6 +33,12 @@ public class OrderController {
     @GetMapping
     public List<OrderDto> getOrders() {
         return orderService.getOrders();
+    }
+
+    @GetMapping("/product/{id}/buyer")
+    public OrderDto getBuyerInfoByProductId(@PathVariable int id){
+
+        return orderService.getBuyerInfoById(id);
     }
 
     @PutMapping("/{id}/status")
