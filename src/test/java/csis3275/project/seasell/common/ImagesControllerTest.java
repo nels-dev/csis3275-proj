@@ -7,7 +7,9 @@ import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+import csis3275.project.seasell.common.dto.FileWrapper;
 import csis3275.project.seasell.common.service.LocalStorageFileService;
+import java.util.Date;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration;
@@ -36,7 +38,7 @@ class ImagesControllerTest {
     @Test
     public void getProductImage() throws Exception {
         final byte[] fileBytes = { 1 };
-        when(fileService.retrieve(anyString())).thenReturn(fileBytes);
+        when(fileService.retrieve(anyString())).thenReturn(new FileWrapper(new Date(), fileBytes));
         mockMvc.perform(MockMvcRequestBuilders.get("/images/my-picture.jpg")).andExpect(status().isOk())
                 .andExpect(content().bytes(fileBytes));
         verify(fileService).retrieve("my-picture.jpg");

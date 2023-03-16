@@ -2,6 +2,7 @@ package csis3275.project.seasell.order;
 
 import csis3275.project.seasell.order.dto.CreateOrderDto;
 import csis3275.project.seasell.order.dto.OrderDto;
+import csis3275.project.seasell.order.dto.OrderStatusUpdateDto;
 import csis3275.project.seasell.order.model.Order;
 import csis3275.project.seasell.order.model.OrderStatus;
 import csis3275.project.seasell.order.repository.OrderRepository;
@@ -58,5 +59,18 @@ public class OrderController {
         } else {
             return List.of(orderService.findByStatusAndProduct_Id(status, productId));
         }
+    }
+
+    @GetMapping("/product/{id}/buyer")
+    public OrderDto getBuyerInfoByProductId(@PathVariable int id) {
+
+        return orderService.getBuyerInfoById(id);
+    }
+
+    @PutMapping("/{id}/status")
+    public ResponseEntity<?> updateOrderStatus(@PathVariable int id, @RequestBody OrderStatusUpdateDto dto) {
+        orderService.updateOrderStatus(id, dto);
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+
     }
 }

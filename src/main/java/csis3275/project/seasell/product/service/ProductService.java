@@ -23,7 +23,6 @@ public class ProductService {
 
     @Autowired
     private ProductRepository productRepository;
-
     @Autowired
     FileService fileService;
 
@@ -59,8 +58,6 @@ public class ProductService {
         prod.setCondition(condition);
         prod.setStatus(ProductStatus.LISTED);
         prod.setSeller(seller);
-        // List<ProductImage> productImages = new ArrayList<>();
-
         String ext = image.getOriginalFilename().substring(image.getOriginalFilename().lastIndexOf(".") + 1);
         String fileName = fileService.store(image.getBytes(), ext);
         ProductImage productImage = new ProductImage();
@@ -105,5 +102,4 @@ public class ProductService {
         }
         return myProducts.stream().map(this::toProductDto).collect(Collectors.toList());
     }
-
 }

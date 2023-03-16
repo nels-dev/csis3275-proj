@@ -1,9 +1,11 @@
 package csis3275.project.seasell.common.service;
 
+import csis3275.project.seasell.common.dto.FileWrapper;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.Date;
 import java.util.UUID;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
@@ -34,10 +36,10 @@ public class LocalStorageFileService implements FileService {
     }
 
     @Override
-    public byte[] retrieve(String key) throws IOException {
+    public FileWrapper retrieve(String key) throws IOException {
         File file = new File(basePath + "/" + key);
         try (FileInputStream fis = new FileInputStream(file)) {
-            return fis.readAllBytes();
+            return new FileWrapper(new Date(file.lastModified()), fis.readAllBytes());
         } catch (IOException e) {
             log.error("Unable to read file locally", e);
             throw e;

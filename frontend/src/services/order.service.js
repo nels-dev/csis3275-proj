@@ -10,6 +10,9 @@ const orderService = {
 
   getOrders: () => axios.get(`/api/client/order`),
 
+  updateOrderStatus: (id, status) =>
+    axios.put(`/api/client/order/${id}/status`, { status }),
+
   getOrderByProductIdAndStatus: (status, productId) =>
     axios.get(`/api/client/order?status=${status}&productId=${productId}`),
 };
