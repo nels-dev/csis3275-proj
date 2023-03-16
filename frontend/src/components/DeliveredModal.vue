@@ -40,7 +40,7 @@
       <v-container>
         <v-text-field
           hide-details="auto"
-          placeholder="Shippment Reference"
+          placeholder="Shipment Reference"
           v-model="shipmentReference"
         ></v-text-field>
       </v-container>

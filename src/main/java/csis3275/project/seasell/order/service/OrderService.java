@@ -74,9 +74,9 @@ public class OrderService {
         return toOrderDto(order);
     }
 
-    public void updateShipmentReferenceInOrder(int orderId, String shippmentReference) {
+    public void updateShipmentReferenceInOrder(int orderId, String shipmentReference) {
         Order order = orderRepository.findById(orderId).orElseThrow(ResourceNotFoundException::new);
-        order.setShipmentReference(shippmentReference);
+        order.setShipmentReference(shipmentReference);
         orderRepository.save(order);
     }
 
