@@ -39,7 +39,6 @@
 
       <v-container>
         <v-text-field
-          ref="shipmentRef"
           hide-details="auto"
           placeholder="Shippment Reference"
           v-model="shipmentReference"
@@ -59,11 +58,8 @@ import router from "@/router";
 
 export default {
   data() {
-    // const ref = orderService
-    //   .getOrderByProductIdAndStatus(this.item.id, "ORDERED")
-    //   .getShipmentReference();
     return {
-      shipmentReference: 1,
+      shipmentReference: "",
     };
   },
   props: {
@@ -72,9 +68,8 @@ export default {
   },
   methods: {
     confirmDelivered() {
-      const shippmentReference = this.$refs.shipmentRef.value;
       orderService
-        .updateOrder(this.item.id, shippmentReference, "DELIVERED")
+        .updateOrder(this.item.id, this.shipmentReference, "DELIVERED")
         .then(() => {
           this.$emit("ship-confirmed");
           this.$store.dispatch(

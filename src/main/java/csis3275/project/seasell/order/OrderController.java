@@ -46,7 +46,7 @@ public class OrderController {
         int orderId = orderService.findByStatusAndProduct_Id(OrderStatus.ORDERED, productId).getId();
         orderService.updateShipmentReferenceInOrder(orderId, shippmentReference);
         productService.updateProductStatus(orderService.getOrder(orderId).getProduct().getId(), status);
-        return ResponseEntity.status(201).build();
+        return ResponseEntity.status(204).build();
     }
 
     // should be like that
