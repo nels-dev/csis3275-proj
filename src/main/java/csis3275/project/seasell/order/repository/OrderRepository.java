@@ -5,7 +5,6 @@ import csis3275.project.seasell.order.model.OrderStatus;
 import csis3275.project.seasell.user.model.AppUser;
 import java.util.List;
 import java.util.Optional;
-import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface OrderRepository extends JpaRepository<Order, Integer> {

@@ -102,6 +102,7 @@ public class OrderService {
     }
         for (int i = 0; i < orders.size(); i++) {
             Order order = orders.get(i);
+        }
 
     private void completeOrder(Order order) {
         // Prevent illegal status advance
