@@ -1,7 +1,7 @@
 import axios from "./axios";
 
 const orderService = {
-  updateOrder: (productId, shippmentReference, status) =>
+  updateOrder: (productId, shipmentReference, status) =>
     axios.patch(
       `/api/client/order?productId=${productId}&shipmentReference=${shipmentReference}&status=${status}`
     ),

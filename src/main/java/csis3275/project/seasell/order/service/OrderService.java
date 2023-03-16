@@ -5,7 +5,6 @@ import csis3275.project.seasell.account.service.BalanceAccountService;
 import csis3275.project.seasell.account.service.JournalEntryService;
 import csis3275.project.seasell.common.exception.InvalidStateException;
 import csis3275.project.seasell.common.exception.ResourceNotFoundException;
-
 import csis3275.project.seasell.common.service.FileService;
 import csis3275.project.seasell.order.dto.CreateOrderDto;
 import csis3275.project.seasell.order.dto.OrderDto;
@@ -21,11 +20,8 @@ import java.io.IOException;
 import java.math.BigDecimal;
 import java.time.OffsetDateTime;
 import java.util.List;
-import java.util.ArrayList;
-import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 
 @Service
 @Transactional
@@ -73,11 +69,11 @@ public class OrderService {
                 .buyerEmail(order.getBuyer().getEmail()).build();
     }
 
-
     public OrderDto getBuyerInfoById(int id) {
         Order order = orderRepository.findByProduct_id(id).orElseThrow(ResourceNotFoundException::new);
         return toOrderDto(order);
     }
+
     public void updateShipmentReferenceInOrder(int orderId, String shippmentReference) {
         Order order = orderRepository.findById(orderId).orElseThrow(ResourceNotFoundException::new);
         order.setShipmentReference(shippmentReference);
@@ -89,8 +85,10 @@ public class OrderService {
     }
 
     public List<OrderDto> getOrders() {
-        List<OrderDto> orderDtos = new ArrayList<>();
-        List<Order> orders = orderRepository.findByBuyerOrderByOrdertimeDesc(currentUserService.getCurrentUser());
+
+        return orderRepository.findByBuyerOrderByOrdertimeDesc(currentUserService.getCurrentUser()).stream()
+                .map(this::toOrderDto).toList();
+    }
 
     public void updateOrderStatus(int id, OrderStatusUpdateDto dto) {
         Order order = orderRepository.findById(id).orElseThrow(ResourceNotFoundException::new);
@@ -98,10 +96,6 @@ public class OrderService {
             completeOrder(order);
         }
         orderRepository.save(order);
-    
-        for (int i = 0; i < orders.size(); i++) {
-            Order order = orders.get(i);
-        }
     }
 
     private void completeOrder(Order order) {
@@ -126,14 +120,7 @@ public class OrderService {
         if (orders.isEmpty()) {
             return null;
         } else {
-            Order order = orders.get(0);
-            OrderDto orderDto = new OrderDto();
-            orderDto.setId(order.getId());
-            orderDto.setOrderTime(order.getOrdertime());
-            orderDto.setStatus(order.getStatus());
-            orderDto.setProductName(order.getProduct().getName());
-            orderDto.setShipmentReference("");
-            return orderDto;
+            return toOrderDto(orders.get(0));
         }
     }
 }
