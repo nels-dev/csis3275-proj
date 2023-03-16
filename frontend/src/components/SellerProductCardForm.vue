@@ -14,7 +14,7 @@
       </v-col>
     </v-row>
     <v-row>
-      <v-col v-if="this.status === 'ALL'"> <CreateProductCard />></v-col>
+      <v-col v-if="this.status === 'ALL'"> <CreateProductCard /></v-col>
       <v-col
         v-for="product in filteredProducts"
         :key="product.id"

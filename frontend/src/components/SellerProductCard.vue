@@ -50,7 +50,7 @@
         color="primary"
         text
         v-if="item.status === 'ORDERED'"
-        @click="toggleProductStatus(item.id, 'SHIPPED')"
+        @click="showShipDialog = true"
       >
         SHIPPED
       </v-btn>
@@ -58,7 +58,7 @@
         color="primary"
         text
         v-if="item.status === 'SHIPPED'"
-        @click="toggleProductStatus(item.id, 'DELIVERED')"
+        @click="showDeliveredDialog = true"
       >
         DELIVERED
       </v-btn>
@@ -71,12 +71,34 @@
       </v-btn>
     </v-card-actions>
   </v-card>
+  <ShipModal
+    :item="item"
+    v-model="showShipDialog"
+    @ship-confirmed="confirmShip"
+    @ship-canceled="cancelShip"
+  />
+  <DeliveredModal
+    :item="item"
+    v-model="showDeliveredDialog"
+    @delivered-confirmed="confirmDelivered"
+    @delivered-canceled="cancelDelivered"
+  />
   <!-- end of the card -->
 </template>
 <script>
+import DeliveredModal from "./DeliveredModal";
+import ShipModal from "./ShipModal";
 import storeService from "@/services/store.service";
 
 export default {
+  data: () => ({
+    showShipDialog: false,
+    showDeliveredDialog: false,
+  }),
+  components: {
+    ShipModal,
+    DeliveredModal,
+  },
   props: ["item"],
   computed: {
     imageUrl() {
@@ -89,6 +111,18 @@ export default {
         this.$store.dispatch("mystore/productUpdated");
         this.$store.dispatch("alert/pushInfo", "Product status changed");
       });
+    },
+    confirmShip() {
+      this.showShipDialog = false;
+    },
+    cancelShip() {
+      this.showShipDialog = false;
+    },
+    confirmDelivered() {
+      this.showDeliveredDialog = false;
+    },
+    cancelDelivered() {
+      this.showDeliveredDialog = false;
     },
   },
 };

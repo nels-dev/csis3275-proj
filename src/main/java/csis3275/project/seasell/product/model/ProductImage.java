@@ -1,5 +1,6 @@
 package csis3275.project.seasell.product.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -18,5 +19,6 @@ public class ProductImage {
     private String path;
 
     @ManyToOne
+    @JsonIgnore
     private Product product;
 }

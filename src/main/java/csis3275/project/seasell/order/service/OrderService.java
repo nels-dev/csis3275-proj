@@ -20,7 +20,6 @@ import java.io.IOException;
 import java.math.BigDecimal;
 import java.time.OffsetDateTime;
 import java.util.List;
-import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -70,14 +69,25 @@ public class OrderService {
                 .buyerEmail(order.getBuyer().getEmail()).build();
     }
 
-    public List<OrderDto> getOrders() {
-        return orderRepository.findByBuyerOrderByOrdertimeDesc((currentUserService.getCurrentUser())).stream()
-                .map(this::toOrderDto).collect(Collectors.toList());
-    }
-
     public OrderDto getBuyerInfoById(int id) {
         Order order = orderRepository.findByProduct_id(id).orElseThrow(ResourceNotFoundException::new);
         return toOrderDto(order);
+    }
+
+    public void updateShipmentReferenceInOrder(int orderId, String shipmentReference) {
+        Order order = orderRepository.findById(orderId).orElseThrow(ResourceNotFoundException::new);
+        order.setShipmentReference(shipmentReference);
+        orderRepository.save(order);
+    }
+
+    public Order getOrder(int id) {
+        return orderRepository.findById(id).orElseThrow(ResourceNotFoundException::new);
+    }
+
+    public List<OrderDto> getOrders() {
+
+        return orderRepository.findByBuyerOrderByOrdertimeDesc(currentUserService.getCurrentUser()).stream()
+                .map(this::toOrderDto).toList();
     }
 
     public void updateOrderStatus(int id, OrderStatusUpdateDto dto) {
@@ -103,5 +113,14 @@ public class OrderService {
         // Credit seller
         journalEntryService.post(order.getProduct().getSeller().getBalanceAccount(),
                 BigDecimal.valueOf(order.getProduct().getPrice()), TransactionType.SALES_PROCEED, "Order completed");
+    }
+
+    public OrderDto findByStatusAndProduct_Id(OrderStatus status, int productId) {
+        List<Order> orders = orderRepository.findByStatusAndProduct_Id(status, productId);
+        if (orders.isEmpty()) {
+            return null;
+        } else {
+            return toOrderDto(orders.get(0));
+        }
     }
 }
