@@ -34,4 +34,10 @@ public class OrderController {
     public List<OrderDto> getOrders(){
         return orderService.getOrders();
     }
+
+    @GetMapping("/product/{id}/buyer")
+    public OrderDto getBuyerInfoByProductId(@PathVariable int id){
+
+        return orderService.getBuyerInfoById(id);
+    }
 }

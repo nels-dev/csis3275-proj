@@ -1,5 +1,4 @@
 package csis3275.project.seasell.product;
-
 import csis3275.project.seasell.product.dto.ProductDto;
 import csis3275.project.seasell.product.dto.ProductStatusUpdateDto;
 import csis3275.project.seasell.product.model.ProductStatus;
@@ -46,4 +45,5 @@ public class StoreController {
         productService.addProduct(name, description, price, condition, file);
         return ResponseEntity.status(201).build();
     }
+
 }

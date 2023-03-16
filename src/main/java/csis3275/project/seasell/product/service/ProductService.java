@@ -2,18 +2,25 @@ package csis3275.project.seasell.product.service;
 
 import csis3275.project.seasell.common.exception.ResourceNotFoundException;
 import csis3275.project.seasell.common.service.FileService;
+import csis3275.project.seasell.order.dto.OrderDto;
+import csis3275.project.seasell.order.model.Order;
+import csis3275.project.seasell.order.repository.OrderRepository;
+import csis3275.project.seasell.order.service.OrderService;
 import csis3275.project.seasell.product.dto.ProductDto;
 import csis3275.project.seasell.product.model.Product;
 import csis3275.project.seasell.product.model.ProductImage;
 import csis3275.project.seasell.product.model.ProductStatus;
 import csis3275.project.seasell.product.repository.ProductRepository;
+import csis3275.project.seasell.user.dto.UserDto;
 import csis3275.project.seasell.user.model.AppUser;
 import csis3275.project.seasell.user.service.CurrentUserService;
 import java.io.IOException;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -23,7 +30,6 @@ public class ProductService {
 
     @Autowired
     private ProductRepository productRepository;
-
     @Autowired
     FileService fileService;
 
@@ -106,4 +112,11 @@ public class ProductService {
         return myProducts.stream().map(this::toProductDto).collect(Collectors.toList());
     }
 
+//    public OrderDto getBuyerInfoById(int id) {
+//        Order order = orderRepository.findByProduct_id(id).orElseThrow(ResourceNotFoundException::new);
+//        return orderService.toOrder
+//                OrderDto.builder().id(order.getId()).productName(order.getProduct().getName())
+//                        .orderTime(order.getOrdertime()).status(order.getStatus()).buyerName(order.getBuyer().getUsername())
+//                        .buyerAddress(order.getBuyer().getAddress()).buyerEmail(order.getBuyer().getEmail()).build();
+//    }
 }
