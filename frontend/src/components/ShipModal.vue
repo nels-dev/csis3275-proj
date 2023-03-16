@@ -39,9 +39,9 @@
 
       <v-container>
         <v-text-field
+          v-model="shipmentReference"
           hide-details="auto"
           placeholder="S000000000"
-          v-model="shipmentReference"
         ></v-text-field>
       </v-container>
       <v-card-actions>
