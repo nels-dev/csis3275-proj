@@ -28,5 +28,5 @@ public class Order {
     @Enumerated(value = EnumType.STRING)
     private OrderStatus status;
 
-    private String shippmentReference;
+    private String shipmentReference;
 }
