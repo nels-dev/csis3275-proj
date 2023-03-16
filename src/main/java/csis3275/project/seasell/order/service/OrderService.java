@@ -5,6 +5,7 @@ import csis3275.project.seasell.account.service.BalanceAccountService;
 import csis3275.project.seasell.account.service.JournalEntryService;
 import csis3275.project.seasell.common.exception.InvalidStateException;
 import csis3275.project.seasell.common.exception.ResourceNotFoundException;
+
 import csis3275.project.seasell.common.service.FileService;
 import csis3275.project.seasell.order.dto.CreateOrderDto;
 import csis3275.project.seasell.order.dto.OrderDto;
@@ -23,6 +24,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 
 @Service
 @Transactional
@@ -70,10 +72,6 @@ public class OrderService {
                 .buyerEmail(order.getBuyer().getEmail()).build();
     }
 
-    public List<OrderDto> getOrders() {
-        return orderRepository.findByBuyerOrderByOrdertimeDesc((currentUserService.getCurrentUser())).stream()
-                .map(this::toOrderDto).collect(Collectors.toList());
-    }
 
     public OrderDto getBuyerInfoById(int id) {
         Order order = orderRepository.findByProduct_id(id).orElseThrow(ResourceNotFoundException::new);
@@ -81,7 +79,7 @@ public class OrderService {
     }
     public void updateShipmentReferenceInOrder(int orderId, String shippmentReference) {
         Order order = orderRepository.findById(orderId).orElseThrow(ResourceNotFoundException::new);
-        order.setShippmentReference(shippmentReference);
+        order.setShipmentReference(shippmentReference);
         orderRepository.save(order);
     }
 
