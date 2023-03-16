@@ -34,6 +34,12 @@ public class OrderController {
         return orderService.getOrders();
     }
 
+    @GetMapping("/product/{id}/buyer")
+    public OrderDto getBuyerInfoByProductId(@PathVariable int id) {
+
+        return orderService.getBuyerInfoById(id);
+    }
+
     @PutMapping("/{id}/status")
     public ResponseEntity<?> updateOrderStatus(@PathVariable int id, @RequestBody OrderStatusUpdateDto dto) {
         orderService.updateOrderStatus(id, dto);

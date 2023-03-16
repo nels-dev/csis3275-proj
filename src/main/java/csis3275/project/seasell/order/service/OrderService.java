@@ -19,8 +19,8 @@ import jakarta.transaction.Transactional;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.time.OffsetDateTime;
-import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -63,22 +63,21 @@ public class OrderService {
         orderRepository.save(order);
     }
 
+    private OrderDto toOrderDto(Order order) {
+        return OrderDto.builder().id(order.getId()).productName(order.getProduct().getName())
+                .orderTime(order.getOrdertime()).status(order.getStatus()).buyerName(order.getBuyer().getUsername())
+                .shipmentReference("Have not provided").buyerAddress(order.getBuyer().getAddress())
+                .buyerEmail(order.getBuyer().getEmail()).build();
+    }
+
     public List<OrderDto> getOrders() {
-        List<OrderDto> orderDtos = new ArrayList<>();
-        List<Order> orders = orderRepository.findByBuyerOrderByOrdertimeDesc(currentUserService.getCurrentUser());
+        return orderRepository.findByBuyerOrderByOrdertimeDesc((currentUserService.getCurrentUser())).stream()
+                .map(this::toOrderDto).collect(Collectors.toList());
+    }
 
-        for (int i = 0; i < orders.size(); i++) {
-            Order order = orders.get(i);
-
-            OrderDto orderDto = new OrderDto();
-            orderDto.setId(order.getId());
-            orderDto.setOrderTime(order.getOrdertime());
-            orderDto.setStatus(order.getStatus());
-            orderDto.setProductName(order.getProduct().getName());
-            orderDto.setShipmentReference("");
-            orderDtos.add(orderDto);
-        }
-        return orderDtos;
+    public OrderDto getBuyerInfoById(int id) {
+        Order order = orderRepository.findByProduct_id(id).orElseThrow(ResourceNotFoundException::new);
+        return toOrderDto(order);
     }
 
     public void updateOrderStatus(int id, OrderStatusUpdateDto dto) {
@@ -97,12 +96,10 @@ public class OrderService {
 
         order.setStatus(OrderStatus.COMPLETED);
         order.getProduct().setStatus(ProductStatus.SOLD);
-
         // Debit buyer
         journalEntryService.post(order.getBuyer().getBalanceAccount(),
                 BigDecimal.valueOf(order.getProduct().getPrice()), TransactionType.PURCHASE_CREDIT_RELEASE,
                 "Order completed");
-
         // Credit seller
         journalEntryService.post(order.getProduct().getSeller().getBalanceAccount(),
                 BigDecimal.valueOf(order.getProduct().getPrice()), TransactionType.SALES_PROCEED, "Order completed");

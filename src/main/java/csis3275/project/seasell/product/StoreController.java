@@ -46,4 +46,5 @@ public class StoreController {
         productService.addProduct(name, description, price, condition, file);
         return ResponseEntity.status(201).build();
     }
+
 }
