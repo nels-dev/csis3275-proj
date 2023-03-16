@@ -49,6 +49,7 @@ public class OrderController {
         productService.updateProductStatus(orderService.getOrder(orderId).getProduct().getId(), status);
         return ResponseEntity.status(204).build();
     }
+
     // should be like that
     @GetMapping
     public List<OrderDto> getOrders(@RequestParam(required = false) OrderStatus status,
