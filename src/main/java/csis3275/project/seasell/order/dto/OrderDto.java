@@ -19,8 +19,6 @@ public class OrderDto {
 
     private String shipmentReference;
 
-    private String buyerName;
-
     private String buyerAddress;
 
     private String buyerEmail;

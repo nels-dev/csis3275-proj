@@ -65,10 +65,15 @@ public class OrderService {
 
     private OrderDto toOrderDto(Order order) {
         return OrderDto.builder().id(order.getId()).productName(order.getProduct().getName())
-                .orderTime(order.getOrdertime()).status(order.getStatus()).buyerName(order.getBuyer().getUsername())
+                .orderTime(order.getOrdertime()).status(order.getStatus())
                 .shipmentReference(order.getShipmentReference()).buyerAddress(order.getBuyer().getAddress())
                        .productId(order.getProduct().getId())
                 .lastUpdatedAt(order.getLastUpdatedAt()).buyerEmail(order.getBuyer().getEmail()).build();
+    }
+
+    public List<OrderDto> getOrders() {
+        return orderRepository.findByBuyerOrderByOrdertimeDesc((currentUserService.getCurrentUser())).stream()
+                .map(this::toOrderDto).collect(Collectors.toList());
     }
 
     public OrderDto getBuyerInfoById(int id) {

@@ -12,6 +12,8 @@ const storeService = {
     axios.put(`/api/client/store/products/${id}/status`, { status }),
   editProduct: (id, form) =>
     axios.put(`/api/client/store/products/${id}`, form),
+  getBuyerInfoByProductId: (id) =>
+    axios.get(`/api/client/order/products/${id}/buyer`),
   getOrderByProductIdAndStatus: (status, productId) =>
     axios.get(
       `/api/client/store/order?status=${status}&productId=${productId}`
