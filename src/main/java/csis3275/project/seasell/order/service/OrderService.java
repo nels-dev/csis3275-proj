@@ -65,9 +65,10 @@ public class OrderService {
 
     private OrderDto toOrderDto(Order order) {
         return OrderDto.builder().id(order.getId()).productName(order.getProduct().getName())
-                .orderTime(order.getOrdertime()).status(order.getStatus()).buyerName(order.getBuyer().getUsername())
-                .shipmentReference("Have not provided").buyerAddress(order.getBuyer().getAddress())
-                .buyerEmail(order.getBuyer().getEmail()).build();
+                .orderTime(order.getOrdertime()).status(order.getStatus())
+                .shipmentReference(order.getShipmentReference()).buyerAddress(order.getBuyer().getAddress())
+                       .productId(order.getProduct().getId())
+                .lastUpdatedAt(order.getLastUpdatedAt()).buyerEmail(order.getBuyer().getEmail()).build();
     }
 
     public List<OrderDto> getOrders() {
