@@ -14,8 +14,6 @@
 
   <v-window v-model="tab">
     <v-window-item value="ALL">
-      <!-- CreateNewProductCardHere -->
-      <!-- CreateNewProductCardHere -->
       <SellerProductCardForm :status="'ALL'" />
     </v-window-item>
     <v-window-item value="LISTED">
