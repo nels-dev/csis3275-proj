@@ -2,6 +2,8 @@ package csis3275.project.seasell.product.service;
 
 import csis3275.project.seasell.common.exception.ResourceNotFoundException;
 import csis3275.project.seasell.common.service.FileService;
+import csis3275.project.seasell.order.model.Order;
+import csis3275.project.seasell.order.model.OrderStatus;
 import csis3275.project.seasell.product.dto.ProductDto;
 import csis3275.project.seasell.product.model.Product;
 import csis3275.project.seasell.product.model.ProductImage;
@@ -90,7 +92,16 @@ public class ProductService {
     private ProductDto toProductDto(Product product) {
         return ProductDto.builder().name(product.getName()).condition(product.getCondition()).price(product.getPrice())
                 .id(product.getId()).description(product.getDescription()).status(product.getStatus())
-                .images(product.getImages().stream().map(ProductImage::getPath).collect(Collectors.toList())).build();
+                .images(getImageFilePaths(product)).activeOrder(getActiveOrderId(product)).build();
+    }
+
+    private Integer getActiveOrderId(Product product) {
+        return product.getOrders().stream().filter(order -> order.getStatus() != OrderStatus.CANCELLED).findFirst()
+                .map(Order::getId).orElse(null);
+    }
+
+    private List<String> getImageFilePaths(Product product) {
+        return product.getImages().stream().map(ProductImage::getPath).collect(Collectors.toList());
     }
 
     public List<ProductDto> getUserProductsByStatus(ProductStatus status) {

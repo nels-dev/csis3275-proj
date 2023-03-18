@@ -69,7 +69,11 @@ export default {
   methods: {
     confirmDelivered() {
       orderService
-        .updateOrder(this.item.id, this.shipmentReference, "DELIVERED")
+        .updateOrderStatusWithShipmentReference(
+          this.item.activeOrder,
+          "DELIVERED",
+          this.shipmentReference
+        )
         .then(() => {
           this.$emit("ship-confirmed");
           this.$store.dispatch(

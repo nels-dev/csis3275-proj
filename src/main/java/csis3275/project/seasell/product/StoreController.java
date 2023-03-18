@@ -1,5 +1,8 @@
 package csis3275.project.seasell.product;
 
+import csis3275.project.seasell.order.dto.OrderDto;
+import csis3275.project.seasell.order.model.OrderStatus;
+import csis3275.project.seasell.order.service.OrderService;
 import csis3275.project.seasell.product.dto.ProductDto;
 import csis3275.project.seasell.product.dto.ProductStatusUpdateDto;
 import csis3275.project.seasell.product.model.ProductStatus;
@@ -19,6 +22,8 @@ public class StoreController {
 
     @Autowired
     ProductService productService;
+    @Autowired
+    OrderService orderService;
 
     @GetMapping("/products")
     public List<ProductDto> getUserProductsByStatus(
@@ -45,6 +50,20 @@ public class StoreController {
             @RequestParam("price") Double price, @RequestParam("images") MultipartFile file) throws IOException {
         productService.addProduct(name, description, price, condition, file);
         return ResponseEntity.status(201).build();
+    }
+
+    /**
+     * Retrieve a specific order given product id and status. Only one single order will be returned
+     *
+     * @param productId
+     * @param status
+     *
+     * @return
+     */
+    @GetMapping("/order")
+    public OrderDto getOrdersByProduct(@RequestParam int productId, @RequestParam OrderStatus status) {
+        return orderService.findByStatusAndProduct_Id(status, productId);
+
     }
 
 }

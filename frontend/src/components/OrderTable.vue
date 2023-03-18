@@ -25,7 +25,7 @@
         <tbody>
           <tr v-for="item in listings" :key="item.id">
             <td>{{ moment(item.orderTime).format("MMMM Do YYYY") }}</td>
-            <td>{{ item.productName }}</td>
+            <td>{{ item.productName }} <v-icon @click="this.$router.push(`/productdetails/${item.productId}`)" icon="mdi-open-in-new"></v-icon></td>
             <td>{{ item.status }}</td>
             <td>{{ item.shipmentReference }}</td>
             <td>

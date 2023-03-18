@@ -6,4 +6,5 @@ import lombok.Data;
 @Data
 public class OrderStatusUpdateDto {
     OrderStatus status;
+    private String shipmentReference;
 }

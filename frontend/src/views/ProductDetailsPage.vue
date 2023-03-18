@@ -1,15 +1,10 @@
 <template>
   <v-main>
     <HeaderPage />
-  </v-main>
 
-  <v-main>
     <ProductForm :item="item" />
   </v-main>
-
-  <v-main>
-    <FooterPage />
-  </v-main>
+  <FooterPage />
 </template>
 <script>
 import HeaderPage from "@/components/HeaderPage.vue";
