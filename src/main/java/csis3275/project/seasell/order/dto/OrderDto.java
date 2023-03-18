@@ -24,4 +24,8 @@ public class OrderDto {
     private String buyerAddress;
 
     private String buyerEmail;
+
+    private OffsetDateTime lastUpdatedAt;
+
+    private int productId;
 }

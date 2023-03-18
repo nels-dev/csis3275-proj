@@ -29,4 +29,6 @@ public class Order {
     private OrderStatus status;
 
     private String shipmentReference;
+
+    private OffsetDateTime lastUpdatedAt;
 }

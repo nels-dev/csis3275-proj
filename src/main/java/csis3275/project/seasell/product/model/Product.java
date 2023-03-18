@@ -1,5 +1,6 @@
 package csis3275.project.seasell.product.model;
 
+import csis3275.project.seasell.order.model.Order;
 import csis3275.project.seasell.user.model.AppUser;
 import jakarta.persistence.*;
 import java.util.List;
@@ -34,5 +35,9 @@ public class Product {
     @JoinColumn(name = "user_id")
     @JsonIgnore
     private AppUser seller;
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "product")
+    @JsonIgnore
+    private List<Order> orders;
 
 }

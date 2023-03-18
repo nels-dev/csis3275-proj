@@ -12,5 +12,9 @@ const storeService = {
     axios.put(`/api/client/store/products/${id}/status`, { status }),
   editProduct: (id, form) =>
     axios.put(`/api/client/store/products/${id}`, form),
+  getOrderByProductIdAndStatus: (status, productId) =>
+    axios.get(
+      `/api/client/store/order?status=${status}&productId=${productId}`
+    ),
 };
 export default storeService;

@@ -15,5 +15,5 @@ public class ProductDto {
     double price;
     ProductStatus status;
     List<String> images;
-
+    Integer activeOrder;
 }

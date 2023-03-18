@@ -15,6 +15,7 @@ import java.time.OffsetDateTime;
 import java.util.Collection;
 import java.util.Set;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -26,6 +27,7 @@ import org.springframework.security.core.userdetails.UserDetails;
  */
 @Entity
 @Data
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public class AppUser implements UserDetails {
 
     @Id

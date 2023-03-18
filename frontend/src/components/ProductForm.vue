@@ -1,28 +1,34 @@
 <template>
+  <v-container>
+    <v-row>
+      <v-col md="6">
+        <v-img
+          v-if="!!imageUrl"
+          :src="imageUrl"
+          max-height="400px"
+          scale-down
+        ></v-img>
+      </v-col>
+      <v-col md="6">
+        <div class="text-h3 py-3">{{ item.name }}</div>
+        <div class="text-h6">C${{ item.price?.toFixed(2) }}</div>
+        <div class="pt-5">{{ item.description }}</div>
+        <div class="text-subtitle-2 pt-5">Product condition</div>
+        <div>{{ item.condition }}</div>
+
+        <div class="text-subtitle-2 pt-5">Mode of delivery</div>
+        <div>Shipment</div>
+
+        <CurrentOrderBox :productId="item.id" />
+
+        <v-spacer class="pt-10" />
+        <v-btn color="primary " @click="showCheckoutDialog = true">
+          Checkout Now
+        </v-btn>
+      </v-col>
+    </v-row>
+  </v-container>
   <v-sheet width="1000" class="mx-auto">
-    <v-form disabled>
-      Product name:
-      <v-text-field :value="item.name"></v-text-field>
-      Detailed product description:
-      <v-text-field :value="item.description"></v-text-field>
-      Price:
-      <v-text-field :value="item.price?.toFixed(2)"></v-text-field>
-      Product image(s):
-      <v-img
-        v-if="!!imageUrl"
-        :src="imageUrl"
-        height="200px"
-        scale-down
-      ></v-img>
-      Condition:
-      <v-text-field :value="item.condition"></v-text-field>
-      Mode of delivery (assumed standard charge $30):
-      <v-text-field value="Shippment"></v-text-field>
-      <v-btn color="primary " @click="showCheckoutDialog = true">
-        Checkout Now
-      </v-btn>
-      <v-btn @click="$router.push('/Home')" variant="text">Return</v-btn>
-    </v-form>
     <CheckoutModal
       :item="item"
       v-model="showCheckoutDialog"
@@ -33,10 +39,12 @@
 </template>
 <script>
 import CheckoutModal from "./CheckoutModal.vue";
+import CurrentOrderBox from "./CurrentOrderBox.vue";
 export default {
   props: ["item"],
   components: {
     CheckoutModal,
+    CurrentOrderBox,
   },
   computed: {
     imageUrl() {
