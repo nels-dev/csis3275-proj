@@ -1,15 +1,16 @@
 <template>
   <v-container>
     <v-row>
-      <v-col md="6">
+      <v-col md="5" sm="12" cols="12">
         <v-img
+          class="py-3"
           v-if="!!imageUrl"
           :src="imageUrl"
           max-height="400px"
           scale-down
         ></v-img>
       </v-col>
-      <v-col md="6">
+      <v-col md="7" sm="12" cols="12">
         <div class="text-h3 py-3">{{ item.name }}</div>
         <div class="text-h6">C${{ item.price?.toFixed(2) }}</div>
         <div class="pt-5">{{ item.description }}</div>
