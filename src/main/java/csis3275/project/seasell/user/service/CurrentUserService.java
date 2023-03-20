@@ -1,5 +1,6 @@
 package csis3275.project.seasell.user.service;
 
+import csis3275.project.seasell.user.dto.UserDto;
 import csis3275.project.seasell.user.model.AppUser;
 import csis3275.project.seasell.user.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,4 +25,13 @@ public class CurrentUserService {
         return userRepository.findByEmail(jwt.getSubject())
                 .orElseThrow(() -> new UsernameNotFoundException("Unable to load user"));
     }
+
+    public void saveUserProfile(UserDto dto) {
+        AppUser currentUser = getCurrentUser();
+        currentUser.setAddress(dto.getAddress());
+        currentUser.setPreferredUserName(dto.getPreferredUserName());
+        currentUser.setMobile(dto.getMobile());
+        userRepository.save(currentUser);
+    }
+
 }
