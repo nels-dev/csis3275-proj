@@ -23,8 +23,15 @@
         <CurrentOrderBox :productId="item.id" />
 
         <v-spacer class="pt-10" />
-        <v-btn color="primary " @click="showCheckoutDialog = true">
+        <v-btn class="mr-6" color="primary " @click="showCheckoutDialog = true">
           Checkout Now
+        </v-btn>
+        <v-btn
+          class="ml-auto"
+          color="primary "
+          @click="showBuyerInfoDialog = true"
+        >
+          BUYER INFO
         </v-btn>
       </v-col>
     </v-row>
@@ -36,15 +43,18 @@
       @checkout-confirmed="confirmCheckout"
       @checkout-canceled="cancelCheckout"
     />
+    <BuyerInfoModal :item="item" v-model="showBuyerInfoDialog" />
   </v-sheet>
 </template>
 <script>
 import CheckoutModal from "./CheckoutModal.vue";
+import BuyerInfoModal from "./BuyerInfoModal.vue";
 import CurrentOrderBox from "./CurrentOrderBox.vue";
 export default {
   props: ["item"],
   components: {
     CheckoutModal,
+    BuyerInfoModal,
     CurrentOrderBox,
   },
   computed: {
@@ -56,6 +66,7 @@ export default {
   },
   data: () => ({
     showCheckoutDialog: false,
+    showBuyerInfoDialog: false,
     firstName: "",
     firstNameRules: [
       (value) => {
