@@ -13,7 +13,7 @@
     top
     right
     @click="show = false"
-    :color="isAlert ? 'error' : 'info'"
+    :color="isAlert ? 'error' : 'success'"
     location="top right"
   >
     {{ message }}

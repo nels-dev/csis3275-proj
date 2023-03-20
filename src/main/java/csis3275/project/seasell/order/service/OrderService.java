@@ -67,8 +67,8 @@ public class OrderService {
         return OrderDto.builder().id(order.getId()).productName(order.getProduct().getName())
                 .orderTime(order.getOrdertime()).status(order.getStatus())
                 .shipmentReference(order.getShipmentReference()).buyerAddress(order.getBuyer().getAddress())
-                       .productId(order.getProduct().getId())
-                .lastUpdatedAt(order.getLastUpdatedAt()).buyerEmail(order.getBuyer().getEmail()).build();
+                .productId(order.getProduct().getId()).lastUpdatedAt(order.getLastUpdatedAt())
+                .buyerEmail(order.getBuyer().getEmail()).build();
     }
 
     public List<OrderDto> getOrders() {

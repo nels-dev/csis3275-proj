@@ -39,16 +39,20 @@
         <v-card>
           <v-card-text>
             <div class="mx-auto text-center">
-              <v-avatar color="primary">
+              <v-avatar
+                type="button"
+                class="my-2"
+                @click="$router.push('/profile')"
+                color="primary"
+              >
                 <span class="text-h5">{{ user.initials }}</span>
               </v-avatar>
-              <h3>{{ user.fullName }}</h3>
+              <v-btn variant="text" block @click="$router.push('/profile')">{{
+                user.fullName
+              }}</v-btn>
               <p class="text-caption mt-1">
                 {{ user.email }}
               </p>
-              <v-divider class="my-3"></v-divider>
-
-              <v-btn rounded variant="text"> Profile </v-btn>
               <v-divider class="my-3"></v-divider>
               <v-btn rounded variant="text" @click="logout()"> Logout </v-btn>
             </div>
