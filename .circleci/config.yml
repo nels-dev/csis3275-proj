@@ -68,8 +68,16 @@ jobs:
 workflows:
   build-and-deploy:
     jobs:
-      - build-backend
+      - build-backend:
+          filters:
+            branches:
+              only:
+                - main
       - run-unit-tests:
+          filters:
+            branches:
+              only:
+                - main
           requires:
             - build-backend
       - aws-ecr/build-and-push-image:
@@ -96,6 +104,10 @@ workflows:
           requires:
             - aws-ecr/build-and-push-image
       - build-frontend
+          filters:
+            branches:
+              only:
+                - main
       - deploy-frontend:
           filters:
             branches:
