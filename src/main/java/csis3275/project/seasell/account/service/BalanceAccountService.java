@@ -24,10 +24,6 @@ public class BalanceAccountService {
                 .orElseThrow(ResourceNotFoundException::new);
     }
 
-    public BalanceAccount getAccountData() {
-        return repository.findByUser(currentUserService.getCurrentUser()).orElse(null);
-    }
-
     public void createAccountForNewUser(AppUser user) {
         BalanceAccount balanceAccount = new BalanceAccount();
         balanceAccount.setUser(user);
