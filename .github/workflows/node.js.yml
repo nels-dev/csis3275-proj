@@ -15,8 +15,8 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - name: Run npm build
-      working-directory: ./frontend
       uses: actions/setup-node@v3
+      working-directory: ./frontend
       with:
         node-version: 18.x
         cache: 'npm'
