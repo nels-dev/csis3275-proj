@@ -5,6 +5,7 @@ import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.model.ObjectMetadata;
 import com.amazonaws.services.s3.model.S3Object;
 import csis3275.project.seasell.common.dto.FileWrapper;
+import csis3275.project.seasell.common.exception.ResourceNotFoundException;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.util.Date;
@@ -40,14 +41,14 @@ public class CloudStorageFileService implements FileService {
     }
 
     @Override
-    public FileWrapper retrieve(String key) throws IOException {
+    public FileWrapper retrieve(String key) {
         try {
             S3Object object = s3Client.getObject(bucket, key);
             Date lastModified = object.getObjectMetadata().getLastModified();
             return new FileWrapper(lastModified, object.getObjectContent().readAllBytes());
-        } catch (SdkClientException e) {
+        } catch (IOException | SdkClientException e) {
             log.error("Error reading file from S3", e);
-            throw new IOException(e);
+            throw new ResourceNotFoundException();
         }
     }
 }

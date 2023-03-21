@@ -7,5 +7,5 @@ public interface FileService {
 
     String store(byte[] fileContent, String extension) throws IOException;
 
-    FileWrapper retrieve(String key) throws IOException;
+    FileWrapper retrieve(String key);
 }
