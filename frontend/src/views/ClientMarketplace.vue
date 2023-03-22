@@ -4,7 +4,23 @@
     <HeroSection />
     <v-container>
       <v-row>
-        <v-col v-for="item in items" :key="item" cols="12" md="4" xl="3">
+        <v-col>
+          <v-text-field
+            v-model="search"
+            outlined
+            append-icon="mdi-magnify"
+            label="Search Your Interested Product Here!"
+          ></v-text-field>
+        </v-col>
+      </v-row>
+      <v-row>
+        <v-col
+          v-for="item in filteredItems"
+          :key="item"
+          cols="12"
+          md="4"
+          xl="3"
+        >
           <ProductCard :item="item" />
         </v-col>
       </v-row>
@@ -31,6 +47,7 @@ export default {
         email: "",
       },
       items: [],
+      search: "",
     };
   },
 
@@ -42,10 +59,33 @@ export default {
       this.user.email = resp.data.email;
       this.user.initials = resp.data.preferredUserName[0];
     });
-    productService.getProducts().then((resp) => {
-      console.log(resp.data);
-      this.items = resp.data;
-    });
+    this.loadData();
+  },
+
+  computed: {
+    filteredItems() {
+      if (!this.search) {
+        return this.items;
+      }
+      return this.items.filter((item) =>
+        item.name.toLowerCase().includes(this.search.toLowerCase())
+      );
+    },
+  },
+
+  methods: {
+    loadData() {
+      productService.getProducts({ search: this.search }).then((resp) => {
+        console.log(resp.data);
+        this.items = resp.data;
+      });
+    },
+  },
+
+  watch: {
+    search() {
+      this.loadData();
+    },
   },
 };
 </script>

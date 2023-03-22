@@ -24,7 +24,7 @@
       Delivery method:
       <v-select
         label="Select from below"
-        :items="['Standard shipment (Fixed charge C$30)', 'Self Pick-up']"
+        :items="['Standard shipment', 'Self Pick-up']"
         v-model="form.deliveryMode"
         :error-messages="getMessage('deliveryMode')"
       ></v-select>

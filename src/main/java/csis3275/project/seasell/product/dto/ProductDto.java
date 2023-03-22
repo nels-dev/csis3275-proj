@@ -2,6 +2,8 @@ package csis3275.project.seasell.product.dto;
 
 import csis3275.project.seasell.product.model.ProductStatus;
 import java.util.List;
+
+import csis3275.project.seasell.user.model.AppUser;
 import lombok.Builder;
 import lombok.Value;
 
@@ -16,4 +18,6 @@ public class ProductDto {
     ProductStatus status;
     List<String> images;
     Integer activeOrder;
+    String sellerName;
+    int sellerId;
 }

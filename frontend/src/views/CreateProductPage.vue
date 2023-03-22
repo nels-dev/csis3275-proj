@@ -21,7 +21,7 @@
         <v-text-field v-model="condition" label="Condition"></v-text-field>
         <v-select
           label="Delivery method"
-          :items="['Standard shipment (Fixed charge C$30)', 'Self Pick-up']"
+          :items="['Standard shipment', 'Self Pick-up']"
         ></v-select>
         <v-file-input
           v-model="filePath"
