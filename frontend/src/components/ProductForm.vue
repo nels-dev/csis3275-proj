@@ -25,7 +25,7 @@
         <v-btn
           color="primary "
           @click="showCheckoutDialog = true"
-          v-if="item.status === 'LISTED'"
+          v-if="item.status === 'LISTED' && item.sellerId !== currentUserId"
         >
           Checkout Now
         </v-btn>
@@ -53,7 +53,6 @@
 import CheckoutModal from "./CheckoutModal.vue";
 import BuyerInfoModal from "./BuyerInfoModal.vue";
 import CurrentOrderBox from "./CurrentOrderBox.vue";
-// import userService from "@/services/user.service";
 
 export default {
   props: ["item"],
@@ -68,14 +67,9 @@ export default {
         ? process.env.VUE_APP_API_URL + "/images/" + this.item.images
         : "";
     },
-    // currentUser() {
-    //   return userService
-    //     .getCurrentClientUser()
-    //     .then((response) => response.data);
-    // },
-    // isSeller() {
-    //   return this.currentUser && this.item.sellerId === this.currentUser.id;
-    // },
+    currentUserId() {
+      return this.$store.state.auth.user.id;
+    },
   },
   data: () => ({
     showCheckoutDialog: false,
@@ -105,5 +99,4 @@ export default {
     },
   },
 };
-// &&item.sellerId !== userService.getCurrentClientUser.user.id
 </script>
