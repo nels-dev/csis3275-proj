@@ -92,7 +92,7 @@ public class ProductService {
     private ProductDto toProductDto(Product product) {
         return ProductDto.builder().name(product.getName()).condition(product.getCondition()).price(product.getPrice())
                 .id(product.getId()).description(product.getDescription()).status(product.getStatus())
-                .images(getImageFilePaths(product)).activeOrder(getActiveOrderId(product)).build();
+                .images(getImageFilePaths(product)).sellerName(product.getSeller().getPreferredUserName()).sellerId(product.getSeller().getId()).activeOrder(getActiveOrderId(product)).build();
     }
 
     private Integer getActiveOrderId(Product product) {

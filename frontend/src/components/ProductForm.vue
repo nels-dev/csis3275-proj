@@ -16,14 +16,17 @@
         <div class="pt-5">{{ item.description }}</div>
         <div class="text-subtitle-2 pt-5">Product condition</div>
         <div>{{ item.condition }}</div>
-
         <div class="text-subtitle-2 pt-5">Mode of delivery</div>
         <div>Shipment</div>
 
         <CurrentOrderBox :productId="item.id" />
 
         <v-spacer class="pt-10" />
-        <v-btn class="mr-6" color="primary " @click="showCheckoutDialog = true">
+        <v-btn
+          color="primary "
+          @click="showCheckoutDialog = true"
+          v-if="item.status === 'LISTED'"
+        >
           Checkout Now
         </v-btn>
         <v-btn
@@ -50,6 +53,8 @@
 import CheckoutModal from "./CheckoutModal.vue";
 import BuyerInfoModal from "./BuyerInfoModal.vue";
 import CurrentOrderBox from "./CurrentOrderBox.vue";
+// import userService from "@/services/user.service";
+
 export default {
   props: ["item"],
   components: {
@@ -63,6 +68,14 @@ export default {
         ? process.env.VUE_APP_API_URL + "/images/" + this.item.images
         : "";
     },
+    // currentUser() {
+    //   return userService
+    //     .getCurrentClientUser()
+    //     .then((response) => response.data);
+    // },
+    // isSeller() {
+    //   return this.currentUser && this.item.sellerId === this.currentUser.id;
+    // },
   },
   data: () => ({
     showCheckoutDialog: false,
@@ -71,7 +84,6 @@ export default {
     firstNameRules: [
       (value) => {
         if (value?.length > 3) return true;
-
         return "First name must be at least 3 characters.";
       },
     ],
@@ -79,10 +91,10 @@ export default {
     lastNameRules: [
       (value) => {
         if (/[^0-9]/.test(value)) return true;
-
         return "Last name can not contain digits.";
       },
     ],
+    // currentUser: null,
   }),
   methods: {
     confirmCheckout() {
@@ -93,4 +105,5 @@ export default {
     },
   },
 };
+// &&item.sellerId !== userService.getCurrentClientUser.user.id
 </script>

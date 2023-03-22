@@ -52,7 +52,7 @@
         v-if="item.status === 'ORDERED'"
         @click="showShipDialog = true"
       >
-        SHIPPED
+        Ship
       </v-btn>
       <v-btn
         color="primary"
@@ -60,7 +60,7 @@
         v-if="item.status === 'SHIPPED'"
         @click="showDeliveredDialog = true"
       >
-        DELIVERED
+        Deliver
       </v-btn>
       <v-spacer></v-spacer>
       <v-btn
