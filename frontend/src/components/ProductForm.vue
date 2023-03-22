@@ -53,7 +53,6 @@
 import CheckoutModal from "./CheckoutModal.vue";
 import BuyerInfoModal from "./BuyerInfoModal.vue";
 import CurrentOrderBox from "./CurrentOrderBox.vue";
-// import userService from "@/services/user.service";
 
 export default {
   props: ["item"],
