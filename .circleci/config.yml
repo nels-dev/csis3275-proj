@@ -103,7 +103,7 @@ workflows:
           family: csis3275-proj-service
           requires:
             - aws-ecr/build-and-push-image
-      - build-frontend
+      - build-frontend:
           filters:
             branches:
               only:
