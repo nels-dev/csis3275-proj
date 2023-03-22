@@ -25,10 +25,7 @@
         <v-btn
           color="primary "
           @click="showCheckoutDialog = true"
-          v-if="
-            item.status === 'LISTED' &&
-            item.sellerId !== userService.getCurrentClientUser.user.id
-          "
+          v-if="item.status === 'LISTED'"
         >
           Checkout Now
         </v-btn>
@@ -108,4 +105,5 @@ export default {
     },
   },
 };
+// &&item.sellerId !== userService.getCurrentClientUser.user.id
 </script>
