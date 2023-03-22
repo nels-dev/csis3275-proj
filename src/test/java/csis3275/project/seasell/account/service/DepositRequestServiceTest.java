@@ -2,10 +2,13 @@ package csis3275.project.seasell.account.service;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.when;
 
 import csis3275.project.seasell.account.dto.DepositRequestDto;
+import csis3275.project.seasell.account.dto.RequestStatusChangeDto;
 import csis3275.project.seasell.account.model.RequestStatus;
+import csis3275.project.seasell.common.exception.InvalidStateException;
 import csis3275.project.seasell.user.repository.UserRepository;
 import csis3275.project.seasell.user.service.CurrentUserService;
 import jakarta.transaction.Transactional;
@@ -66,5 +69,49 @@ class DepositRequestServiceTest {
         // Account available balance is NOT added because the request is still pending
         assertThat(userRepository.findByEmail(TEST_USER).get().getBalanceAccount().getAvailableBalance())
                 .isEqualByComparingTo(BigDecimal.valueOf(1000));
+    }
+
+    @Test
+    public void changeStatusToFulfill() {
+        assertThat(depositRequestService.getUserDepositRequests(RequestStatus.FULFILLED)).hasSize(0);
+        RequestStatusChangeDto dto = new RequestStatusChangeDto();
+        dto.setStatus(RequestStatus.FULFILLED);
+        depositRequestService.changeStatus(1, dto);
+        assertThat(depositRequestService.getUserDepositRequests(RequestStatus.FULFILLED)).hasSize(1);
+        assertThat(depositRequestService.getUserDepositRequests(RequestStatus.PENDING)).hasSize(0);
+
+        // Account available balance is increased
+        assertThat(userRepository.findByEmail(TEST_USER).get().getBalanceAccount().getAvailableBalance())
+                .isEqualByComparingTo(BigDecimal.valueOf(1100.00));
+    }
+
+    @Test
+    public void changeStatusToReject() {
+        assertThat(depositRequestService.getUserDepositRequests(RequestStatus.REJECTED)).hasSize(0);
+        RequestStatusChangeDto dto = new RequestStatusChangeDto();
+        dto.setStatus(RequestStatus.REJECTED);
+        depositRequestService.changeStatus(1, dto);
+        assertThat(depositRequestService.getUserDepositRequests(RequestStatus.REJECTED)).hasSize(1);
+        assertThat(depositRequestService.getUserDepositRequests(RequestStatus.PENDING)).hasSize(0);
+
+        // Account available balance is unchanged
+        assertThat(userRepository.findByEmail(TEST_USER).get().getBalanceAccount().getAvailableBalance())
+                .isEqualByComparingTo(BigDecimal.valueOf(1000.00));
+    }
+
+    @Test
+    public void changeStatus_invalidStatus() {
+        RequestStatusChangeDto change1 = new RequestStatusChangeDto();
+        change1.setStatus(RequestStatus.REJECTED);
+        depositRequestService.changeStatus(1, change1);
+        RequestStatusChangeDto change2 = new RequestStatusChangeDto();
+        change2.setStatus(RequestStatus.FULFILLED);
+        assertThrows(InvalidStateException.class, () -> depositRequestService.changeStatus(1, change2));
+    }
+
+    @Test
+    public void getAllWithdrawalRequestsForAdmin() {
+        List<DepositRequestDto> result = depositRequestService.getAllDepositRequestsForAdmin(RequestStatus.PENDING);
+        assertThat(result).hasSize(2);
     }
 }

@@ -6,6 +6,7 @@ import jakarta.validation.constraints.Positive;
 import java.math.BigDecimal;
 import java.time.OffsetDateTime;
 import lombok.Data;
+import org.hibernate.validator.constraints.Length;
 
 @Data
 public class WithdrawalRequestDto {
@@ -14,8 +15,10 @@ public class WithdrawalRequestDto {
     private String createdByEmail;
     private int createdById;
     @NotBlank
+    @Length(min = 3, max = 3)
     private String bankInstitutionNumber;
     @NotBlank
+    @Length(min = 5, max = 5)
     private String bankTransitNumber;
     @NotBlank
     private String bankAccountNumber;

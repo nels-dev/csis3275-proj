@@ -49,7 +49,7 @@ public class OrderService {
     public void addOrder(CreateOrderDto dto) throws IOException {
         int productId = dto.getProductId();
         productService.updateProductStatus(productId, ProductStatus.ORDERED);
-        journalEntryService.post(balanceAccountService.getAccountData(),
+        journalEntryService.post(currentUserService.getCurrentUser().getBalanceAccount(),
                 new BigDecimal(productService.getProductData(productId).getPrice()),
                 TransactionType.PURCHASE_CREDIT_HOLD, "ORDER");
 

@@ -3,6 +3,7 @@ package csis3275.project.seasell.account.service;
 import csis3275.project.seasell.account.dto.BalanceAccountDto;
 import csis3275.project.seasell.account.model.BalanceAccount;
 import csis3275.project.seasell.account.repository.BalanceAccountRepository;
+import csis3275.project.seasell.common.exception.ResourceNotFoundException;
 import csis3275.project.seasell.user.model.AppUser;
 import csis3275.project.seasell.user.service.CurrentUserService;
 import java.math.BigDecimal;
@@ -19,11 +20,8 @@ public class BalanceAccountService {
 
     public BalanceAccountDto getAccount() {
 
-        return repository.findByUser(currentUserService.getCurrentUser()).map(this::toDto).orElse(null);
-    }
-
-    public BalanceAccount getAccountData() {
-        return repository.findByUser(currentUserService.getCurrentUser()).orElse(null);
+        return repository.findByUser(currentUserService.getCurrentUser()).map(this::toDto)
+                .orElseThrow(ResourceNotFoundException::new);
     }
 
     public void createAccountForNewUser(AppUser user) {

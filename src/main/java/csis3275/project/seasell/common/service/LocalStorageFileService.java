@@ -1,6 +1,7 @@
 package csis3275.project.seasell.common.service;
 
 import csis3275.project.seasell.common.dto.FileWrapper;
+import csis3275.project.seasell.common.exception.ResourceNotFoundException;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -36,13 +37,13 @@ public class LocalStorageFileService implements FileService {
     }
 
     @Override
-    public FileWrapper retrieve(String key) throws IOException {
+    public FileWrapper retrieve(String key) {
         File file = new File(basePath + "/" + key);
         try (FileInputStream fis = new FileInputStream(file)) {
             return new FileWrapper(new Date(file.lastModified()), fis.readAllBytes());
         } catch (IOException e) {
             log.error("Unable to read file locally", e);
-            throw e;
+            throw new ResourceNotFoundException();
         }
     }
 }

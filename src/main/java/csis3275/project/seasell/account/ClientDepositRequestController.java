@@ -3,6 +3,7 @@ package csis3275.project.seasell.account;
 import csis3275.project.seasell.account.dto.DepositRequestDto;
 import csis3275.project.seasell.account.model.RequestStatus;
 import csis3275.project.seasell.account.service.DepositRequestService;
+import jakarta.validation.Valid;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -27,7 +28,7 @@ public class ClientDepositRequestController {
     }
 
     @PostMapping
-    public ResponseEntity<?> submitDepositRequest(@RequestBody DepositRequestDto dto) {
+    public ResponseEntity<?> submitDepositRequest(@RequestBody @Valid DepositRequestDto dto) {
         depositRequestService.addDepositRequest(dto);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
