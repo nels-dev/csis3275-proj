@@ -33,6 +33,13 @@
           class="ml-auto"
           color="primary "
           @click="showBuyerInfoDialog = true"
+          v-if="
+            (item.status === 'SHIPPED' ||
+              item.status === 'ORDERED' ||
+              item.status === 'DELIVERED' ||
+              item.status === 'SOLD') &&
+            item.sellerId === currentUserId
+          "
         >
           BUYER INFO
         </v-btn>
