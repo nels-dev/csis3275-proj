@@ -80,7 +80,7 @@ export default {
             "alert/pushInfo",
             "Update status to shipped successful!"
           );
-          router.push("/Home");
+          router.push("/client/home");
           this.showDialog = false;
         });
     },

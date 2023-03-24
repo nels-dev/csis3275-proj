@@ -1,44 +1,30 @@
 <template>
-  <v-main>
-    <HeaderPage />
-    <HeroSection />
-    <v-container>
-      <v-row>
-        <v-col>
-          <v-text-field
-            v-model="search"
-            outlined
-            append-icon="mdi-magnify"
-            label="Search Your Interested Product Here!"
-          ></v-text-field>
-        </v-col>
-      </v-row>
-      <v-row>
-        <v-col
-          v-for="item in filteredItems"
-          :key="item"
-          cols="12"
-          md="4"
-          xl="3"
-        >
-          <ProductCard :item="item" />
-        </v-col>
-      </v-row>
-    </v-container>
-  </v-main>
-  <FooterPage />
+  <!-- <HeroSection /> -->
+  <v-container class="mb-10">
+    <v-row>
+      <v-col>
+        <v-text-field
+          v-model="search"
+          outlined
+          append-icon="mdi-magnify"
+          label="Search Your Interested Product Here!"
+        ></v-text-field>
+      </v-col>
+    </v-row>
+    <v-row>
+      <v-col v-for="item in filteredItems" :key="item" cols="6" md="4" xl="3">
+        <ProductCard :item="item" />
+      </v-col>
+    </v-row>
+  </v-container>
 </template>
 
 <script>
 import userService from "@/services/user.service";
 import productService from "@/services/product.service";
-import HeaderPage from "@/components/HeaderPage.vue";
 import ProductCard from "@/components/ProductCard.vue";
-import HeroSection from "@/components/HeroSection.vue";
-import FooterPage from "@/components/FooterPage.vue";
 
 export default {
-  //  start of slideshow
   data() {
     return {
       user: {
@@ -51,7 +37,7 @@ export default {
     };
   },
 
-  components: { HeaderPage, ProductCard, HeroSection, FooterPage },
+  components: { ProductCard },
 
   mounted() {
     userService.getCurrentClientUser().then((resp) => {

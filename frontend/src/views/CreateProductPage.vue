@@ -1,74 +1,69 @@
 <template>
-  <v-main>
-    <HeaderPage />
-  </v-main>
-
-  <v-main>
-    <v-sheet width="1000" class="mx-auto">
-      <v-form @submit.prevent="submitProduct">
-        <v-text-field
-          v-model="name"
-          label="Product name:"
-          :rules="[(v) => !!v || 'Name is required']"
-        >
-          <template v-slot:messages>
-            <div v-if="!name">Please enter the product name</div>
-          </template>
-        </v-text-field>
-        <v-text-field
-          v-model="description"
-          label="Detailed product description:"
-          required
-        ></v-text-field>
-        <v-text-field
-          v-model.number="price"
-          label="Price:"
-          type="number"
-          step="0.01"
-          required
-        ></v-text-field>
-        <v-text-field
-          v-model="condition"
-          label="Condition"
-          required
-        ></v-text-field>
-        <v-select
-          label="Delivery method"
-          :items="['Standard shipment', 'Self Pick-up']"
-          required
-        ></v-select>
-        <v-file-input
-          v-model="filePath"
-          ref="file"
-          multiple
-          required
-          label="Upload product images"
-          accept="image/*"
-          @change="uploadImage($event.target.files)"
-        ></v-file-input>
-        <v-btn color="primary " type="submit"> Create </v-btn>
-        <v-btn @click="$router.push('/Home')" variant="text">Return</v-btn>
-        <v-dialog v-model="dialog" max-width="500">
-          <v-card>
-            <v-card-title> Warning </v-card-title>
-            <v-card-text>
-              Please fill in all required fields before submitting.
-            </v-card-text>
-            <v-card-actions>
-              <v-btn color="primary" text @click="dialog = false"> OK </v-btn>
-            </v-card-actions>
-          </v-card>
-        </v-dialog>
-      </v-form>
-    </v-sheet>
-  </v-main>
-  <v-main>
-    <FooterPage />
-  </v-main>
+  <v-container>
+    <h1>Add store item</h1>
+    <v-form @submit.prevent="submitProduct" class="my-10">
+      <v-text-field
+        v-model="name"
+        label="Product name:"
+        :rules="[(v) => !!v || 'Name is required']"
+      >
+        <template v-slot:messages>
+          <div v-if="!name">Please enter the product name</div>
+        </template>
+      </v-text-field>
+      <v-text-field
+        v-model="description"
+        label="Detailed product description:"
+        required
+      ></v-text-field>
+      <v-text-field
+        v-model.number="price"
+        label="Price:"
+        type="number"
+        step="0.01"
+        required
+      ></v-text-field>
+      <v-text-field
+        v-model="condition"
+        label="Condition"
+        required
+      ></v-text-field>
+      <v-select
+        label="Delivery method"
+        :items="['Standard shipment', 'Self Pick-up']"
+        required
+      ></v-select>
+      <v-file-input
+        v-model="filePath"
+        ref="file"
+        multiple
+        required
+        label="Upload product images"
+        accept="image/*"
+        @change="uploadImage($event.target.files)"
+      ></v-file-input>
+      <v-btn color="primary " type="submit" class="my-2"> Create </v-btn>
+      <v-btn
+        @click="$router.push('/client/mystore')"
+        variant="text"
+        class="my-2"
+        >Return</v-btn
+      >
+      <v-dialog v-model="dialog" max-width="500">
+        <v-card>
+          <v-card-title> Warning </v-card-title>
+          <v-card-text>
+            Please fill in all required fields before submitting.
+          </v-card-text>
+          <v-card-actions>
+            <v-btn color="primary" text @click="dialog = false"> OK </v-btn>
+          </v-card-actions>
+        </v-card>
+      </v-dialog>
+    </v-form>
+  </v-container>
 </template>
 <script>
-import HeaderPage from "@/components/HeaderPage.vue";
-import FooterPage from "@/components/FooterPage.vue";
 import storeService from "@/services/store.service";
 export default {
   data() {
@@ -113,10 +108,9 @@ export default {
       console.log(productParams);
       storeService.createProduct(productParams).then((response) => {
         console.log("creating product...", response);
-        this.$router.push("/mystore");
+        this.$router.push("/client/mystore");
       });
     },
   },
-  components: { HeaderPage, FooterPage },
 };
 </script>

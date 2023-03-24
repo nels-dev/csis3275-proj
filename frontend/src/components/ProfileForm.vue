@@ -1,9 +1,9 @@
 <template>
   <v-container>
-    <h3 class="text-h3 mb-5">Profile</h3>
-    <v-row>
-      <v-col cols="12" md="6">
-        <v-form @submit.prevent="save">
+    <h1>My Profile</h1>
+    <v-form @submit.prevent="save" class="my-10">
+      <v-row>
+        <v-col cols="12" md="6">
           <span class="text-subtitle-2 pa-2">Preferred User Name</span>
           <v-text-field v-model="profile.preferredUserName" />
           <span class="text-subtitle-2 pa-2">Address</span>
@@ -13,10 +13,10 @@
             v-model="profile.mobile"
             :error-messages="getMessage('mobile')"
           />
-          <v-btn type="submit" color="primary" class="ma-2">Save</v-btn>
-        </v-form>
-      </v-col>
-    </v-row>
+          <v-btn type="submit" color="primary" class="my-2">Save</v-btn>
+        </v-col>
+      </v-row>
+    </v-form>
   </v-container>
 </template>
 <script>

@@ -8,7 +8,7 @@
     type="warning"
     prominent
     border="top"
-    class="ma-5"
+    class="my-5"
     v-if="message"
   >
     {{ message }}

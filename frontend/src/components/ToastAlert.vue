@@ -8,7 +8,7 @@
 <template>
   <v-snackbar
     v-model="show"
-    :timeout="3000"
+    :timeout="1500"
     :multi-line="multiLine"
     top
     right

@@ -28,6 +28,11 @@ public class ProductController {
         return productService.getProductsExceptCurrentUser();
     }
 
+    @GetMapping("/latest")
+    public List<ProductDto> getLatestProducts() {
+        return productService.getLatestProducts();
+    }
+
     @GetMapping("/{id}")
     public ProductDto getProduct(@PathVariable int id) {
         return productService.getProduct(id);

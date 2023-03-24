@@ -1,16 +1,10 @@
 <template>
-  <HeaderPage />
-  <v-main>
-    <ProfileForm />
-  </v-main>
-  <FooterPage />
+  <ProfileForm />
 </template>
 <script>
 import ProfileForm from "../components/ProfileForm.vue";
-import HeaderPage from "@/components/HeaderPage.vue";
-import FooterPage from "@/components/FooterPage.vue";
 export default {
   name: "MyProfilePage",
-  components: { HeaderPage, ProfileForm, FooterPage },
+  components: { ProfileForm },
 };
 </script>

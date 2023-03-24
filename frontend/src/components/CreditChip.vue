@@ -1,10 +1,5 @@
 <template>
-  <v-chip
-    size="x-large"
-    class="mr-5"
-    prepend-icon="mdi-currency-usd"
-    @click="openAccount"
-  >
+  <v-chip prepend-icon="mdi-currency-usd" @click="openAccount">
     {{ credit.toFixed(2) }}
   </v-chip>
 </template>
@@ -24,7 +19,7 @@ export default {
   },
   methods: {
     openAccount() {
-      this.$router.push("/account");
+      this.$router.push("/client/account");
     },
     getData() {
       accountService.getAccount().then((resp) => {

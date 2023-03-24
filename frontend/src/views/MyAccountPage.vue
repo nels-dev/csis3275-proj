@@ -1,16 +1,10 @@
 <template>
-  <HeaderPage />
-  <v-main>
-    <MyAccountOverview />
-    <DepositRequests />
-    <WithdrawalRequests />
-  </v-main>
-  <FooterPage />
+  <MyAccountOverview />
+  <DepositRequests />
+  <WithdrawalRequests />
 </template>
 
 <script>
-import HeaderPage from "@/components/HeaderPage.vue";
-import FooterPage from "@/components/FooterPage.vue";
 import MyAccountOverview from "@/components/MyAccountOverview";
 import DepositRequests from "@/components/DepositRequests.vue";
 import WithdrawalRequests from "@/components/WithdrawalRequests.vue";
@@ -20,8 +14,6 @@ export default {
   },
   components: {
     MyAccountOverview,
-    HeaderPage,
-    FooterPage,
     DepositRequests,
     WithdrawalRequests,
   },

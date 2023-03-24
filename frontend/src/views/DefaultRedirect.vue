@@ -17,7 +17,7 @@ export default {
       console.log("Login detected");
       if (this.isClient) {
         console.log("Client detected, directing to home");
-        this.$router.push("/home");
+        this.$router.push("/client/home");
       } else if (this.isAdmin) {
         console.log("Admin detected, directing to admin dashboardx");
         this.$router.push("/admin");

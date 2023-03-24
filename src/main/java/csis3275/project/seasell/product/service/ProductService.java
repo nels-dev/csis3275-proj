@@ -12,6 +12,7 @@ import csis3275.project.seasell.product.repository.ProductRepository;
 import csis3275.project.seasell.user.model.AppUser;
 import csis3275.project.seasell.user.service.CurrentUserService;
 import java.io.IOException;
+import java.time.OffsetDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 import lombok.extern.slf4j.Slf4j;
@@ -66,6 +67,7 @@ public class ProductService {
         productImage.setPath(fileName);
         productImage.setProduct(prod);
         prod.setImages(List.of(productImage));
+        prod.setCreatedAt(OffsetDateTime.now());
         productRepository.save(prod);
 
         log.info("Saved file name: " + fileName);
@@ -81,6 +83,14 @@ public class ProductService {
                 .stream().map(this::toProductDto).collect(Collectors.toList());
     }
 
+    public List<ProductDto> getLatestProducts() {
+        return productRepository
+                .findTop4ByStatusAndSellerNotOrderByCreatedAtDesc(ProductStatus.LISTED,
+                        currentUserService.getCurrentUser())
+                .stream().map(this::toProductDto).collect(Collectors.toList());
+
+    }
+
     public ProductDto getProduct(int id) {
         return toProductDto(productRepository.findById(id).orElseThrow(ResourceNotFoundException::new));
     }
@@ -92,7 +102,8 @@ public class ProductService {
     private ProductDto toProductDto(Product product) {
         return ProductDto.builder().name(product.getName()).condition(product.getCondition()).price(product.getPrice())
                 .id(product.getId()).description(product.getDescription()).status(product.getStatus())
-                .images(getImageFilePaths(product)).sellerName(product.getSeller().getPreferredUserName()).sellerId(product.getSeller().getId()).activeOrder(getActiveOrderId(product)).build();
+                .images(getImageFilePaths(product)).sellerName(product.getSeller().getPreferredUserName())
+                .sellerId(product.getSeller().getId()).activeOrder(getActiveOrderId(product)).build();
     }
 
     private Integer getActiveOrderId(Product product) {

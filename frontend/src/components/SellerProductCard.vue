@@ -1,38 +1,29 @@
 <template>
   <!-- start of the card -->
-  <v-card>
+  <v-card height="100%">
     <v-img
       :src="imageUrl"
-      height="250"
-      @click="$router.push('/productdetails/' + item.id)"
+      aspect-ratio="1.778"
+      @click="$router.push('/client/productdetails/' + item.id)"
       type="button"
     >
-      <v-card-title
-        v-text="item.status"
-        style="
-          position: absolute;
-          bottom: 0;
-          width: 100%;
-          background-color: rgba(0, 0, 0, 0.5);
-          font-size: 12px;
-          color: white;
-          line-height: 1.1;
-        "
-      ></v-card-title>
     </v-img>
-    <v-card-title @click="$router.push('/productdetails/' + item.id)">
-      {{ item.name }}
+    <v-card-title @click="$router.push('/client/productdetails/' + item.id)">
+      <span class="text-info font-weight-bold">{{ item.name }}</span>
+      <v-chip class="mx-2 float-right" :color="contextColor(item.status)">
+        <span class="text-subtitle-2">{{ item.status }}</span>
+      </v-chip>
     </v-card-title>
     <v-card-subtitle> {{ item.description }} </v-card-subtitle>
     <v-card-text>
       <v-row no-gutters>
-        <v-col class="text-h6"> C${{ item.price?.toFixed(2) }} </v-col>
+        <v-col class="text-subtitle-1"> C${{ item.price?.toFixed(2) }} </v-col>
       </v-row>
     </v-card-text>
+    <v-divider></v-divider>
     <v-card-actions>
       <v-btn
         color="primary"
-        text
         v-if="item.status === 'UNLISTED'"
         @click="toggleProductStatus(item.id, 'LISTED')"
       >
@@ -40,7 +31,6 @@
       </v-btn>
       <v-btn
         color="primary"
-        text
         v-if="item.status === 'LISTED'"
         @click="toggleProductStatus(item.id, 'UNLISTED')"
       >
@@ -48,7 +38,6 @@
       </v-btn>
       <v-btn
         color="primary"
-        text
         v-if="item.status === 'ORDERED'"
         @click="showShipDialog = true"
       >
@@ -56,7 +45,6 @@
       </v-btn>
       <v-btn
         color="primary"
-        text
         v-if="item.status === 'SHIPPED'"
         @click="showDeliveredDialog = true"
       >
@@ -65,9 +53,10 @@
       <v-spacer></v-spacer>
       <v-btn
         v-if="['LISTED', 'UNLISTED'].includes(item.status)"
-        @click="$router.push('/editProduct/' + item.id)"
+        icon="mdi-square-edit-outline"
+        color="primary"
+        @click="$router.push('/client/editProduct/' + item.id)"
       >
-        <v-icon icon="mdi-square-edit-outline" />
       </v-btn>
     </v-card-actions>
   </v-card>
@@ -123,6 +112,17 @@ export default {
     },
     cancelDelivered() {
       this.showDeliveredDialog = false;
+    },
+    contextColor(status) {
+      if (status == "LISTED") {
+        return "blue-darken-4";
+      } else if (status == "UNLISTED") {
+        return "grey-darken-4";
+      } else if (status == "ORDERED" || status == "SHIPPED") {
+        return "amber-darken-4";
+      } else if (status == "DELIVERED" || status == "SOLD") {
+        return "green-darken-4";
+      }
     },
   },
 };

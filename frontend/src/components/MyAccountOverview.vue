@@ -64,6 +64,7 @@ export default {
         this.availableBalance = resp.data?.availableBalance ?? 0;
         this.heldBalance = resp.data?.heldBalance ?? 0;
         this.lastUpdate = moment(resp.data?.lastUpdate).fromNow();
+        this.$store.dispatch("account/balanceChanged");
       });
     },
   },

@@ -1,6 +1,7 @@
 <template>
-  <v-sheet width="1000" class="mx-auto">
-    <form @submit.prevent="submit">
+  <v-container>
+    <h1>Edit store item</h1>
+    <form @submit.prevent="submit" class="my-10">
       Product name:
       <v-text-field
         v-model="form.name"
@@ -30,10 +31,15 @@
       ></v-select>
       Product image(s):
       <v-file-input label="Upload product images"></v-file-input>
-      <v-btn color="primary" class="mr-2" type="submit">Save</v-btn>
-      <v-btn @click="$router.push('/mystore')" variant="text">Return</v-btn>
-    </form>
-  </v-sheet>
+      <v-btn color="primary" class="mr-2 my-2" type="submit">Save</v-btn>
+      <v-btn
+        @click="$router.push('/client/mystore')"
+        variant="text"
+        class="my-2"
+        >Return</v-btn
+      >
+    </form> </v-container
+  >>
 </template>
 <script>
 import productService from "@/services/product.service";
@@ -89,7 +95,7 @@ export default {
           }
         })
         .then(() => {
-          this.$router.push("/mystore");
+          this.$router.push("/client/mystore");
           this.$store.dispatch("alert/pushInfo", "Product edited");
         })
         .catch((error) => {

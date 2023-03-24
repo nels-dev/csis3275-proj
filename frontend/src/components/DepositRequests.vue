@@ -18,7 +18,7 @@
           </v-col>
         </v-row>
       </v-card-title>
-      <v-table height="30vh" class="ma-6">
+      <v-table class="ma-6">
         <thead>
           <tr>
             <th class="text-left">Submitted at</th>

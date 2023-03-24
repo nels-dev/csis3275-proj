@@ -1,7 +1,9 @@
 <template>
   <v-dialog v-model="showdialog" max-width="900">
     <v-card>
-      <v-card-title class="bg-cyan-darken-1 text-h4">Buyer Info</v-card-title>
+      <v-card-title class="bg-secondary-darken-1 text-h5"
+        >Buyer Info</v-card-title
+      >
       <v-card
         variant="tonal"
         height="50"
