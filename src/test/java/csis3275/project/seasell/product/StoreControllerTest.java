@@ -31,6 +31,7 @@ public class StoreControllerTest {
     @Autowired
     MockMvc mockMvc;
     
+    
     @Test
     public void getUserProductsByStatus() throws Exception {
         when(productService.getUserProductsByStatus(ProductStatus.LISTED)).thenReturn(List.of(createProductDto()));
