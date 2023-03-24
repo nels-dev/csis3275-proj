@@ -17,16 +17,19 @@ import org.springframework.context.annotation.Import;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
+import csis3275.project.seasell.order.service.OrderService;
 import csis3275.project.seasell.product.dto.ProductDto;
 import csis3275.project.seasell.product.model.ProductStatus;
 import csis3275.project.seasell.product.service.ProductService;
 
 @WebMvcTest(useDefaultFilters = false, excludeAutoConfiguration = { SecurityAutoConfiguration.class })
-@Import(ProductController.class)
+@Import(StoreController.class)
 public class StoreControllerTest {
 
     @MockBean
     ProductService productService;
+    @MockBean
+    OrderService orderService;
 
     @Autowired
     MockMvc mockMvc;
@@ -35,10 +38,11 @@ public class StoreControllerTest {
     @Test
     public void getUserProductsByStatus() throws Exception {
         when(productService.getUserProductsByStatus(ProductStatus.LISTED)).thenReturn(List.of(createProductDto()));
-        mockMvc.perform(MockMvcRequestBuilders.get("/api/client/store/products")).andExpect(content().json(
+        mockMvc.perform(MockMvcRequestBuilders.get("/api/client/store/products?status=LISTED")).andExpect(content().json(
                 "[{\"id\":0,\"name\":\"Table\",\"description\":\"A good item\",\"condition\":\"90% new\",\"price\":100.24,\"images\":[\"item.jpg\"]}]"))
                 .andExpect(status().isOk());
     }
+    
     
     private ProductDto createProductDto() {
         return ProductDto.builder().price(100.24).description("A good item").condition("90% new")
