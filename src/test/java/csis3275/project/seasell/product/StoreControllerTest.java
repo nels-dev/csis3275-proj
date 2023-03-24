@@ -18,6 +18,7 @@ import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
+import csis3275.project.seasell.order.model.OrderStatus;
 import csis3275.project.seasell.order.service.OrderService;
 import csis3275.project.seasell.product.dto.ProductDto;
 import csis3275.project.seasell.product.model.ProductStatus;
@@ -63,10 +64,15 @@ public class StoreControllerTest {
         		).andExpect(status().isNoContent());
     }
     
-    
+    @Test
+    public void getOrdersByProduct() throws Exception {
+        when(orderService.findByStatusAndProduct_Id(OrderStatus.ORDERED,1)).thenReturn(null);
+        mockMvc.perform(MockMvcRequestBuilders.get("/api/client/store/order?productId=1&status=ORDERED")).andExpect(status().isOk());
+    }
     
     private ProductDto createProductDto() {
         return ProductDto.builder().price(100.24).description("A good item").condition("90% new")
                 .images(List.of("item.jpg")).name("Table").build();
     }
+    
 }
