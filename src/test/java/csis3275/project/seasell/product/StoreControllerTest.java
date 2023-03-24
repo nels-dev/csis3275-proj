@@ -54,6 +54,17 @@ public class StoreControllerTest {
     }
     
     
+    @Test
+    public void updateProduct() throws Exception {
+        mockMvc.perform(MockMvcRequestBuilders
+        		.put("/api/client/store/products/1")
+        		.content("{\"id\":0,\"name\":\"Table\",\"description\":\"A good item\",\"condition\":\"90% new\",\"price\":100.24,\"images\":[\"item.jpg\"]}")
+        		.contentType(MediaType.APPLICATION_JSON)
+        		).andExpect(status().isNoContent());
+    }
+    
+    
+    
     private ProductDto createProductDto() {
         return ProductDto.builder().price(100.24).description("A good item").condition("90% new")
                 .images(List.of("item.jpg")).name("Table").build();
