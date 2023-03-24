@@ -42,8 +42,11 @@
         accept="image/*"
         @change="uploadImage($event.target.files)"
       ></v-file-input>
-      <v-btn color="primary " type="submit"> Create </v-btn>
-      <v-btn @click="$router.push('/client/mystore')" variant="text"
+      <v-btn color="primary " type="submit" class="my-2"> Create </v-btn>
+      <v-btn
+        @click="$router.push('/client/mystore')"
+        variant="text"
+        class="my-2"
         >Return</v-btn
       >
       <v-dialog v-model="dialog" max-width="500">

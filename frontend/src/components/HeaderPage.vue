@@ -2,7 +2,7 @@
   <v-app-bar elevation="1">
     <v-container>
       <v-row class="align-center">
-        <v-col class="flex-grow-0">
+        <v-col class="flex-grow-0 d-none d-md-block">
           <v-img
             src="../assets/seasell_logo.png"
             height="60"
@@ -24,18 +24,12 @@
         </v-col>
 
         <v-col class="flex-grow-1" align="center">
-          <v-btn variant="flat" size="small" to="/client/marketplace">
-            Marketplace</v-btn
-          >
-          <v-btn variant="flat" size="small" to="/client/mystore">
-            My Store
-          </v-btn>
-          <v-btn variant="flat" size="small" to="/client/myorder">
-            Orders
-          </v-btn>
+          <v-btn variant="flat" to="/client/marketplace"> Marketplace</v-btn>
+          <v-btn variant="flat" to="/client/mystore"> My Store </v-btn>
+          <v-btn variant="flat" to="/client/myorder"> Orders </v-btn>
         </v-col>
 
-        <v-col class="flex-grow-0">
+        <v-col class="flex-grow-0 d-none d-md-block">
           <CreditChip />
         </v-col>
         <v-col class="flex-grow-0">

@@ -13,24 +13,11 @@
     <v-btn
       type="submit"
       color="primary"
-      class="ma-2"
+      class="my-2"
       :loading="loading"
       :disabled="loading"
       >Sign in</v-btn
     >
-    <div>
-      <h4>Don't have an account yet? Register now!</h4>
-      <v-btn
-        color="primary"
-        variant="outlined"
-        class="ma-2"
-        :loading="loading"
-        :disabled="loading"
-        router-link
-        to="/register"
-        >Register</v-btn
-      >
-    </div>
   </v-form>
 </template>
 <script>

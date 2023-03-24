@@ -8,7 +8,7 @@
       }"
     >
     </v-col>
-    <v-col md="4" align-self="center">
+    <v-col md="5" align-self="center">
       <v-container>
         <h1>Welcome to SeaSell!</h1>
         <h2>

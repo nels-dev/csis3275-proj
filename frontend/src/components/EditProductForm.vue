@@ -31,8 +31,11 @@
       ></v-select>
       Product image(s):
       <v-file-input label="Upload product images"></v-file-input>
-      <v-btn color="primary" class="mr-2" type="submit">Save</v-btn>
-      <v-btn @click="$router.push('/client/mystore')" variant="text"
+      <v-btn color="primary" class="mr-2 my-2" type="submit">Save</v-btn>
+      <v-btn
+        @click="$router.push('/client/mystore')"
+        variant="text"
+        class="my-2"
         >Return</v-btn
       >
     </form> </v-container

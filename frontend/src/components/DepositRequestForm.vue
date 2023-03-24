@@ -70,7 +70,9 @@
           <v-btn color="secondary" variant="text" @click="cancel">
             Cancel
           </v-btn>
-          <v-btn color="primary" variant="text" type="submit"> Submit </v-btn>
+          <v-btn color="primary" variant="elevated" type="submit">
+            Submit
+          </v-btn>
         </v-card-actions>
       </v-card>
     </form>
