@@ -14,6 +14,7 @@ import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfi
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.context.annotation.Import;
+import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
@@ -41,6 +42,15 @@ public class StoreControllerTest {
         mockMvc.perform(MockMvcRequestBuilders.get("/api/client/store/products?status=LISTED")).andExpect(content().json(
                 "[{\"id\":0,\"name\":\"Table\",\"description\":\"A good item\",\"condition\":\"90% new\",\"price\":100.24,\"images\":[\"item.jpg\"]}]"))
                 .andExpect(status().isOk());
+    }
+    
+    @Test
+    public void updateProductStatusToOrdered() throws Exception {
+        mockMvc.perform(MockMvcRequestBuilders
+        		.put("/api/client/store/products/1/status")
+        		.content("{\"status\":\"ORDERED\"}")
+        		.contentType(MediaType.APPLICATION_JSON)
+        		).andExpect(status().isNoContent());
     }
     
     
