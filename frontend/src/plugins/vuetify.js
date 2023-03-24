@@ -8,16 +8,21 @@ import { createVuetify } from "vuetify";
 const seasellTheme = {
   dark: false,
   colors: {
-    background: "#f8fdff",
-    surface: "#f8fdff",
-    primary: "#006874",
-    "primary-darken-1": "#001f24",
-    secondary: "#4a6267",
-    "secondary-darken-1": "#051f23",
-    error: "#ba1a1a",
-    info: "#4a6267",
-    success: "#4CAF50",
-    warning: "#FB8C00",
+    background: "#FDFDFD",
+    surface: "#FDFDFD",
+    "on-background": "1a2749",
+    "on-surface": "1a2749",
+    //Main brand color: This color should be eye-catching but not harsh. It can be liberally applied to your layout as its main identity.
+    primary: "#3D6DB0",
+    //Dark shades: Use as the text color for dark-on-light designs, or as the background for inverted designs.
+    "primary-darken-1": "#253A72",
+    //Light accent: Accent colors can be used to bring attention to design elements by contrasting with the rest of the palette.
+    secondary: "#74ADD6",
+    "secondary-darken-1": "#5085BD",
+    error: "#f44336",
+    info: "#253a72",
+    success: "#489b6d",
+    warning: "#c58b35",
   },
 };
 

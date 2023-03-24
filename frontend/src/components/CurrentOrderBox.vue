@@ -4,7 +4,7 @@
       Your order
 
       <v-chip class="ma-2" color="success" variant="outlined">
-        {{ order.status }}
+        <span class="text-subtitle-2">{{ order.status }}</span>
       </v-chip>
     </v-card-title>
     <v-card-text>

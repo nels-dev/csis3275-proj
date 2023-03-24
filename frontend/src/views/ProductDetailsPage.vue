@@ -1,14 +1,7 @@
 <template>
-  <v-main>
-    <HeaderPage />
-
-    <ProductForm :item="item" />
-  </v-main>
-  <FooterPage />
+  <ProductForm :item="item" />
 </template>
 <script>
-import HeaderPage from "@/components/HeaderPage.vue";
-import FooterPage from "@/components/FooterPage.vue";
 import ProductForm from "@/components/ProductForm.vue";
 import productService from "@/services/product.service";
 
@@ -21,7 +14,7 @@ export default {
       return this.$route.params.id;
     },
   },
-  components: { HeaderPage, FooterPage, ProductForm },
+  components: { ProductForm },
   mounted() {
     productService.getProduct(this.id).then((resp) => {
       console.log(resp.data);

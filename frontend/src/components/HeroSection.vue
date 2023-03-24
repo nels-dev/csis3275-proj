@@ -1,6 +1,6 @@
 <template>
   <!-- start of the slideshow -->
-  <v-carousel :show-arrows="false" cycle>
+  <v-carousel :show-arrows="false" hide-delimiters cycle>
     <v-carousel-item
       :src="require(`../assets/banner1.png`)"
       cover

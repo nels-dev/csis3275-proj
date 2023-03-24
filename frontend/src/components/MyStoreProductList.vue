@@ -1,10 +1,8 @@
 <template>
   <v-container>
     <v-row align="center">
-      <v-col>
-        <h2>My Store - {{ this.status }}</h2>
-      </v-col>
-      <v-col>
+      <v-spacer />
+      <v-col cols="12">
         <v-text-field
           v-model="search"
           outlined

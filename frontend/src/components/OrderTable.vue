@@ -25,8 +25,12 @@
         <tbody>
           <tr v-for="item in listings" :key="item.id">
             <td>{{ moment(item.orderTime).format("MMMM Do YYYY") }}</td>
-            <td>{{ item.productName }} <v-icon @click="this.$router.push(`/productdetails/${item.productId}`)" icon="mdi-open-in-new"></v-icon></td>
-            <td>{{ item.status }}</td>
+            <td>{{ item.productName }} <v-icon @click="this.$router.push(`/client/productdetails/${item.productId}`)" icon="mdi-open-in-new"></v-icon></td>
+            <td>
+              <v-chip class="ma-2" color="success" variant="outlined">
+                <span class="text-subtitle-2">{{ item.status }}</span>
+              </v-chip>
+            </td>
             <td>{{ item.shipmentReference }}</td>
             <td>
 

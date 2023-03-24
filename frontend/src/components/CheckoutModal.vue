@@ -1,7 +1,7 @@
 <template>
   <v-dialog v-model="showdialog" persistent max-width="1000">
     <v-card>
-      <v-card-title class="bg-blue-grey-darken-2 text-h5"
+      <v-card-title class="bg-secondary-darken-1 text-h5"
         >Checkout</v-card-title
       >
       <v-container>
@@ -56,13 +56,14 @@
             ></v-checkbox>
             <v-card-actions>
               <v-btn
-                color="green"
+                variant="elevated"
+                color="primary"
                 @click="confirmCheckout"
                 :disabled="availableBalance < item.price || !checkboxValue"
               >
                 Confirm
               </v-btn>
-              <v-btn color="red" @click="cancelCheckout">Cancel</v-btn>
+              <v-btn color="secondary" @click="cancelCheckout">Cancel</v-btn>
             </v-card-actions>
           </v-col>
         </v-row>
@@ -99,7 +100,7 @@ export default {
         this.$emit("checkout-confirmed");
         this.$store.dispatch("account/balanceChanged");
         this.$store.dispatch("alert/pushInfo", "Checkout successful!");
-        router.push("/Home");
+        router.push("/client/home");
         this.showDialog = false;
       });
     },

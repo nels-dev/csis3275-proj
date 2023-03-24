@@ -3,6 +3,7 @@ package csis3275.project.seasell.product.model;
 import csis3275.project.seasell.order.model.Order;
 import csis3275.project.seasell.user.model.AppUser;
 import jakarta.persistence.*;
+import java.time.OffsetDateTime;
 import java.util.List;
 import lombok.Data;
 import net.minidev.json.annotate.JsonIgnore;
@@ -40,4 +41,5 @@ public class Product {
     @JsonIgnore
     private List<Order> orders;
 
+    private OffsetDateTime createdAt;
 }
