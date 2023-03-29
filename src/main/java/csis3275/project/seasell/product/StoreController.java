@@ -63,7 +63,6 @@ public class StoreController {
     @GetMapping("/order")
     public OrderDto getOrdersByProduct(@RequestParam int productId, @RequestParam OrderStatus status) {
         return orderService.findByStatusAndProduct_Id(status, productId);
-
     }
 
 }
