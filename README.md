@@ -50,9 +50,9 @@ with the CircleCI build pipeline which tests and eventually deploys the package 
 ## Frontend
 To run the frondend in Window OS:
 ```
-npm install
+npm install && npm run lint
 ```
 Then
 ```
-npm run lint
+npm run serve
 ```
