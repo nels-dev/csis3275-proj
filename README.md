@@ -45,3 +45,14 @@ This is of course not intended for use in production or production-like testing 
 
 The backend service is intended to be deployed to the cloud platform. The configuration under `.circleci` folder enables integration 
 with the CircleCI build pipeline which tests and eventually deploys the package to AWS Elastic Container Services (ECS).
+
+
+## Frontend
+To run the frondend in Window OS:
+```
+npm install
+```
+Then
+```
+npm run lint
+```
